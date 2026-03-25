@@ -1,32 +1,29 @@
 package Controlador;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-/**
- *Karina Alejandra Arriaza Ortiz 9959-24-14190
- * @author VA
- */
+//Karina Alejandra Arriaza Ortiz 9959-24-14190
 public class clsAsignacionAplicacionUsuario {
 
-     // Llaves primaria/foránea
+    // Llaves primaria/foránea (ajustado a la BD)
     private int Aplcodigo;
-    private int Usucodigo;
+    private int UsuId;
 
-    // Permisos de la aplicación (varchar(1))
+    // Permisos
     private String APLUins;
     private String APLUsel;
     private String APLUupd;
     private String APLUdel;
     private String APLUrep;
-    
+
     // Constructor vacío
     public clsAsignacionAplicacionUsuario() {
     }
 
-    // Constructor con todos los atributos
-    public clsAsignacionAplicacionUsuario(int Aplcodigo, int Usucodigo, String APLUins, String APLUsel, String APLUupd, String APLUdel, String APLUrep) {
+    // Constructor completo
+    public clsAsignacionAplicacionUsuario(int Aplcodigo, int UsuId, String APLUins, String APLUsel, String APLUupd, String APLUdel, String APLUrep) {
         this.Aplcodigo = Aplcodigo;
-        this.Usucodigo = Usucodigo;
+        this.UsuId = UsuId;
         this.APLUins = APLUins;
         this.APLUsel = APLUsel;
         this.APLUupd = APLUupd;
@@ -34,8 +31,8 @@ public class clsAsignacionAplicacionUsuario {
         this.APLUrep = APLUrep;
     }
 
-    // GET Y SET
-    
+    // GETTERS Y SETTERS
+
     public int getAplcodigo() {
         return Aplcodigo;
     }
@@ -44,12 +41,12 @@ public class clsAsignacionAplicacionUsuario {
         this.Aplcodigo = Aplcodigo;
     }
 
-    public int getUsucodigo() {
-        return Usucodigo;
+    public int getUsuId() {
+        return UsuId;
     }
 
-    public void setUsucodigo(int Usucodigo) {
-        this.Usucodigo = Usucodigo;
+    public void setUsuId(int UsuId) {
+        this.UsuId = UsuId;
     }
 
     public String getAPLUins() {
@@ -92,15 +89,18 @@ public class clsAsignacionAplicacionUsuario {
         this.APLUrep = APLUrep;
     }
 
+    // GENERAR BITÁCORA 
     public clsBitacora generarBitacora(String accion) {
 
         clsBitacora bitacora = new clsBitacora();
 
-        // Usuario conectado
+        // Usuario conectado (compatible con su clase)
         bitacora.setUsucodigo(clsUsuarioConectado.getUsuId());
+
+        // Aplicación actual
         bitacora.setAplcodigo(this.Aplcodigo);
 
-        // Fecha en formato String
+        // Fecha como STRING (como ustedes lo manejan)
         LocalDateTime ahora = LocalDateTime.now();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         bitacora.setBitfecha(ahora.format(formato));
@@ -109,7 +109,7 @@ public class clsAsignacionAplicacionUsuario {
         bitacora.setBitip("127.0.0.1");
         bitacora.setBitequipo("PC");
 
-        // Acción
+        // Acción realizada
         bitacora.setBitaccion(accion);
 
         return bitacora;
@@ -117,9 +117,9 @@ public class clsAsignacionAplicacionUsuario {
 
     @Override
     public String toString() {
-        return "AsignacionAplicacionUsuario{" +
+        return "clsAsignacionAplicacionUsuario{" +
                 "Aplcodigo=" + Aplcodigo +
-                ", Usucodigo=" + Usucodigo +
+                ", UsuId=" + UsuId +
                 ", APLUins='" + APLUins + '\'' +
                 ", APLUsel='" + APLUsel + '\'' +
                 ", APLUupd='" + APLUupd + '\'' +
