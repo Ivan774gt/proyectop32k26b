@@ -5,6 +5,18 @@ import Controlador.clsAplicaciones;
 import java.sql.*;
 
 public class AplicacionesDAO {
+    
+    public ResultSet listar() {
+    String sql = "SELECT * FROM aplicaciones";
+    try {
+        Connection conn = Conexion.getConnection();
+        PreparedStatement ps = conn.prepareStatement(sql);
+        return ps.executeQuery();
+    } catch (Exception e) {
+        e.printStackTrace();
+        return null;
+    }
+}
 
     // INSERT
     public void insert(clsAplicaciones app) {
