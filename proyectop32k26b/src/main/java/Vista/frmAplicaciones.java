@@ -38,10 +38,10 @@ AplicacionesDAO dao = new AplicacionesDAO(); //inicializar llamada al DAO
     //llamado para llenar la tabla
     public void llenarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tablaAplicaciones.getModel();
-    modelo.setRowCount(0);
+        modelo.setRowCount(0);
 
-    try {
-        List<clsAplicaciones> lista = dao.listar(); //método en AplicacionesDAO
+        try {
+        List<clsAplicaciones> lista = dao.listar();
 
         for (clsAplicaciones app : lista) {
             modelo.addRow(new Object[]{
@@ -53,7 +53,7 @@ AplicacionesDAO dao = new AplicacionesDAO(); //inicializar llamada al DAO
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(null, "Error al llenar tabla: " + e.getMessage());
-    }
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
