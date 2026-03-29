@@ -76,9 +76,13 @@ public class clsAsignacionAplicacionPerfil {
         this.Percodigo = Percodigo;
     }
 
+    public clsAsignacionAplicacionPerfil() {
+   
+    }
+
     @Override
     public String toString() {
         return "clsAsignacionAplicacionPerfil{" + "Aplcodigo=" + Aplcodigo + ", Percodigo=" + Percodigo + ", APLPins=" + APLPins + ", APLPsel=" + APLPsel + ", APLPupd=" + APLPupd + ", APLPdel=" + APLPdel + ", APLPrep=" + APLPrep + '}';
     }
-    
+
 }
