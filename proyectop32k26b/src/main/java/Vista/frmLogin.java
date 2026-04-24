@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+//Marco. Hernandez 9959-24-6201  1. Se edito invetnario por logistica
 package Vista;
 
 
@@ -11,6 +13,7 @@ import Modelo.BitacoraDAO;
 import Controlador.clsSeguridad;
 import Controlador.clsUsuario;
 import Controlador.clsUsuarioConectado;
+
 
 import java.awt.HeadlessException;
 import java.util.HashSet;
@@ -86,7 +89,7 @@ public class frmLogin extends javax.swing.JFrame {
 
         jLabel4.setText("Departamento");
 
-        cboOpciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bancos", "Compras", "Cuentas Corrientes", "Inventarios", "Seguridad", "Ventas" }));
+        cboOpciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bancos", "Compras", "Cuentas Corrientes", "Inventarios", "Seguridad", "Ventas", "Logistica", " " }));
         cboOpciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboOpcionesActionPerformed(evt);
@@ -222,9 +225,9 @@ public class frmLogin extends javax.swing.JFrame {
                             System.out.println(e);
                         }   
                         break;
-                        case "Inventarios":
+                        case "Logistica":
                         try {
-                            MdiSeguridad menu = new MdiSeguridad();
+                            MdiLogistica menu = new MdiLogistica(); //1*
                             menu.setVisible(true);
                             this.dispose();
                         } catch (Exception e) {
@@ -249,6 +252,7 @@ public class frmLogin extends javax.swing.JFrame {
                             System.out.println(e);
                         }   
                         break;
+                        
                         default:
                             break;
                     }
