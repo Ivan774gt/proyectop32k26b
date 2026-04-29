@@ -230,7 +230,7 @@ public class frmLogin extends javax.swing.JFrame {
                             System.out.println(e);
                         }   
                         break;
-                        case "Inventarios":
+                        case "Logistica":
                         try {
                             MdiSeguridad menu = new MdiSeguridad();
                             menu.setVisible(true);
