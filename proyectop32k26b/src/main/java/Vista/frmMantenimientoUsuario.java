@@ -17,6 +17,7 @@ import Controlador.clsUsuario;
 import Controlador.clsUsuarioConectado;
 import Modelo.BitacoraDAO;
 import Modelo.Conexion;
+import Modelo.PermisosDAO;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
@@ -81,7 +82,24 @@ int codigoAplicacion=10001;
         initComponents();
         llenadoDeTablas();
         llenadoDeCombos();
+        //Linea para cargar el metodo (agregar)
+        cargarPermisos(); //Prueba para la cosa d seguridad
     }
+    
+    //metodo gregado por Astrid, para los permisos del mdi
+    public void cargarPermisos() {
+    int usuId = clsUsuarioConectado.getUsuId();
+    PermisosDAO permisosDAO = new PermisosDAO();
+
+    //METODO PARA EL SISTEMA DE SEGURIDAD DE PERMISOS AGREGAR A SUS FORMULARIOS CORRESPONDIENTES
+    // Todos usan código 10 = Mantenimiento Usuario
+    btnRegistrar.setEnabled( permisosDAO.puedeInsertar (usuId, 10) );
+    btnBuscar.setEnabled  ( permisosDAO.puedeBuscar   (usuId, 10) );
+    btnModificar.setEnabled( permisosDAO.puedeModificar(usuId, 10) );
+    btnEliminar.setEnabled ( permisosDAO.puedeEliminar (usuId, 10) );
+    btnReportes.setEnabled( permisosDAO.puedeReportar (usuId, 10) );
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
