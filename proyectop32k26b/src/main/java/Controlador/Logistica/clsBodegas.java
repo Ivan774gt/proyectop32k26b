@@ -10,25 +10,28 @@ package Controlador.Logistica;
  * @author ferito
  */
 public class clsBodegas {
-    private int Bodcodigo;
+
+    private int bodegaid;
     private String Bodnombre;
-    private String Bodestado;
+    private String Bodubicacion;
     
+    //constructor vacio
     public clsBodegas() {
     }
-    //constructo de parametros
-    public clsBodegas(int Bodcodigo, String Bodnombre, String Bodestado) {
-        this.Bodcodigo = Bodcodigo;
+    
+    //constructor con parametros
+    public clsBodegas(int bodegaid, String Bodnombre, String Bodubicacion) {
+        this.bodegaid = bodegaid;
         this.Bodnombre = Bodnombre;
-        this.Bodestado = Bodestado;
+        this.Bodubicacion = Bodubicacion;
     }
     //getters y setters
-    public int getBodcodigo() {
-        return Bodcodigo;
+    public int getBodegaid() {
+        return bodegaid;
     }
 
-    public void setBodcodigo(int Bodcodigo) {
-        this.Bodcodigo = Bodcodigo;
+    public void setBodegaid(int bodegaid) {
+        this.bodegaid = bodegaid;
     }
 
     public String getBodnombre() {
@@ -39,16 +42,18 @@ public class clsBodegas {
         this.Bodnombre = Bodnombre;
     }
 
-    public String getBodestado() {
-        return Bodestado;
+    public String getBodubicacion() {
+        return Bodubicacion;
     }
 
-    public void setBodestado(String Bodestado) {
-        this.Bodestado = Bodestado;
+    public void setBodubicacion(String Bodubicacion) {
+        this.Bodubicacion = Bodubicacion;
     }
 
     @Override
     public String toString() {
-        return "Bodegas{" + "Bodcodigo=" + Bodcodigo + ", Bodnombre=" + Bodnombre + ", Bodestado=" + Bodestado + '}';
+        return "clsBodegas{" + "bodegaid=" + bodegaid + ", Bodnombre=" + Bodnombre + ", Bodubicacion=" + Bodubicacion + '}';
     }
+    
+     
 }

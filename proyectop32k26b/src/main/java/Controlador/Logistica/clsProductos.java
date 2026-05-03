@@ -10,45 +10,48 @@ package Controlador.Logistica;
  * @author ferito
  */
 public class clsProductos {
-    private int Prdcodigo;
-    private String Prdnombre;
-    private String Prdestado;
+    private int Prodid;
+    private String Prodnombre;
+    private int Prodpuntoreorden;
     
-    public clsProductos() {
+    //constructor vacio
+    public clsProductos(){
     }
-    //constructo con parametros
-    public clsProductos(int Prdcodigo, String Prdnombre, String Prdestado) {
-        this.Prdcodigo = Prdcodigo;
-        this.Prdnombre = Prdnombre;
-        this.Prdestado = Prdestado;
+
+    //constructor con parametros
+    public clsProductos(int Prodid, String Prodnombre, int Prodpuntoreorden) {
+        this.Prodid = Prodid;
+        this.Prodnombre = Prodnombre;
+        this.Prodpuntoreorden = Prodpuntoreorden;
     }
     //getters y setters
-    public int getPrdcodigo() {
-        return Prdcodigo;
+    public int getProdid() {
+        return Prodid;
     }
 
-    public void setPrdcodigo(int Prdcodigo) {
-        this.Prdcodigo = Prdcodigo;
+    public void setProdid(int Prodid) {
+        this.Prodid = Prodid;
     }
 
-    public String getPrdnombre() {
-        return Prdnombre;
+    public String getProdnombre() {
+        return Prodnombre;
     }
 
-    public void setPrdnombre(String Prdnombre) {
-        this.Prdnombre = Prdnombre;
+    public void setProdnombre(String Prodnombre) {
+        this.Prodnombre = Prodnombre;
     }
 
-    public String getPrdestado() {
-        return Prdestado;
+    public int getProdpuntoreorden() {
+        return Prodpuntoreorden;
     }
 
-    public void setPrdestado(String Prdestado) {
-        this.Prdestado = Prdestado;
+    public void setProdpuntoreorden(int Prodpuntoreorden) {
+        this.Prodpuntoreorden = Prodpuntoreorden;
     }
 
     @Override
     public String toString() {
-        return "Productos{" + "Prdcodigo=" + Prdcodigo + ", Prdnombre=" + Prdnombre + ", Prdestado=" + Prdestado + '}';
+        return "clsProductos{" + "Prodid=" + Prodid + ", Prodnombre=" + Prodnombre + ", Prodpuntoreorden=" + Prodpuntoreorden + '}';
     }
+   
 }

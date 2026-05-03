@@ -4,39 +4,52 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controlador.Logistica;
-
+import java.sql.Timestamp;
 /**
  *
  * @author ferito
  */
 public class clsPedidos {
-    private int Pedcodigo;
-    private int Pedclienteid;
+    
+    private int Pedid;
+    private int Cliid;
+    private Timestamp Pedfecha;
     private String Pedestado;
-
-    public clsPedidos() {
+    
+    //constructor vacio
+    public clsPedidos(){
     }
-    //cosntructor con parametros
-    public clsPedidos(int Pedcodigo, int Pedclienteid, String Pedestado) {
-        this.Pedcodigo = Pedcodigo;
-        this.Pedclienteid = Pedclienteid;
+
+    //constructor vacio
+    public clsPedidos(int Pedid, int Cliid, Timestamp Pedfecha, String Pedestado) {
+        this.Pedid = Pedid;
+        this.Cliid = Cliid;
+        this.Pedfecha = Pedfecha;
         this.Pedestado = Pedestado;
     }
     //getters y setters
-    public int getPedcodigo() {
-        return Pedcodigo;
+    public int getPedid() {
+        return Pedid;
     }
 
-    public void setPedcodigo(int Pedcodigo) {
-        this.Pedcodigo = Pedcodigo;
+    public void setPedid(int Pedid) {
+        this.Pedid = Pedid;
     }
 
-    public int getPedclienteid() {
-        return Pedclienteid;
+    public int getCliid() {
+        return Cliid;
     }
 
-    public void setPedclienteid(int Pedclienteid) {
-        this.Pedclienteid = Pedclienteid;
+    public void setCliid(int Cliid) {
+        this.Cliid = Cliid;
+    }
+
+    public Timestamp getPedfecha() {
+        return Pedfecha;
+    }
+
+    public void setPedfecha(Timestamp Pedfecha) {
+        this.Pedfecha = Pedfecha;
     }
 
     public String getPedestado() {
@@ -49,6 +62,7 @@ public class clsPedidos {
 
     @Override
     public String toString() {
-        return "Pedidos{" + "Pedcodigo=" + Pedcodigo + ", Pedclienteid=" + Pedclienteid + ", Pedestado=" + Pedestado + '}';
+        return "clsPedidos{" + "Pedid=" + Pedid + ", Cliid=" + Cliid + ", Pedfecha=" + Pedfecha + ", Pedestado=" + Pedestado + '}';
     }
+
 }

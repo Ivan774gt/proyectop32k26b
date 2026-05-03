@@ -4,61 +4,74 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controlador.Logistica;
-
+import java.sql.Timestamp;
 /**
  *
  * @author ferito
  */
 public class clsEnvios {
-    private int Envcodigo;
-    private int Envpedidoid;
-    private int Envtransportistaid;
-    private String Envestado;
+
+    private int Envid;
+    private int Peid;
+    private int Tranid;
+    private Timestamp Envfechasalida;
+    private String Envnumeroguia;
     
+    //constructor vacio
     public clsEnvios() {
     }
     //constructor con parametros
-    public clsEnvios(int Envcodigo, int Envpedidoid, int Envtransportistaid, String Envestado) {
-        this.Envcodigo = Envcodigo;
-        this.Envpedidoid = Envpedidoid;
-        this.Envtransportistaid = Envtransportistaid;
-        this.Envestado = Envestado;
+    public clsEnvios(int Envid, int Peid, int Tranid, Timestamp Envfechasalida, String Envnumeroguia) {
+        this.Envid = Envid;
+        this.Peid = Peid;
+        this.Tranid = Tranid;
+        this.Envfechasalida = Envfechasalida;
+        this.Envnumeroguia = Envnumeroguia;
     }
     //getters y setters
-    public int getEnvcodigo() {
-        return Envcodigo;
+    public int getEnvid() {
+        return Envid;
     }
 
-    public void setEnvcodigo(int Envcodigo) {
-        this.Envcodigo = Envcodigo;
+    public void setEnvid(int Envid) {
+        this.Envid = Envid;
     }
 
-    public int getEnvpedidoid() {
-        return Envpedidoid;
+    public int getPeid() {
+        return Peid;
     }
 
-    public void setEnvpedidoid(int Envpedidoid) {
-        this.Envpedidoid = Envpedidoid;
+    public void setPeid(int Peid) {
+        this.Peid = Peid;
     }
 
-    public int getEnvtransportistaid() {
-        return Envtransportistaid;
+    public int getTranid() {
+        return Tranid;
     }
 
-    public void setEnvtransportistaid(int Envtransportistaid) {
-        this.Envtransportistaid = Envtransportistaid;
+    public void setTranid(int Tranid) {
+        this.Tranid = Tranid;
     }
 
-    public String getEnvestado() {
-        return Envestado;
+    public Timestamp getEnvfechasalida() {
+        return Envfechasalida;
     }
 
-    public void setEnvestado(String Envestado) {
-        this.Envestado = Envestado;
+    public void setEnvfechasalida(Timestamp Envfechasalida) {
+        this.Envfechasalida = Envfechasalida;
+    }
+
+    public String getEnvnumeroguia() {
+        return Envnumeroguia;
+    }
+
+    public void setEnvnumeroguia(String Envnumeroguia) {
+        this.Envnumeroguia = Envnumeroguia;
     }
 
     @Override
     public String toString() {
-        return "Envios{" + "Envcodigo=" + Envcodigo + ", Envpedidoid=" + Envpedidoid + ", Envtransportistaid=" + Envtransportistaid + ", Envestado=" + Envestado + '}';
+        return "clsEnvios{" + "Envid=" + Envid + ", Peid=" + Peid + ", Tranid=" + Tranid + ", Envfechasalida=" + Envfechasalida + ", Envnumeroguia=" + Envnumeroguia + '}';
     }
+    
 }
