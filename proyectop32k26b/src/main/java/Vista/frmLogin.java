@@ -11,6 +11,7 @@ import Modelo.BitacoraDAO;
 import Controlador.clsSeguridad;
 import Controlador.clsUsuario;
 import Controlador.clsUsuarioConectado;
+import Vista.Logistica.MdiLogistica;
 
 import java.awt.HeadlessException;
 import java.util.HashSet;
@@ -87,7 +88,7 @@ public class frmLogin extends javax.swing.JFrame {
 
         jLabel4.setText("Departamento");
 
-        cboOpciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bancos", "Compras", "Cuentas Corrientes", "Inventarios", "Seguridad", "Ventas", "Comisiones de ventas" }));
+        cboOpciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bancos", "Compras", "Cuentas Corrientes", "Logistica", "Seguridad", "Ventas", "Comisiones de ventas" }));
         cboOpciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboOpcionesActionPerformed(evt);
@@ -232,7 +233,7 @@ public class frmLogin extends javax.swing.JFrame {
                         break;
                         case "Logistica":
                         try {
-                            MdiSeguridad menu = new MdiSeguridad();
+                            MdiLogistica menu = new MdiLogistica();
                             menu.setVisible(true);
                             this.dispose();
                         } catch (Exception e) {
