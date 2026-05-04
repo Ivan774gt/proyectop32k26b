@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 public class clsEnvios {
 
     private int Envid;
-    private int Peid;
+    private int Pedid;
     private int Tranid;
     private Timestamp Envfechasalida;
     private String Envnumeroguia;
@@ -21,9 +21,9 @@ public class clsEnvios {
     public clsEnvios() {
     }
     //constructor con parametros
-    public clsEnvios(int Envid, int Peid, int Tranid, Timestamp Envfechasalida, String Envnumeroguia) {
+    public clsEnvios(int Envid, int Pedid, int Tranid, Timestamp Envfechasalida, String Envnumeroguia) {
         this.Envid = Envid;
-        this.Peid = Peid;
+        this.Pedid = Pedid;
         this.Tranid = Tranid;
         this.Envfechasalida = Envfechasalida;
         this.Envnumeroguia = Envnumeroguia;
@@ -37,12 +37,12 @@ public class clsEnvios {
         this.Envid = Envid;
     }
 
-    public int getPeid() {
-        return Peid;
+    public int getPedid() {
+        return Pedid;
     }
 
-    public void setPeid(int Peid) {
-        this.Peid = Peid;
+    public void setPedid(int Pedid) {
+        this.Pedid = Pedid;
     }
 
     public int getTranid() {
@@ -71,7 +71,7 @@ public class clsEnvios {
 
     @Override
     public String toString() {
-        return "clsEnvios{" + "Envid=" + Envid + ", Peid=" + Peid + ", Tranid=" + Tranid + ", Envfechasalida=" + Envfechasalida + ", Envnumeroguia=" + Envnumeroguia + '}';
+        return "clsEnvios{" + "Envid=" + Envid + ", Pedid=" + Pedid + ", Tranid=" + Tranid + ", Envfechasalida=" + Envfechasalida + ", Envnumeroguia=" + Envnumeroguia + '}';
     }
     
 }

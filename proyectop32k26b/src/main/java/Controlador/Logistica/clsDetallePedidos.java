@@ -12,18 +12,18 @@ package Controlador.Logistica;
 public class clsDetallePedidos {
 
     private int Detallepedidoid;
-    private int Peid;
-    private int Proid;
+    private int Pedid;
+    private int Prodid;
     private int Detallepedidocantidad;
     
     //constructor vacio
     public clsDetallePedidos() {
     }
     //constructor con parametros
-    public clsDetallePedidos(int Detallepedidoid, int Peid, int Proid, int Detallepedidocantidad) {
+    public clsDetallePedidos(int Detallepedidoid, int Pedid, int Prodid, int Detallepedidocantidad) {
         this.Detallepedidoid = Detallepedidoid;
-        this.Peid = Peid;
-        this.Proid = Proid;
+        this.Pedid = Pedid;
+        this.Prodid = Prodid;
         this.Detallepedidocantidad = Detallepedidocantidad;
     }
     //getters y setters
@@ -35,20 +35,20 @@ public class clsDetallePedidos {
         this.Detallepedidoid = Detallepedidoid;
     }
 
-    public int getPeid() {
-        return Peid;
+    public int getPedid() {
+        return Pedid;
     }
 
-    public void setPeid(int Peid) {
-        this.Peid = Peid;
+    public void setPedid(int Pedid) {
+        this.Pedid = Pedid;
     }
 
-    public int getProid() {
-        return Proid;
+    public int getProdid() {
+        return Prodid;
     }
 
-    public void setProid(int Proid) {
-        this.Proid = Proid;
+    public void setProdid(int Prodid) {
+        this.Prodid = Prodid;
     }
 
     public int getDetallepedidocantidad() {
@@ -61,7 +61,7 @@ public class clsDetallePedidos {
 
     @Override
     public String toString() {
-        return "clsDetallePedidos{" + "Detallepedidoid=" + Detallepedidoid + ", Peid=" + Peid + ", Proid=" + Proid + ", Detallepedidocantidad=" + Detallepedidocantidad + '}';
+        return "clsDetallePedidos{" + "Detallepedidoid=" + Detallepedidoid + ", Pedid=" + Pedid + ", Prodid=" + Prodid + ", Detallepedidocantidad=" + Detallepedidocantidad + '}';
     }
     
 }
