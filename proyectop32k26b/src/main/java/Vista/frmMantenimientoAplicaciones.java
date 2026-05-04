@@ -396,7 +396,9 @@ AplicacionesDAO dao = new AplicacionesDAO(); //inicializar llamada al DAO
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+Vista.Logistica.frmAyuda ventana = new Vista.Logistica.frmAyuda();
+    ventana.setVisible(true);
+    ventana.setLocationRelativeTo(null);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed

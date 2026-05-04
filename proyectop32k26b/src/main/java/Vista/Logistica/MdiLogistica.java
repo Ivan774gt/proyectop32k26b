@@ -316,7 +316,7 @@ public class MdiLogistica extends javax.swing.JFrame {
     private void frmAyudainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmAyudainActionPerformed
 Vista.Logistica.frmAyuda ventana = new Vista.Logistica.frmAyuda();
     ventana.setVisible(true);
-    ventana.setLocationRelativeTo(null); // centrar
+    ventana.setLocationRelativeTo(null);
     }//GEN-LAST:event_frmAyudainActionPerformed
 
     /**
