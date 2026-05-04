@@ -5,7 +5,8 @@
 
 //Marco. Hernandez 9959-24-6201 
 //Marco. Hernandez 9959-24-6291 22-04-2026  1. Creacion MdiLogistica, implementaciones basicas
-//Marco. Hernandez 9959-24-6201 24-04-2026  2. Implementacion de los formularios transportes, pedidos, stock, kardex                                    
+//Marco. Hernandez 9959-24-6201 24-04-2026  2. Implementacion de los formularios transportes, pedidos, stock, kardex 
+//Boris de Leon    9959-24-6203 03-05-2026  3.Implementacion de seguridad en el MdiLogistica
 
 package Vista.Logistica;
 
@@ -15,6 +16,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import Controlador.clsUsuarioConectado;
+import Modelo.PermisosDAO;
+import java.util.List;
 
 //formulario
 
@@ -32,6 +36,40 @@ public class MdiLogistica extends javax.swing.JFrame {
      */
     public MdiLogistica() {
         initComponents();
+        // Obtiene el usuario logueado y sus permisos
+        int usuId = clsUsuarioConectado.getUsuId();
+        PermisosDAO permisosDAO = new PermisosDAO();
+        List<Integer> appsPermitidas = permisosDAO.obtenerAplicacionesPermitidas(usuId);
+        
+        // Configura qué botones se ven
+        configurarVisibilidadBotones(appsPermitidas);
+    }
+    // Método para bloquear o desbloquear opciones según los permisos
+    public void configurarVisibilidadBotones(List<Integer> appsPermitidas) {
+        
+        // 1. Por seguridad, deshabilitar todas las opciones por defecto
+        frmTansportes.setEnabled(false);
+        frmKardex.setEnabled(false);
+        frmStock.setEnabled(false);
+        frmGestion.setEnabled(false);
+
+        // 2. Recorrer la lista y encender solo las que el usuario tiene asignadas
+        for (int codigoApp : appsPermitidas) {
+            switch (codigoApp) {
+                case 2000: //Cambiar por el código real de "Transportes" en la BD
+                    frmTansportes.setEnabled(true);
+                    break;
+                case 2001: //Cambiar por el código real de "Kardex" en la BD
+                    frmKardex.setEnabled(true);
+                    break;
+                case 2002: //Cambiar por el código real de "Stock" en la BD
+                    frmStock.setEnabled(true);
+                    break;
+                case 2003: //Cambiar por el código real de "Gestión de Pedidos" en la BD
+                    frmGestion.setEnabled(true);
+                    break;
+            }
+        }
     }
 
     /**
@@ -222,7 +260,7 @@ public class MdiLogistica extends javax.swing.JFrame {
           System.out.println("Abriendo Informacion de Transportes");
     frmMantenimientoPedidos ventana = new frmMantenimientoPedidos();
     
-   
+    ventana.setSize(900, 600);
     ventana.setVisible(true); 
     
     jDesktopPane1.add(ventana);
@@ -232,6 +270,7 @@ public class MdiLogistica extends javax.swing.JFrame {
     Dimension FrameSize = ventana.getSize();
     ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
     
+    ventana.setVisible(true); 
     try {
         ventana.setSelected(true); 
     } catch (java.beans.PropertyVetoException e) {

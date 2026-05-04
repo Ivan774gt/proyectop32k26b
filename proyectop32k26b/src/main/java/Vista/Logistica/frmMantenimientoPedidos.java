@@ -21,6 +21,27 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
      */
     public frmMantenimientoPedidos() {
         initComponents();
+        cargarPermisos(); // <-- Llama a la seguridad al abrir la ventana
+        this.setClosable(true);
+        this.setIconifiable(true);
+        this.setMaximizable(true);
+        this.setResizable(true);
+        this.setDefaultCloseOperation(javax.swing.JInternalFrame.DISPOSE_ON_CLOSE);
+    }
+    public void cargarPermisos() {
+        // Obtener el ID del usuario conectado
+        int usuId = Controlador.clsUsuarioConectado.getUsuId();
+        Modelo.PermisosDAO permisosDAO = new Modelo.PermisosDAO();
+
+        // Instrucciones para adaptarlo a otro formulario Cambiar el "2000" por el código de tu aplicación:
+        //  Codigos de ejmplo utilizados de momento 2000 = Transportes | 2001 = Kardex | 2002 = Stock | 2003 = Pedidos
+        int codigoAplicacion = 2003; 
+
+        btnRegistrar1.setEnabled(permisosDAO.puedeInsertar(usuId, codigoAplicacion));
+        btnBuscar1.setEnabled(permisosDAO.puedeBuscar(usuId, codigoAplicacion));
+        btnModificar1.setEnabled(permisosDAO.puedeModificar(usuId, codigoAplicacion));
+        btnEliminar1.setEnabled(permisosDAO.puedeEliminar(usuId, codigoAplicacion));
+        btnReportes1.setEnabled(permisosDAO.puedeReportar(usuId, codigoAplicacion));
     }
 
     /**
