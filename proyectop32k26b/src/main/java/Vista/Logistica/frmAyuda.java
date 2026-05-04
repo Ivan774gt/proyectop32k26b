@@ -110,19 +110,21 @@ public class frmAyuda extends javax.swing.JFrame {
         //Ferdynand Monroy mayo 2026: agregue la ayuda junto al archivo .chm
         
         try {
-            if((new File("C:\\Users\\ferit\\Desktop\\ProyFinalP32K26\\proyectop32k26b\\proyectop32k26b\\src\\main\\java\\Ayudas\\ayuda.chm")).exists()){
-                Process p = Runtime
-                        .getRuntime().
-                        exec("rundll32 url.dll,FileProtocolHandler C:\\Users\\ferit\\Desktop\\ProyFinalP32K26\\proyectop32k26b\\proyectop32k26b\\src\\main\\java\\Ayudas\\ayuda.chm");
-                p.waitFor();
-                
-            } else {
-                System.out.println("La ayuda no fue encontrada");
-            }
-        
-        } catch (Exception e) {
-            System.out.println(e.getStackTrace());
+        String ruta = "C:\\Users\\ferit\\Desktop\\proyectop32k26b\\proyectop32k26b\\src\\main\\java\\Ayudas\\Logistica\\ayuda.chm";
+
+        File archivo = new File(ruta);
+
+        if (archivo.exists()) {
+            Runtime.getRuntime().exec(
+                "rundll32 url.dll,FileProtocolHandler \"" + ruta + "\""
+            );
+        } else {
+            System.out.println("La ayuda no fue encontrada");
         }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
     }//GEN-LAST:event_BotonAyudaActionPerformed
 
     /**
