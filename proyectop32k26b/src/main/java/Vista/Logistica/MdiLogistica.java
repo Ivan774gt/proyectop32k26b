@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import Controlador.clsUsuarioConectado;
 import Modelo.PermisosDAO;
 import java.util.List;
+import Vista.Logistica.frmAyuda;
 
 //formulario
 
@@ -92,6 +93,7 @@ public class MdiLogistica extends javax.swing.JFrame {
         frmGestion = new javax.swing.JMenuItem();
         mnuArchivo = new javax.swing.JMenu();
         mnuSalirSistema = new javax.swing.JCheckBoxMenuItem();
+        frmAyudain = new javax.swing.JCheckBoxMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -170,6 +172,15 @@ public class MdiLogistica extends javax.swing.JFrame {
             }
         });
         mnuArchivo.add(mnuSalirSistema);
+
+        frmAyudain.setSelected(true);
+        frmAyudain.setText("Ayudas");
+        frmAyudain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                frmAyudainActionPerformed(evt);
+            }
+        });
+        mnuArchivo.add(frmAyudain);
 
         mnuGeneral.add(mnuArchivo);
 
@@ -302,6 +313,12 @@ public class MdiLogistica extends javax.swing.JFrame {
                                
     }//GEN-LAST:event_frmStockActionPerformed
 
+    private void frmAyudainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmAyudainActionPerformed
+Vista.Logistica.frmAyuda ventana = new Vista.Logistica.frmAyuda();
+    ventana.setVisible(true);
+    ventana.setLocationRelativeTo(null); // centrar
+    }//GEN-LAST:event_frmAyudainActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -328,6 +345,7 @@ public class MdiLogistica extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBoxMenuItem frmAyudain;
     private javax.swing.JMenuItem frmGestion;
     private javax.swing.JMenuItem frmKardex;
     private javax.swing.JMenuItem frmStock;

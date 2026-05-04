@@ -18,6 +18,7 @@ public class frmAyuda extends javax.swing.JFrame {
      */
     public frmAyuda() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
