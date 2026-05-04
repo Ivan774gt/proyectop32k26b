@@ -13,19 +13,19 @@ public class clsDetalleArribo {
 
     private int Detallearriboid;
     private int Arriboid;
-    private int Proid;
+    private int Prodid;
     private int Detarribocantidad;
-    private char Detarribopreciounitariocompra;
+    private double Detarribopreciounitariocompra;
     
     //constructor vacio
     public clsDetalleArribo() {
     }
     
     //constructor con parametros
-    public clsDetalleArribo(int Detallearriboid, int Arriboid, int Proid, int Detarribocantidad, char Detarribopreciounitariocompra) {
+    public clsDetalleArribo(int Detallearriboid, int Arriboid, int Prodid, int Detarribocantidad, double Detarribopreciounitariocompra) {
         this.Detallearriboid = Detallearriboid;
         this.Arriboid = Arriboid;
-        this.Proid = Proid;
+        this.Prodid = Prodid;
         this.Detarribocantidad = Detarribocantidad;
         this.Detarribopreciounitariocompra = Detarribopreciounitariocompra;
     }
@@ -46,12 +46,12 @@ public class clsDetalleArribo {
         this.Arriboid = Arriboid;
     }
 
-    public int getProid() {
-        return Proid;
+    public int getProdid() {
+        return Prodid;
     }
 
-    public void setProid(int Proid) {
-        this.Proid = Proid;
+    public void setProdid(int Prodid) {
+        this.Prodid = Prodid;
     }
 
     public int getDetarribocantidad() {
@@ -62,17 +62,17 @@ public class clsDetalleArribo {
         this.Detarribocantidad = Detarribocantidad;
     }
 
-    public char getDetarribopreciounitariocompra() {
+    public double getDetarribopreciounitariocompra() {
         return Detarribopreciounitariocompra;
     }
 
-    public void setDetarribopreciounitariocompra(char Detarribopreciounitariocompra) {
+    public void setDetarribopreciounitariocompra(double Detarribopreciounitariocompra) {
         this.Detarribopreciounitariocompra = Detarribopreciounitariocompra;
     }
 
     @Override
     public String toString() {
-        return "clsDetalleArribo{" + "Detallearriboid=" + Detallearriboid + ", Arriboid=" + Arriboid + ", Proid=" + Proid + ", Detarribocantidad=" + Detarribocantidad + ", Detarribopreciounitariocompra=" + Detarribopreciounitariocompra + '}';
+        return "clsDetalleArribo{" + "Detallearriboid=" + Detallearriboid + ", Arriboid=" + Arriboid + ", Prodid=" + Prodid + ", Detarribocantidad=" + Detarribocantidad + ", Detarribopreciounitariocompra=" + Detarribopreciounitariocompra + '}';
     }
     
 }

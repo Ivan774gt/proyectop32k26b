@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 public class clsMovimientosInventario {
 
     private int Movimientoid;
-    private int Proid;
+    private int Prodid;
     private int bodegaid;
     private String Movtipomovimiento; //entradas y salidas
     private String Movmotivo; //compra, venta, merca, etc
@@ -27,9 +27,9 @@ public class clsMovimientosInventario {
     }
     
     //constructor con parametros
-    public clsMovimientosInventario(int Movimientoid, int Proid, int bodegaid, String Movtipomovimiento, String Movmotivo, int Movcantidad, Timestamp Movfecha, String Movtiporeferencia, int Movreferenciaid, String Movobservacion) {
+    public clsMovimientosInventario(int Movimientoid, int Prodid, int bodegaid, String Movtipomovimiento, String Movmotivo, int Movcantidad, Timestamp Movfecha, String Movtiporeferencia, int Movreferenciaid, String Movobservacion) {
         this.Movimientoid = Movimientoid;
-        this.Proid = Proid;
+        this.Prodid = Prodid;
         this.bodegaid = bodegaid;
         this.Movtipomovimiento = Movtipomovimiento;
         this.Movmotivo = Movmotivo;
@@ -49,12 +49,12 @@ public class clsMovimientosInventario {
         this.Movimientoid = Movimientoid;
     }
 
-    public int getProid() {
-        return Proid;
+    public int getProdid() {
+        return Prodid;
     }
 
-    public void setProid(int Proid) {
-        this.Proid = Proid;
+    public void setProdid(int Prodid) {
+        this.Prodid = Prodid;
     }
 
     public int getBodegaid() {
@@ -123,7 +123,7 @@ public class clsMovimientosInventario {
 
     @Override
     public String toString() {
-        return "clsMovimientosInventario{" + "Movimientoid=" + Movimientoid + ", Proid=" + Proid + ", bodegaid=" + bodegaid + ", Movtipomovimiento=" + Movtipomovimiento + ", Movmotivo=" + Movmotivo + ", Movcantidad=" + Movcantidad + ", Movfecha=" + Movfecha + ", Movtiporeferencia=" + Movtiporeferencia + ", Movreferenciaid=" + Movreferenciaid + ", Movobservacion=" + Movobservacion + '}';
+        return "clsMovimientosInventario{" + "Movimientoid=" + Movimientoid + ", Prodid=" + Prodid + ", bodegaid=" + bodegaid + ", Movtipomovimiento=" + Movtipomovimiento + ", Movmotivo=" + Movmotivo + ", Movcantidad=" + Movcantidad + ", Movfecha=" + Movfecha + ", Movtiporeferencia=" + Movtiporeferencia + ", Movreferenciaid=" + Movreferenciaid + ", Movobservacion=" + Movobservacion + '}';
     }
     
 }
