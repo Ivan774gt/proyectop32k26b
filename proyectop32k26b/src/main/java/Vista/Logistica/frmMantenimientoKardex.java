@@ -7,6 +7,8 @@
 //Marco. Hernandez 9959-24-6201 
 //Marco. Hernandez 9959-24-6291 24-04-2026  1. Creacion frmMantenimientoKardex, implementaciones basicas
 package Vista.Logistica;
+import Controlador.clsUsuarioConectado;
+import Modelo.PermisosDAO;
 
 /**
  *
@@ -21,6 +23,32 @@ public class frmMantenimientoKardex extends javax.swing.JInternalFrame {
      */
     public frmMantenimientoKardex() {
         initComponents();
+        cargarPermisos(); // <-- Llama a la seguridad al abrir la ventana
+        this.setClosable(true);
+        this.setIconifiable(true);
+        this.setMaximizable(true);
+        this.setResizable(true);
+        this.setDefaultCloseOperation(javax.swing.JInternalFrame.DISPOSE_ON_CLOSE);
+
+    }
+    public void cargarPermisos() {
+        // Obtener el ID del usuario conectado
+        int usuId = clsUsuarioConectado.getUsuId();
+        PermisosDAO permisosDAO = new PermisosDAO();
+
+        // 2001 es el código de la aplicación Mantenimiento Kardex
+        int codigoAplicacion = 2001; 
+
+        // Como es un Kardex, por ahora solo validamos el botón Buscar
+        btnBuscar.setEnabled(permisosDAO.puedeBuscar(usuId, codigoAplicacion));
+        
+        /* 
+        Si más adelante agregas más botones a este formulario, puedes usar esto:
+        btnRegistrar.setEnabled(permisosDAO.puedeInsertar(usuId, codigoAplicacion));
+        btnModificar.setEnabled(permisosDAO.puedeModificar(usuId, codigoAplicacion));
+        btnEliminar.setEnabled(permisosDAO.puedeEliminar(usuId, codigoAplicacion));
+        btnReportes.setEnabled(permisosDAO.puedeReportar(usuId, codigoAplicacion));
+        */
     }
 
     /**
@@ -148,6 +176,7 @@ public class frmMantenimientoKardex extends javax.swing.JInternalFrame {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
         //   limpiar();
+        cargarPermisos();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void tablaKardexAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tablaKardexAncestorAdded
