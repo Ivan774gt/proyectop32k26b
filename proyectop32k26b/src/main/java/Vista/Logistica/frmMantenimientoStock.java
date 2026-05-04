@@ -6,6 +6,9 @@
 //Marco. Hernandez 9959-24-6201 
 //Marco. Hernandez 9959-24-6291 24-04-2026  1. Creacion frmMantenimientStock, implementaciones basicas
 package Vista.Logistica;
+import Controlador.clsUsuarioConectado;
+import Modelo.PermisosDAO;
+import java.util.List;
 
 /**
  *
@@ -20,6 +23,23 @@ public class frmMantenimientoStock extends javax.swing.JInternalFrame {
      */
     public frmMantenimientoStock() {
         initComponents();
+        cargarPermisos(); // <-- Llama a la seguridad al abrir la ventana
+        this.setClosable(true);
+        this.setIconifiable(true);
+        this.setMaximizable(true);
+        this.setResizable(true);
+        this.setDefaultCloseOperation(javax.swing.JInternalFrame.DISPOSE_ON_CLOSE);
+    }
+    public void cargarPermisos() {
+        // Obtener el ID del usuario conectado
+        int usuId = clsUsuarioConectado.getUsuId();
+        PermisosDAO permisosDAO = new PermisosDAO();
+
+        // 2002 es el código de la aplicación Mantenimiento Stock
+        int codigoAplicacion = 2002; 
+
+        // Validamos únicamente el botón de Buscar
+        btnBuscar.setEnabled(permisosDAO.puedeBuscar(usuId, codigoAplicacion));
     }
 
     /**
@@ -148,6 +168,7 @@ public class frmMantenimientoStock extends javax.swing.JInternalFrame {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
         //   limpiar();
+        cargarPermisos();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void tablaStockAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tablaStockAncestorAdded

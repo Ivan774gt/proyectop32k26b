@@ -8,6 +8,8 @@
 
 
 package Vista.Logistica;
+import Controlador.clsUsuarioConectado;
+import Modelo.PermisosDAO;
 
 /**
  *
@@ -22,7 +24,24 @@ public class frmMantenimientoTransporte extends javax.swing.JInternalFrame {
      */
     public frmMantenimientoTransporte() {
         initComponents();
+        cargarPermisos();
+        this.setClosable(true);
+        this.setIconifiable(true);
+        this.setMaximizable(true);
+        this.setResizable(true);
+        this.setDefaultCloseOperation(javax.swing.JInternalFrame.DISPOSE_ON_CLOSE);
         
+    }
+    public void cargarPermisos() {
+        // Obtener el ID del usuario conectado
+        int usuId = clsUsuarioConectado.getUsuId();
+        PermisosDAO permisosDAO = new PermisosDAO();
+
+        // 2000 es el código de la aplicación Mantenimiento Transportes
+        int codigoAplicacion = 2000; 
+
+        // Validamos únicamente el botón de Buscar
+        btnBuscar.setEnabled(permisosDAO.puedeBuscar(usuId, codigoAplicacion));
     }
 
     /**
@@ -121,6 +140,7 @@ public class frmMantenimientoTransporte extends javax.swing.JInternalFrame {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
     //   limpiar();
+    cargarPermisos();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void cboxTipoBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxTipoBusquedaActionPerformed
