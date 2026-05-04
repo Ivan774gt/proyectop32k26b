@@ -1,8 +1,11 @@
+//Formulario hecho por: Anthony Hetzale
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Vista.Logistica;
+
+import java.io.File;
 
 /**
  *
@@ -46,6 +49,11 @@ public class frmAyuda extends javax.swing.JFrame {
         BotonAyuda.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         BotonAyuda.setForeground(new java.awt.Color(255, 51, 51));
         BotonAyuda.setText("?");
+        BotonAyuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonAyudaActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("AYUDA");
 
@@ -95,6 +103,26 @@ public class frmAyuda extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BotonAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAyudaActionPerformed
+        // TODO add your handling code here:
+        //Ferdynand Monroy mayo 2026: agregue la ayuda junto al archivo .chm
+        
+        try {
+            if((new File("C:\\Users\\ferit\\Desktop\\ProyFinalP32K26\\proyectop32k26b\\proyectop32k26b\\src\\main\\java\\Ayudas\\ayuda.chm")).exists()){
+                Process p = Runtime
+                        .getRuntime().
+                        exec("rundll32 url.dll,FileProtocolHandler C:\\Users\\ferit\\Desktop\\ProyFinalP32K26\\proyectop32k26b\\proyectop32k26b\\src\\main\\java\\Ayudas\\ayuda.chm");
+                p.waitFor();
+                
+            } else {
+                System.out.println("La ayuda no fue encontrada");
+            }
+        
+        } catch (Exception e) {
+            System.out.println(e.getStackTrace());
+        }
+    }//GEN-LAST:event_BotonAyudaActionPerformed
 
     /**
      * @param args the command line arguments
