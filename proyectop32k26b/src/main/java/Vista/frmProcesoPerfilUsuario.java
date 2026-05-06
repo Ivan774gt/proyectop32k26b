@@ -38,7 +38,8 @@ import java.io.File; //nueva agregada
 public class frmProcesoPerfilUsuario extends javax.swing.JInternalFrame {
 
 
-private static final int Aplcodigo = 10010;
+   //id del codigo de administracion
+    private static final int Aplcodigo = 10010;
     int idUsuarioConectado = clsUsuarioConectado.getUsuId();
 
     AsignacionPerfilUsuarioDAO asignacionDAO = new AsignacionPerfilUsuarioDAO();
