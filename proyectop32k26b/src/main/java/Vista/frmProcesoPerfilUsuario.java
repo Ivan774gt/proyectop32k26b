@@ -8,11 +8,12 @@ package Vista;
 // 1. Para el manejo de Listas (necesario para traer usuarios y perfiles)
 import java.util.List;
 import java.util.ArrayList;
-
+//1.1 Manejo de permisos
+import Modelo.PermisosDAO;
 // 2. Para las Tablas y Mensajes de alerta
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
-
+//Librerias de permisos
 import Controlador.clsAsignacionPerfilUsuario; 
 import Modelo.AsignacionPerfilUsuarioDAO;    
 import Controlador.clsUsuario;               
@@ -20,13 +21,16 @@ import Modelo.UsuarioDAO;
 import Modelo.BitacoraDAO;                   
 import Controlador.clsUsuarioConectado;       
 
-
+//Librerias extra
 import Controlador.clsPerfil; 
 import Modelo.PerfilDAO;
+import java.io.File; //nueva agregada 
+
+
 
 /**
  *
- * @author JENNIFER BARRIOS 9959-24-10016
+ * @author JENNIFER BARRIOS 9959-24-10016 Modificacion:Roli Cedillo 9959-24-1672
  */
 
 
@@ -34,99 +38,96 @@ import Modelo.PerfilDAO;
 public class frmProcesoPerfilUsuario extends javax.swing.JInternalFrame {
 
 
-private static final int Aplcodigo = 10010; 
-    int idUsuarioConectado = Controlador.clsUsuarioConectado.getUsuId();
+private static final int Aplcodigo = 10010;
+    int idUsuarioConectado = clsUsuarioConectado.getUsuId();
 
-
-    Modelo.AsignacionPerfilUsuarioDAO asignacionDAO = new Modelo.AsignacionPerfilUsuarioDAO();
-    Controlador.clsAsignacionPerfilUsuario asignacionControlador = new Controlador.clsAsignacionPerfilUsuario();
-    Modelo.BitacoraDAO bitacoraDAO = new Modelo.BitacoraDAO();
-    
-    
-    public void llenarComboUsuario() {
-    Modelo.UsuarioDAO usuarioDAO = new Modelo.UsuarioDAO();
-
-    List<Controlador.clsUsuario> usuarios = usuarioDAO.consultaUsuarios(); 
-    
-    cboUsuario.removeAllItems();
-    cboUsuarioId.removeAllItems();
-    
-    for (Controlador.clsUsuario usuario : usuarios) {
-        cboUsuario.addItem(usuario.getUsuNombre()); 
-        cboUsuarioId.addItem(String.valueOf(usuario.getUsuId())); 
-    }
+    AsignacionPerfilUsuarioDAO asignacionDAO = new AsignacionPerfilUsuarioDAO();
+    clsAsignacionPerfilUsuario asignacionControlador = new clsAsignacionPerfilUsuario();
+    BitacoraDAO bitacoraDAO = new BitacoraDAO();
+    PermisosDAO permisosDAO = new PermisosDAO(); 
+    public frmProcesoPerfilUsuario() {
+        initComponents();
+        if (!permisosDAO.puedeBuscar(idUsuarioConectado, Aplcodigo)) {
+    JOptionPane.showMessageDialog(null, "No tiene acceso a este módulo");
+    dispose();
+    return;
 }
-    
-    public void llenarTablas(int idUsuario) {
-        
-        DefaultTableModel modeloDisp = (DefaultTableModel) tablaDisponibles.getModel();
-    DefaultTableModel modeloAsig = (DefaultTableModel) tablaAsignados.getModel();
-    modeloDisp.setRowCount(0); 
-    modeloAsig.setRowCount(0); 
+        cargarPermisos();
+        this.setClosable(true);
+        this.setIconifiable(true);
+        this.setMaximizable(true);
+        this.setResizable(true);
 
-    try {
-        // 1. Obtenemos todos los perfiles existentes
-        // Creamos una bitácora vacía solo para cumplir con el requisito del PerfilDAO
-        Controlador.clsBitacora bitTemp = new Controlador.clsBitacora();
-        PerfilDAO daoPerfil = new PerfilDAO();
-        List<Controlador.clsPerfil> todosLosPerfiles = daoPerfil.obtenerPerfiles(bitTemp);
+        llenarComboUsuario();
 
-        // 2. Usamos tu AsignacionPerfilUsuarioDAO para ver cuáles ya tiene el usuario
-        AsignacionPerfilUsuarioDAO daoAsignacion = new AsignacionPerfilUsuarioDAO();
-
-        for (Controlador.clsPerfil perfil : todosLosPerfiles) {
-            // Usamos tu método .buscar(usuario, perfil) para saber si ya existe la relación
-            boolean existe = daoAsignacion.buscar(idUsuario, perfil.getPercodigo());
-
-            if (existe) {
-                // Si ya existe, va a la tabla de ASIGNADOS (derecha)
-                modeloAsig.addRow(new Object[]{perfil.getPercodigo(), perfil.getPernombre()});
-            } else {
-                // Si no existe, va a la tabla de DISPONIBLES (izquierda)
-                modeloDisp.addRow(new Object[]{perfil.getPercodigo(), perfil.getPernombre(), perfil.getPerestado()});
-            }
+        if (cboUsuario.getItemCount() > 0) {
+            cboUsuario.setSelectedIndex(0);
+            cboUsuarioId.setSelectedIndex(0);
         }
-    } catch (Exception e) {
-        System.err.println("Error en llenarTablas: " + e);
     }
+    // ================= PERMISOS =================
+    public void cargarPermisos() {
+        btnAsignarUno.setEnabled(permisosDAO.puedeInsertar(idUsuarioConectado, Aplcodigo));
+        btnAsignarTodos.setEnabled(permisosDAO.puedeInsertar(idUsuarioConectado, Aplcodigo));
+        btnQuitarUno.setEnabled(permisosDAO.puedeEliminar(idUsuarioConectado, Aplcodigo));
+        btnQuitarTodos.setEnabled(permisosDAO.puedeEliminar(idUsuarioConectado, Aplcodigo));
+    }
+
+    private boolean puedeInsertar() {
+        return permisosDAO.puedeInsertar(idUsuarioConectado, Aplcodigo);
+    }
+
+    private boolean puedeEliminar() {
+        return permisosDAO.puedeEliminar(idUsuarioConectado, Aplcodigo);
+    }
+
+    // ================= COMBOS =================
+    public void llenarComboUsuario() {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        List<clsUsuario> usuarios = usuarioDAO.consultaUsuarios();
+
+        cboUsuario.removeAllItems();
+        cboUsuarioId.removeAllItems();
+
+        for (clsUsuario usuario : usuarios) {
+            cboUsuario.addItem(usuario.getUsuNombre());
+            cboUsuarioId.addItem(String.valueOf(usuario.getUsuId()));
+        }
+    }
+
     
-        //Este metódo lo podré terminar hasta la modificacion de los errores de PerfilDAO
-}
-    
+    // ================= TABLAS =================
+    public void llenarTablas(int idUsuario) {
+
+        DefaultTableModel modeloDisp = (DefaultTableModel) tablaDisponibles.getModel();
+        DefaultTableModel modeloAsig = (DefaultTableModel) tablaAsignados.getModel();
+
+        modeloDisp.setRowCount(0);
+        modeloAsig.setRowCount(0);
+
+        try {
+            PerfilDAO daoPerfil = new PerfilDAO();
+            List<clsPerfil> perfiles = daoPerfil.obtenerPerfiles(new Controlador.clsBitacora());
+
+            for (clsPerfil perfil : perfiles) {
+                boolean existe = asignacionDAO.buscar(idUsuario, perfil.getPercodigo());
+
+                if (existe) {
+                    modeloAsig.addRow(new Object[]{perfil.getPercodigo(), perfil.getPernombre()});
+                } else {
+                    modeloDisp.addRow(new Object[]{perfil.getPercodigo(), perfil.getPernombre(), perfil.getPerestado()});
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error: " + e);
+        }
+    }
+
+
     /**
      * Creates new form MantenimientoAsignacionPerfilUsuario
      */
-   public frmProcesoPerfilUsuario() {
-       
-    initComponents(); 
-    
-    this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-    this.setClosable(true);
-    this.setIconifiable(true);
-    this.setMaximizable(true);
-    this.setResizable(true);
-    this.setSize(800, 600); 
-    
-    llenarComboUsuario();
-    Modelo.UsuarioDAO usuarioDAO = new Modelo.UsuarioDAO();
-    List<Controlador.clsUsuario> usuarios = usuarioDAO.consultaUsuarios(); 
-    
-    // 1. Limpiamos los combos
-    cboUsuario.removeAllItems();
-    cboUsuarioId.removeAllItems();
-    
-    // 2. Llenamos ambos combos
-    for (Controlador.clsUsuario usuario : usuarios) {
-        cboUsuario.addItem(usuario.getUsuNombre()); 
-        cboUsuarioId.addItem(String.valueOf(usuario.getUsuId())); 
-    }
-    
-    // 3. Forzamos una selección inicial solo si hay datos
-    if (cboUsuario.getItemCount() > 0) {
-        cboUsuario.setSelectedIndex(0);
-        cboUsuarioId.setSelectedIndex(0);
-    }
-}
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -152,6 +153,7 @@ private static final int Aplcodigo = 10010;
         btnQuitarUno = new javax.swing.JButton();
         btnAsignarTodos = new javax.swing.JButton();
         btnQuitarTodos = new javax.swing.JButton();
+        btnayuda = new javax.swing.JButton();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -252,11 +254,22 @@ private static final int Aplcodigo = 10010;
         });
         getContentPane().add(btnQuitarTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(376, 412, -1, -1));
 
+        btnayuda.setText("AYUDA");
+        btnayuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnayudaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnayuda, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnQuitarUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarUnoActionPerformed
-                                           
+     if (!puedeEliminar()) {
+    JOptionPane.showMessageDialog(null, "No tiene permisos para quitar perfiles.");
+    return;
+}                            
     int filaSeleccionada = tablaAsignados.getSelectedRow();
 
     if (filaSeleccionada != -1) {
@@ -292,7 +305,10 @@ private static final int Aplcodigo = 10010;
     }//GEN-LAST:event_btnQuitarUnoActionPerformed
 
     private void btnQuitarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarTodosActionPerformed
-                                             
+    if (!puedeEliminar()) {
+    JOptionPane.showMessageDialog(null, "No tiene permisos para quitar todos los perfiles.");
+    return;
+    }                                         
     if (cboUsuarioId.getSelectedItem() != null) {
         int idUsuarioDestino = Integer.parseInt(cboUsuarioId.getSelectedItem().toString());
         DefaultTableModel modeloAsignados = (DefaultTableModel) tablaAsignados.getModel();
@@ -306,13 +322,14 @@ private static final int Aplcodigo = 10010;
         llenarTablas(idUsuarioDestino); // Esto refresca ambas tablas de la Base de Datos
         JOptionPane.showMessageDialog(null, "Se han quitado todas las asignaciones.");
     }
-
-        
         // TODO add your handling code here:
     }//GEN-LAST:event_btnQuitarTodosActionPerformed
 
     private void btnAsignarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarTodosActionPerformed
-
+    if (!puedeInsertar()) {
+    JOptionPane.showMessageDialog(null, "No tiene permisos para asignar todos.");
+    return;
+     }
     if (cboUsuarioId.getSelectedItem() != null) {
         int idUsuarioDestino = Integer.parseInt(cboUsuarioId.getSelectedItem().toString());
         DefaultTableModel modeloDisponibles = (DefaultTableModel) tablaDisponibles.getModel();
@@ -327,15 +344,18 @@ private static final int Aplcodigo = 10010;
         llenarTablas(idUsuarioDestino);
         JOptionPane.showMessageDialog(null, "Todos los perfiles han sido asignados.");
     }
-
-
-        
+   
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAsignarTodosActionPerformed
 
     private void btnAsignarUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarUnoActionPerformed
 
-    int filaSeleccionada = tablaDisponibles.getSelectedRow();
+    if (!puedeInsertar()) {
+        JOptionPane.showMessageDialog(null, "No tiene permisos para asignar perfiles.");
+        return;
+    }
+
+       int filaSeleccionada = tablaDisponibles.getSelectedRow();
     
     if (filaSeleccionada != -1) {
         // 1. Extraer el ID del perfil (está en la columna 0)
@@ -355,7 +375,6 @@ private static final int Aplcodigo = 10010;
         JOptionPane.showMessageDialog(null, "Selecciona un perfil de la tabla de disponibles.");
     }
 
-        
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAsignarUnoActionPerformed
 
@@ -369,7 +388,8 @@ if (cboUsuario.getItemCount() > 0 && cboUsuario.getSelectedIndex() != -1) {
             llenarTablas(idSeleccionado);
         }
     }
-       
+      
+ 
         // TODO add your handling code here:
     }//GEN-LAST:event_cboUsuarioActionPerformed
 
@@ -379,8 +399,31 @@ if (cboUsuario.getItemCount() > 0 && cboUsuario.getSelectedIndex() != -1) {
             cboUsuario.setSelectedIndex(cboUsuarioId.getSelectedIndex());
         }
     }
+
         // TODO add your handling code here:
     }//GEN-LAST:event_cboUsuarioIdActionPerformed
+
+    private void btnayudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnayudaActionPerformed
+
+        //AUTORA DEL CODIGO MARIA CELESTE MAYEN IBARRA. 
+        //POR PROBLEMAS TÉCNICOS JENNIFER BARRIOS HA INSERTADO EL CODIGO DEL BOTON.
+        
+        try {
+            if ((new File("src\\main\\java\\ayudas\\ProcesoMayor.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\ayudas\\ProcesoMayor.chm");
+                p.waitFor();
+            } else {
+                System.out.println("La ayuda no Fue encontrada");
+            }
+            System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnayudaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -423,6 +466,7 @@ if (cboUsuario.getItemCount() > 0 && cboUsuario.getSelectedIndex() != -1) {
     private javax.swing.JButton btnAsignarUno;
     private javax.swing.JButton btnQuitarTodos;
     private javax.swing.JButton btnQuitarUno;
+    private javax.swing.JButton btnayuda;
     private javax.swing.JComboBox<String> cboUsuario;
     private javax.swing.JComboBox<String> cboUsuarioId;
     private javax.swing.JLabel jLabel1;
