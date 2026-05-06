@@ -536,11 +536,11 @@ private void activarPermisos() {
             asig.setPercodigo(idPerfil);
             asig.setAplcodigo(idApp);
 
-            asig.setAPLPins(jRadioButton1.isSelected() ? "S" : "N"); // Insertar
-           asig.setAPLPsel(jRadioButton2.isSelected() ? "S" : "N"); // Seleccionar
-            asig.setAPLPupd(jRadioButton3.isSelected() ? "S" : "N"); // Actualizar
-           asig.setAPLPdel(jRadioButton4.isSelected() ? "S" : "N"); // Eliminar
-           asig.setAPLPrep(jRadioButton5.isSelected() ? "S" : "N"); // Reportes
+            asig.setAPLPins(jRadioButton1.isSelected() ? "1" : "0"); // Insertar
+           asig.setAPLPsel(jRadioButton2.isSelected() ? "1" : "0"); // Seleccionar
+            asig.setAPLPupd(jRadioButton3.isSelected() ? "1" : "0"); // Actualizar
+           asig.setAPLPdel(jRadioButton4.isSelected() ? "1" : "0"); // Eliminar
+           asig.setAPLPrep(jRadioButton5.isSelected() ? "1" : "0"); // Reportes
 
             //Llamar al DAO para guardar o actualizar
             AsignacionAplicacionPerfilDAO dao = new AsignacionAplicacionPerfilDAO();
