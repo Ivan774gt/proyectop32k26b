@@ -6,15 +6,22 @@
 
 //Marco. Hernandez 9959-24-6201 
 //Marco. Hernandez 9959-24-6291 24-04-2026  1. Creacion frmMantenimientoKardex, implementaciones basicas
+                              //09-05-2026  2. Implementacion de funcionalidad de botones
+                              
 package Vista.Logistica;
 import Controlador.clsUsuarioConectado;
 import Modelo.PermisosDAO;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import javax.swing.RowFilter;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author macoh
  */
 public class frmMantenimientoKardex extends javax.swing.JInternalFrame {
+    private javax.swing.table.DefaultTableModel modeloKardex;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(frmMantenimientoKardex.class.getName());
 
@@ -22,15 +29,25 @@ public class frmMantenimientoKardex extends javax.swing.JInternalFrame {
      * Creates new form frmMantenimientoKardex
      */
     public frmMantenimientoKardex() {
-        initComponents();
-        cargarPermisos(); // <-- Llama a la seguridad al abrir la ventana
-        this.setClosable(true);
-        this.setIconifiable(true);
-        this.setMaximizable(true);
-        this.setResizable(true);
-        this.setDefaultCloseOperation(javax.swing.JInternalFrame.DISPOSE_ON_CLOSE);
+      initComponents();
+    cargarPermisos(); 
 
-    }
+    modeloKardex = new javax.swing.table.DefaultTableModel(
+        new Object [][] {}, 
+        new String [] { "ID Movimiento", "Tipo de Movimiento", "Producto", "Fecha", "Cantidad" }
+    ) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false; // Nadie edita manualmente
+        }
+    };
+    tablaKardex.setModel(modeloKardex);
+    cargarDatosEjemplo();
+    this.setClosable(true);
+    this.setIconifiable(true);
+    this.setMaximizable(true);
+    this.setResizable(true);
+}
     public void cargarPermisos() {
         // Obtener el ID del usuario conectado
         int usuId = clsUsuarioConectado.getUsuId();
@@ -40,7 +57,8 @@ public class frmMantenimientoKardex extends javax.swing.JInternalFrame {
         int codigoAplicacion = 2001; 
 
         // Como es un Kardex, por ahora solo validamos el botón Buscar
-        btnBuscar.setEnabled(permisosDAO.puedeBuscar(usuId, codigoAplicacion));
+     //   btnBuscar.setEnabled(permisosDAO.puedeBuscar(usuId, codigoAplicacion));
+        btnBuscar.setEnabled(true); // Para consulta 
         
         /* 
         Si más adelante agregas más botones a este formulario, puedes usar esto:
@@ -67,8 +85,9 @@ public class frmMantenimientoKardex extends javax.swing.JInternalFrame {
         cboxTipoBusqueda = new javax.swing.JComboBox<>();
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        btnAyuda = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnLimpiar.setText("Limpiar");
@@ -124,11 +143,23 @@ public class frmMantenimientoKardex extends javax.swing.JInternalFrame {
             }
         });
 
+        btnAyuda.setText("Ayuda");
+        btnAyuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAyudaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 790, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(339, Short.MAX_VALUE)
+                .addComponent(btnLimpiar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(271, 271, 271))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 49, Short.MAX_VALUE)
@@ -144,15 +175,18 @@ public class frmMantenimientoKardex extends javax.swing.JInternalFrame {
                             .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(203, 203, 203)
-                            .addComponent(btnBuscar)
-                            .addGap(47, 47, 47)
-                            .addComponent(btnLimpiar))
+                            .addComponent(btnBuscar))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(0, 49, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 751, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(242, 242, 242)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLimpiar)
+                    .addComponent(btnAyuda))
+                .addContainerGap(478, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 27, Short.MAX_VALUE)
@@ -162,9 +196,7 @@ public class frmMantenimientoKardex extends javax.swing.JInternalFrame {
                     .addGap(12, 12, 12)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(101, 101, 101)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnBuscar)
-                        .addComponent(btnLimpiar))
+                    .addComponent(btnBuscar)
                     .addGap(18, 18, 18)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 28, Short.MAX_VALUE)))
@@ -174,8 +206,9 @@ public class frmMantenimientoKardex extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        // TODO add your handling code here:
-        //   limpiar();
+        txtBuscar.setText("");
+    tablaKardex.clearSelection();
+    cboxTipoBusqueda.setSelectedIndex(0);
         cargarPermisos();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
@@ -184,70 +217,109 @@ public class frmMantenimientoKardex extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tablaKardexAncestorAdded
 
     private void cboxTipoBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxTipoBusquedaActionPerformed
-        // TODO add your handling code here:
-
-        // Oculta todos los campos de búsqueda al inicio
-        // para evitar que aparezcan controles innecesarios
-        /*    txtBuscar.setVisible(false);
-        fechaInicio.setVisible(false);
-        fechaFin.setVisible(false);
-        jLabel1.setVisible(false);
-        jLabel2.setVisible(false);
-        btnBuscar.setVisible(false);
-        */
-        // Obtiene el tipo de búsqueda seleccionado en el ComboBox
-        String seleccion = cboxTipoBusqueda.getSelectedItem().toString();
-
-        // Dependiendo del tipo de búsqueda se muestran
-        // los controles necesarios para ingresar los datos
-        switch (seleccion) {
-            case "ID":
+ 
+    txtBuscar.setText("");
+    txtBuscar.requestFocus();
+    String seleccion = cboxTipoBusqueda.getSelectedItem().toString();
+    switch (seleccion) {
+        case "ID Movimiento":
             buscarPorIDk();
             break;
-            case "Nombre":
+        case "Tipo de Movimiento":
             buscarPorMovimiento();
             break;
-            case "Empresa":
+        case "Producto":
             buscarPorProducto();
             break;
-            case "Tipo de Vehículo":
+        case "Fecha":
             buscarPorFechak();
             break;
-        }
+    }
     }//GEN-LAST:event_cboxTipoBusquedaActionPerformed
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
-        // TODO add your handling code here:
+        String filtro = txtBuscar.getText().trim().toLowerCase();
+    String criterio = cboxTipoBusqueda.getSelectedItem().toString();
+    boolean encontrado = false;
+
+    if (filtro.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Ingrese un valor para buscar.");
+        return;
+    }
+    int columna = 0;
+    if (criterio.equals("ID Movimiento")) columna = 0;
+    else if (criterio.equals("Tipo de Movimiento")) columna = 1;
+    else if (criterio.equals("Producto")) columna = 2;
+    else if (criterio.equals("Fecha")) columna = 3;
+
+
+    for (int i = 0; i < tablaKardex.getRowCount(); i++) {
+        String valorCelda = tablaKardex.getValueAt(i, columna).toString().toLowerCase();
+        
+        if (valorCelda.contains(filtro)) {
+            tablaKardex.setRowSelectionInterval(i, i);
+            encontrado = true;
+            break; 
+        }
+    }
+
+    if (!encontrado) {
+        javax.swing.JOptionPane.showMessageDialog(this, "No se encontró coincidencia para: " + filtro);
+    }
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        if (txtBuscar.getText().isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ingrese un valor para buscar", "Advertencia", javax.swing.JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+       String filtro = txtBuscar.getText().trim();
+    String criterio = cboxTipoBusqueda.getSelectedItem().toString();
 
-        String seleccion = cboxTipoBusqueda.getSelectedItem().toString();
+    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) tablaKardex.getModel());
+    tablaKardex.setRowSorter(sorter);
 
-        switch (seleccion) {
-            case "ID":
-            buscarPorIDk();
-            break;
-            case "Nombre":
-            buscarPorMovimiento();
-            break;
-            case "Empresa":
-            buscarPorProducto();
-            break;
-            case "Tipo de Vehículo":
-            buscarPorFechak();
-            break;
-            default:
-            javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un tipo de búsqueda");
+    if (filtro.length() == 0) {
+        sorter.setRowFilter(null);
+    } else {
+        int indiceColumna = 0;
+switch (criterio) {
+    case "ID Movimiento": 
+        indiceColumna = 0; 
+        break;
+    case "Tipo de Movimiento":
+        indiceColumna = 1; 
+        break;
+    case "Producto": 
+        indiceColumna = 2; 
+        break;
+    case "Fecha":
+        indiceColumna = 3; 
+        break;
+    default:
+        indiceColumna = 0;
+        break;
+}
+
+        try {
+            // 3. Aplicamos el filtro (el (?i) es para que ignore mayúsculas/minúsculas)
+            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + filtro, indiceColumna));
+            
+            // Verificamos si quedó algo después de filtrar
+            if (tablaKardex.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(this, "No se encontraron resultados.");
+            }
+        } catch (Exception e) {
+            System.err.println("Error en el filtro: " + e.getMessage());
         }
+    }
         //Registro de la accion en bitacora
         //     BitacoraDAO bitacoraDAO = new BitacoraDAO();
         //    bitacoraDAO.insert(idUsuario, Aplcodigo, "CONSULTA");    
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
+        Vista.Logistica.frmAyuda ventanaAyuda = new Vista.Logistica.frmAyuda();
+    
+    ventanaAyuda.setVisible(true);
+    ventanaAyuda.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnAyudaActionPerformed
 private void buscarPorIDk() {
         System.out.println("Buscando por ID en la BD...");
     }
@@ -290,7 +362,21 @@ private void buscarPorIDk() {
         java.awt.EventQueue.invokeLater(() -> new frmMantenimientoKardex().setVisible(true));
     }
 
+private void cargarDatosEjemplo() {
+    modeloKardex.addRow(new Object[]{"101", "Entrada", "Martillo", "24/04/2026", "50"});
+    modeloKardex.addRow(new Object[]{"102", "Salida", "Clavos", "25/04/2026", "200"});
+}
+
+public void registrarMovimientoExterno(Object[] fila) {
+    if (fila.length == 5) {
+        modeloKardex.addRow(fila);
+    } else {
+        System.out.println("Error: El movimiento no tiene las 5 columnas requeridas.");
+    }
+}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAyuda;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JComboBox<String> cboxTipoBusqueda;

@@ -91,10 +91,10 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
         label2 = new javax.swing.JLabel();
         label14 = new javax.swing.JLabel();
         btnModificar1 = new javax.swing.JButton();
-        txtCorreo1 = new javax.swing.JTextField();
+        txtProductoId = new javax.swing.JTextField();
         label15 = new javax.swing.JLabel();
         txtbuscado1 = new javax.swing.JTextField();
-        txtNombre1 = new javax.swing.JTextField();
+        txtIdCliente = new javax.swing.JTextField();
         btnLimpiar1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaUsuarios1 = new javax.swing.JTable();
@@ -103,13 +103,11 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
         jButton3 = new javax.swing.JButton();
         label19 = new javax.swing.JLabel();
         btnActualizar1 = new javax.swing.JButton();
-        txtNombreReal1 = new javax.swing.JTextField();
+        txtEstadoPedido = new javax.swing.JTextField();
         label21 = new javax.swing.JLabel();
-        label22 = new javax.swing.JLabel();
         btnEliminar1 = new javax.swing.JButton();
-        txtEstatus1 = new javax.swing.JTextField();
         btnRegistrar1 = new javax.swing.JButton();
-        txtTelefono1 = new javax.swing.JTextField();
+        txtCantidad = new javax.swing.JTextField();
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -250,7 +248,7 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
         txtTelefono.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtTelefono.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnBuscar1.setText("Buscar");
         btnBuscar1.addActionListener(new java.awt.event.ActionListener() {
@@ -275,14 +273,14 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
             }
         });
 
-        txtCorreo1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtCorreo1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtProductoId.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtProductoId.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
         label15.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label15.setText("Nombre");
+        label15.setText("ID cliente");
 
-        txtNombre1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtNombre1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtIdCliente.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtIdCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
         btnLimpiar1.setText("Limpiar");
         btnLimpiar1.addActionListener(new java.awt.event.ActionListener() {
@@ -336,14 +334,11 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
             }
         });
 
-        txtNombreReal1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtNombreReal1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtEstadoPedido.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtEstadoPedido.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
         label21.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label21.setText("Estado Pedido");
-
-        label22.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label22.setText("Estatus");
 
         btnEliminar1.setText("Eliminar");
         btnEliminar1.addActionListener(new java.awt.event.ActionListener() {
@@ -352,9 +347,6 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
             }
         });
 
-        txtEstatus1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtEstatus1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-
         btnRegistrar1.setText("Registrar");
         btnRegistrar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -362,8 +354,8 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
             }
         });
 
-        txtTelefono1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtTelefono1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtCantidad.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtCantidad.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -401,28 +393,25 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
                                     .addComponent(btnReportes1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label15)
-                            .addComponent(label22))
+                        .addComponent(label15)
                         .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEstatus1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(label21)
                                     .addComponent(label14)))
                             .addComponent(label12))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(txtCorreo1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtNombreReal1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtProductoId, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtEstadoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 994, Short.MAX_VALUE)
@@ -444,23 +433,19 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(label15)
-                            .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(label22)
-                            .addComponent(txtEstatus1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(label21)
-                            .addComponent(txtNombreReal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtEstadoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(label14)
-                            .addComponent(txtCorreo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtProductoId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(label12)
-                            .addComponent(txtTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnRegistrar1)
@@ -624,7 +609,6 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
     private javax.swing.JLabel label19;
     private javax.swing.JLabel label2;
     private javax.swing.JLabel label21;
-    private javax.swing.JLabel label22;
     private javax.swing.JLabel label3;
     private javax.swing.JLabel label4;
     private javax.swing.JLabel label5;
@@ -636,19 +620,18 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
     private javax.swing.JLabel lb1;
     private javax.swing.JTable tablaUsuarios;
     private javax.swing.JTable tablaUsuarios1;
+    private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtConfContraseña;
     private javax.swing.JTextField txtContrasena;
     private javax.swing.JTextField txtCorreo;
-    private javax.swing.JTextField txtCorreo1;
     private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtEstadoPedido;
     private javax.swing.JTextField txtEstatus;
-    private javax.swing.JTextField txtEstatus1;
+    private javax.swing.JTextField txtIdCliente;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombre1;
     private javax.swing.JTextField txtNombreReal;
-    private javax.swing.JTextField txtNombreReal1;
+    private javax.swing.JTextField txtProductoId;
     private javax.swing.JTextField txtTelefono;
-    private javax.swing.JTextField txtTelefono1;
     private javax.swing.JTextField txtUltimaSesion;
     private javax.swing.JTextField txtbuscado;
     private javax.swing.JTextField txtbuscado1;

@@ -385,17 +385,12 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="label15" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="label22" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="label15" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtEstatus1" min="-2" pref="261" max="-2" attributes="0"/>
-                          <Component id="txtNombre1" min="-2" pref="271" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="txtIdCliente" min="-2" pref="271" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
@@ -408,12 +403,12 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtTelefono1" min="-2" pref="263" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
+                          <Component id="txtCantidad" min="-2" pref="263" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                              <Component id="txtCorreo1" min="-2" pref="261" max="-2" attributes="0"/>
+                              <Component id="txtProductoId" min="-2" pref="261" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="txtNombreReal1" min="-2" pref="261" max="-2" attributes="0"/>
+                          <Component id="txtEstadoPedido" min="-2" pref="261" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -444,27 +439,22 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="label15" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNombre1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtIdCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="label22" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtEstatus1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="label21" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNombreReal1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtEstadoPedido" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="label14" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtCorreo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtProductoId" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="label12" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtTelefono1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtCantidad" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -538,7 +528,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModificar1ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtCorreo1">
+    <Component class="javax.swing.JTextField" name="txtProductoId">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Century Gothic" size="12" style="0"/>
@@ -557,12 +547,12 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Century Gothic" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Nombre"/>
+        <Property name="text" type="java.lang.String" value="ID cliente"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtbuscado1">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNombre1">
+    <Component class="javax.swing.JTextField" name="txtIdCliente">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Century Gothic" size="12" style="0"/>
@@ -672,7 +662,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizar1ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNombreReal1">
+    <Component class="javax.swing.JTextField" name="txtEstadoPedido">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Century Gothic" size="12" style="0"/>
@@ -694,14 +684,6 @@
         <Property name="text" type="java.lang.String" value="Estado Pedido"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="label22">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Century Gothic" size="12" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Estatus"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btnEliminar1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
@@ -709,20 +691,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminar1ActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtEstatus1">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Century Gothic" size="12" style="0"/>
-        </Property>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-            <MatteColorBorder bottom="1" left="0" right="0" top="0">
-              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
-            </MatteColorBorder>
-          </Border>
-        </Property>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnRegistrar1">
       <Properties>
@@ -732,7 +700,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrar1ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtTelefono1">
+    <Component class="javax.swing.JTextField" name="txtCantidad">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Century Gothic" size="12" style="0"/>
