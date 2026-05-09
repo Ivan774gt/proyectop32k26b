@@ -14,6 +14,8 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.util.List;
 import javax.swing.JOptionPane;
+import Controlador.clsUsuarioConectado;
+import Modelo.PermisosDAO;
 /**
  *
  * @author ferito
@@ -30,6 +32,28 @@ AplicacionesDAO dao = new AplicacionesDAO(); //inicializar llamada al DAO
         this.setIconifiable(true);
         this.setMaximizable(true);
         this.setResizable(true);
+        cargarPermisos(); // <-- Llama a la seguridad al abrir la ventana
+        
+        this.setClosable(true);
+        this.setIconifiable(true);
+        this.setMaximizable(true);
+        this.setResizable(true);
+    }
+    
+    public void cargarPermisos() {
+        // Obtener el ID del usuario conectado
+        int usuId = clsUsuarioConectado.getUsuId();
+        PermisosDAO permisosDAO = new PermisosDAO();
+
+        // Código de la aplicación en la base de datos
+        int codigoAplicacion = 11; 
+
+        // Validamos cada botón (OJO: btnEliminar1 lleva un "1")
+        btnRegistrar.setEnabled(permisosDAO.puedeInsertar(usuId, codigoAplicacion));
+        btnBuscar.setEnabled(permisosDAO.puedeBuscar(usuId, codigoAplicacion));
+        btnModificar.setEnabled(permisosDAO.puedeModificar(usuId, codigoAplicacion));
+        btnEliminar1.setEnabled(permisosDAO.puedeEliminar(usuId, codigoAplicacion)); 
+        btnReportes.setEnabled(permisosDAO.puedeReportar(usuId, codigoAplicacion));
     }
     //método limpiar
     public void limpiar() {
@@ -372,7 +396,9 @@ AplicacionesDAO dao = new AplicacionesDAO(); //inicializar llamada al DAO
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+Vista.Logistica.frmAyuda ventana = new Vista.Logistica.frmAyuda();
+    ventana.setVisible(true);
+    ventana.setLocationRelativeTo(null);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -381,6 +407,7 @@ AplicacionesDAO dao = new AplicacionesDAO(); //inicializar llamada al DAO
         txtCodigo.setText("");
         txtCodigo.setText("");
         txtEstatus.setText("");
+        cargarPermisos(); // Vuelve a validar la seguridad por si acaso
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     /**
