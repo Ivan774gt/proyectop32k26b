@@ -6,22 +6,26 @@
 
 //Marco. Hernandez 9959-24-6201 
 //Marco. Hernandez 9959-24-6291 24-04-2026  1. Creacion frmMantenimientPedidos, implementaciones basicas
+                              //09-05-2026  2. Corregido, funcionalidad de botnoes --Falta Reportes--
+                              //09-05-2026  3. Implementacion, boton ayuda  
 package Vista.Logistica;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author macoh
  */
 public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
-    
+  javax.swing.table.DefaultTableModel modeloLocal;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(frmMantenimientoPedidos.class.getName());
 
-    /**
-     * Creates new form frmMantenimientoPedidos
-     */
     public frmMantenimientoPedidos() {
         initComponents();
-        cargarPermisos(); // <-- Llama a la seguridad al abrir la ventana
+        String[] titulos = {"ID Cliente", "Estado Pedido", "Producto ID", "Cantidad"};
+        modeloLocal = new javax.swing.table.DefaultTableModel(null, titulos);
+        tablaUsuarios1.setModel(modeloLocal);
+        cargarPermisos();
+        
         this.setClosable(true);
         this.setIconifiable(true);
         this.setMaximizable(true);
@@ -100,7 +104,7 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
         tablaUsuarios1 = new javax.swing.JTable();
         btnReportes1 = new javax.swing.JButton();
         lb1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        btnAyuda = new javax.swing.JButton();
         label19 = new javax.swing.JLabel();
         btnActualizar1 = new javax.swing.JButton();
         txtEstadoPedido = new javax.swing.JTextField();
@@ -317,10 +321,10 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
 
         lb1.setText(".");
 
-        jButton3.setText("Ayuda");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnAyuda.setText("Ayuda");
+        btnAyuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnAyudaActionPerformed(evt);
             }
         });
 
@@ -386,7 +390,7 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnLimpiar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(14, 14, 14)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnEliminar1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
@@ -399,11 +403,8 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(label21)
-                                    .addComponent(label14)))
+                            .addComponent(label21)
+                            .addComponent(label14)
                             .addComponent(label12))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -454,7 +455,7 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
                         .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnLimpiar1)
-                            .addComponent(jButton3)
+                            .addComponent(btnAyuda)
                             .addComponent(btnReportes1))
                         .addGap(5, 5, 5)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -513,21 +514,51 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
-        // TODO add your handling code here:
+  String idBuscado = txtbuscado1.getText().trim();
+    
+    if(idBuscado.isEmpty()){
+        JOptionPane.showMessageDialog(null, "Ingrese el ID del Pedido para buscar.");
+        return;
+    }
 
-      
+    boolean encontrado = false;
+    for (int i = 0; i < modeloLocal.getRowCount(); i++) {
+        if (modeloLocal.getValueAt(i, 0).toString().equals(idBuscado)) {
+            txtIdCliente.setText(modeloLocal.getValueAt(i, 0).toString());
+            txtEstadoPedido.setText(modeloLocal.getValueAt(i, 1).toString());
+            txtProductoId.setText(modeloLocal.getValueAt(i, 2).toString());
+            txtCantidad.setText(modeloLocal.getValueAt(i, 3).toString());
+            tablaUsuarios1.setRowSelectionInterval(i, i);
+            encontrado = true;
+            break;
+        }
+    }
 
+    if (!encontrado) {
+        JOptionPane.showMessageDialog(null, "No se encontró el pedido con ID: " + idBuscado);
+    }
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     private void btnModificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificar1ActionPerformed
-        //        // TODO add your handling code here:
-
+                                             
+  int filaSeleccionada = tablaUsuarios1.getSelectedRow();
+        if (filaSeleccionada >= 0) {
+            modeloLocal.setValueAt(txtIdCliente.getText(), filaSeleccionada, 0);
+            modeloLocal.setValueAt(txtEstadoPedido.getText(), filaSeleccionada, 1);
+            modeloLocal.setValueAt(txtProductoId.getText(), filaSeleccionada, 2);
+            modeloLocal.setValueAt(txtCantidad.getText(), filaSeleccionada, 3);
+            
+            JOptionPane.showMessageDialog(null, "Registro actualizado correctamente.");
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila de la tabla para modificar.");
+        }
        
     }//GEN-LAST:event_btnModificar1ActionPerformed
 
     private void btnLimpiar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar1ActionPerformed
       
-        // TODO add your handling code here:
+    limpiarCampos();
     }//GEN-LAST:event_btnLimpiar1ActionPerformed
 
     private void btnReportes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportes1ActionPerformed
@@ -535,25 +566,78 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
 
     }//GEN-LAST:event_btnReportes1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
         // TODO add your handling code here:
+           Vista.Logistica.frmAyuda ventanaAyuda = new Vista.Logistica.frmAyuda();
+    
+    ventanaAyuda.setVisible(true);
+    ventanaAyuda.setLocationRelativeTo(null);
+                                           
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnAyudaActionPerformed
 
     private void btnActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizar1ActionPerformed
-        // TODO add your handling code here:
-      
+      String idBuscar = txtbuscado1.getText();
+        if(idBuscar.trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor ingrese un ID para buscar");
+            return;
+        }
+        JOptionPane.showMessageDialog(null, "Buscando ID: " + idBuscar);
+    
     }//GEN-LAST:event_btnActualizar1ActionPerformed
 
     private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
-        // TODO add your handling code here:
+   String idEliminar = txtbuscado1.getText();
+        if(idEliminar.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe buscar un pedido primero.");
+            return;
+        }
+
+        int respuesta = JOptionPane.showConfirmDialog(null, "¿Eliminar pedido " + idEliminar + "?", "Advertencia", JOptionPane.YES_NO_OPTION);
+        if (respuesta == JOptionPane.YES_OPTION) {
+            System.out.println("Vista: Solicitando eliminar Pedido: " + idEliminar);
+            JOptionPane.showMessageDialog(null, "Eliminación procesada.");
+            limpiarCampos();
+            llenarTabla();
       
     }//GEN-LAST:event_btnEliminar1ActionPerformed
 
+}
     private void btnRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrar1ActionPerformed
-       
+   String idCliente = txtIdCliente.getText(); 
+        String estado = txtEstadoPedido.getText();
+        String producto = txtProductoId.getText();
+        String cantidad = txtCantidad.getText();
+
+        if (idCliente.isEmpty() || producto.isEmpty() || cantidad.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor llene los campos obligatorios");
+            return;
+        }
+
+        Object[] fila = {idCliente, estado, producto, cantidad};
+        modeloLocal.addRow(fila); 
+
+        JOptionPane.showMessageDialog(null, "Pedido agregado a la lista visual.");
+        limpiarCampos();
+
+
     }//GEN-LAST:event_btnRegistrar1ActionPerformed
 
+    public void limpiarCampos() {
+  txtIdCliente.setText("");      
+        txtEstadoPedido.setText("");  
+        txtProductoId.setText("");      
+        txtCantidad.setText("");    
+        txtbuscado1.setText("");
+}
+
+
+    public void llenarTabla() {
+  modeloLocal.setRowCount(0); 
+        System.out.println("Vista: Solicitando datos a la base de datos...");
+}
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -582,6 +666,7 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnActualizar1;
+    private javax.swing.JButton btnAyuda;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscar1;
     private javax.swing.JButton btnEliminar;
@@ -595,7 +680,6 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
     private javax.swing.JButton btnReportes;
     private javax.swing.JButton btnReportes1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

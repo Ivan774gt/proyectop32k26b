@@ -5,7 +5,7 @@
 
 //Marco. Hernandez 9959-24-6201 
 //Marco. Hernandez 9959-24-6291 24-04-2026  1. Creacion frmMantenimientStock, implementaciones basicas
-                                          //2. Implementacion, funcionalidad a botones 
+                              //09-05-2026  2. Implementacion de funcionalidad de botones
 package Vista.Logistica;
 import Controlador.clsUsuarioConectado;
 import Modelo.PermisosDAO;
