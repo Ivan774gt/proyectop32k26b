@@ -342,16 +342,16 @@ AplicacionesDAO dao = new AplicacionesDAO(); //inicializar llamada al DAO
         //Reporte de Ferdynand Monroy mayo 2026
         Connection conn = null;
     Map p = new HashMap();
-    //net.sf.jasperreports.engine.JasperReport report;
-    //JasperPrint print;
+    net.sf.jasperreports.engine.JasperReport report;
+    JasperPrint print;
         try {
             conn = Conexion.getConnection();
-            //report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-                //+ "/src/main/java/Reportes/reporteApp.jrxml");
-                //print = JasperFillManager.fillReport(report, p, conn);
-            //JasperViewer view = new JasperViewer(print, false);
-                //view.setTitle("Reporte Prueba");
-            //view.setVisible(true);
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                + "/src/main/java/Reportes/reporteApp.jrxml");
+                print = JasperFillManager.fillReport(report, p, conn);
+            JasperViewer view = new JasperViewer(print, false);
+                view.setTitle("Reporte Prueba");
+            view.setVisible(true);
         } catch (Exception e) {
         e.printStackTrace();
     }
