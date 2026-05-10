@@ -231,6 +231,11 @@ public class MdiBancos extends javax.swing.JFrame {
         mnuGeneral.add(mnuReportes);
 
         mnuAyudas.setText("Ayudas");
+        mnuAyudas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAyudasActionPerformed(evt);
+            }
+        });
         mnuGeneral.add(mnuAyudas);
 
         setJMenuBar(mnuGeneral);
@@ -422,6 +427,21 @@ public void configurarVisibilidadBotones(List<Integer> appsPermitidas) {
         Dimension FrameSize = ventana.getSize();
         ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
     }//GEN-LAST:event_frmProcesoAplicacionUsuarioActionPerformed
+
+    private void mnuAyudasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAyudasActionPerformed
+ System.out.println("Abriendo ayuda del sistema");
+
+    try {
+        String ruta = System.getProperty("user.dir") + "C:\\Users\\VA\\Desktop\\proyectop32k26b\\proyectop32k26b\\src\\main\\java\\Ayudas\\Bancos";
+
+        // Ejecuta el archivo de ayuda
+        Runtime.getRuntime().exec("hh.exe \"" + ruta + "\"");
+
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(this,
+                "No se pudo abrir la ayuda");
+    }
+    }//GEN-LAST:event_mnuAyudasActionPerformed
 
     /**
      * @param args the command line arguments

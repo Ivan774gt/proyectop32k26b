@@ -1,4 +1,5 @@
 Vista\MdiSeguridad$14.class
+Vista\frmMantenimientoPerfil$7.class
 Vista\frmMantenimientoUsuario$4.class
 Controlador\controladorPlanilla\prueba1.class
 Vista\Bancos\MdiBancos$7.class
@@ -53,6 +54,7 @@ Vista\MdiSeguridad$8.class
 Vista\MdiSeguridad$1.class
 Vista\Bancos\MdiBancos$2.class
 Vista\frmRestablecerContraseña.class
+Vista\frmProcesoPerfilUsuario$8.class
 Vista\frmMantenimientoUsuario$2.class
 Vista\frmProcesoAplicacionPerfil$10.class
 Vista\vistaCuentasCorrientes\NewJFrame.class
@@ -158,6 +160,7 @@ Vista\vistaCuentasCorrientes\MdiGeneralCC$5.class
 Vista\MdiSeguridad$15.class
 Modelo\AsignacionAplicacionUsuarioDAO.class
 Vista\frmProcesoAplicacionPerfil$7.class
+Vista\Bancos\MdiBancos$16.class
 Vista\frmLogin$3.class
 Controlador\clsBitacora.class
 Modelo\ComisionesVentas\RepostesDAO.class
