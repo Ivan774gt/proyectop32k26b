@@ -5,9 +5,13 @@
 
 //Marco. Hernandez 9959-24-6201 
 //Marco. Hernandez 9959-24-6291 24-04-2026  1. Creacion frmMantenimientStock, implementaciones basicas
+                              //09-05-2026  2. Implementacion de funcionalidad de botones
 package Vista.Logistica;
 import Controlador.clsUsuarioConectado;
 import Modelo.PermisosDAO;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import javax.swing.RowFilter;
 import java.util.List;
 
 /**
@@ -17,19 +21,33 @@ import java.util.List;
 public class frmMantenimientoStock extends javax.swing.JInternalFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(frmMantenimientoStock.class.getName());
-
+private DefaultTableModel modeloStock;
     /**
      * Creates new form frmMantenimientoStock
      */
-    public frmMantenimientoStock() {
+public frmMantenimientoStock() {
         initComponents();
-        cargarPermisos(); // <-- Llama a la seguridad al abrir la ventana
+        cargarPermisos(); 
         this.setClosable(true);
         this.setIconifiable(true);
         this.setMaximizable(true);
         this.setResizable(true);
-        this.setDefaultCloseOperation(javax.swing.JInternalFrame.DISPOSE_ON_CLOSE);
+        
+        modeloStock = (DefaultTableModel) tablaStock.getModel();
+        tablaStock.setDefaultEditor(Object.class, null);
+  
+        cargarDatosPrueba();
     }
+
+    private void cargarDatosPrueba() {
+        modeloStock.setRowCount(0); 
+        modeloStock.addRow(new Object[]{"101", "Martillo", "50", "Unidades"});
+        modeloStock.addRow(new Object[]{"102", "Clavos 2 pulg", "200", "Bolsas"});
+        modeloStock.addRow(new Object[]{"103", "Pintura Látex", "15", "Cubetas"});
+    };
+
+  
+ 
     public void cargarPermisos() {
         // Obtener el ID del usuario conectado
         int usuId = clsUsuarioConectado.getUsuId();
@@ -51,6 +69,7 @@ public class frmMantenimientoStock extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton3 = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaStock = new javax.swing.JTable();
@@ -58,8 +77,16 @@ public class frmMantenimientoStock extends javax.swing.JInternalFrame {
         cboxTipoBusqueda = new javax.swing.JComboBox<>();
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        btnAdyda = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jButton3.setText("Ayuda");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnLimpiar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnLimpiar.setText("Limpiar");
@@ -115,60 +142,80 @@ public class frmMantenimientoStock extends javax.swing.JInternalFrame {
             }
         });
 
+        btnAdyda.setText("Ayuda");
+        btnAdyda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdydaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(282, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(220, 220, 220))
+                .addGap(0, 12, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboxTipoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnLimpiar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAdyda, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(223, 223, 223))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(26, 26, 26)
-                            .addComponent(cboxTipoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(26, 26, 26)
-                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(203, 203, 203)
-                            .addComponent(btnBuscar)
-                            .addGap(47, 47, 47)
-                            .addComponent(btnLimpiar))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(203, 209, Short.MAX_VALUE)
+                    .addComponent(btnBuscar)
+                    .addGap(0, 419, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(41, 41, 41)
                 .addComponent(jLabel3)
-                .addContainerGap(643, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cboxTipoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(76, 76, 76)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 74, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnLimpiar)
+                            .addComponent(btnAdyda))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 43, Short.MAX_VALUE)
-                    .addComponent(cboxTipoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(12, 12, 12)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(101, 101, 101)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnBuscar)
-                        .addComponent(btnLimpiar))
-                    .addGap(18, 18, 18)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 216, Short.MAX_VALUE)
+                    .addComponent(btnBuscar)
+                    .addGap(0, 449, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        // TODO add your handling code here:
-        //   limpiar();
-        cargarPermisos();
+     txtBuscar.setText("");
+        cboxTipoBusqueda.setSelectedIndex(0);
+        if (tablaStock.getRowSorter() != null) {
+            tablaStock.setRowSorter(null); // Quita filtros
+        }
+        cargarDatosPrueba();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void tablaStockAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tablaStockAncestorAdded
@@ -204,7 +251,21 @@ public class frmMantenimientoStock extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cboxTipoBusquedaActionPerformed
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
-        // TODO add your handling code here:
+        
+        String filtro = txtBuscar.getText().trim();
+        if (filtro.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ingrese un valor para buscar", "Advertencia", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(modeloStock);
+        tablaStock.setRowSorter(sorter);
+        
+        String seleccion = cboxTipoBusqueda.getSelectedItem().toString();
+        int columnaIndex = seleccion.equals("ID Producto") ? 0 : 1;
+
+        sorter.setRowFilter(RowFilter.regexFilter("(?i)" + filtro, columnaIndex));
+        
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -230,6 +291,17 @@ public class frmMantenimientoStock extends javax.swing.JInternalFrame {
         //     BitacoraDAO bitacoraDAO = new BitacoraDAO();
         //    bitacoraDAO.insert(idUsuario, Aplcodigo, "CONSULTA");
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnAdydaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdydaActionPerformed
+         Vista.Logistica.frmAyuda ventanaAyuda = new Vista.Logistica.frmAyuda();
+    
+    ventanaAyuda.setVisible(true);
+    ventanaAyuda.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnAdydaActionPerformed
 private void buscarPorIDS() {
         System.out.println("Buscando por ID en la BD...");
     }
@@ -265,11 +337,19 @@ private void buscarPorIDS() {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new frmMantenimientoStock().setVisible(true));
     }
+    
+    
+    private void cargarDatosEjemplo() {
+    modeloStock.addRow(new Object[]{"P001", "Martillo Pro", "50", "Unidades"});
+    modeloStock.addRow(new Object[]{"P002", "Clavos 2 pulg", "500", "Bolsas"});
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdyda;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JComboBox<String> cboxTipoBusqueda;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tablaStock;
