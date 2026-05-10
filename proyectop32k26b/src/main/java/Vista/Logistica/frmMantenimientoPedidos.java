@@ -9,6 +9,7 @@
                               //09-05-2026  2. Corregido, funcionalidad de botnoes --Falta Reportes--
                               //09-05-2026  3. Implementacion, boton ayuda  
 package Vista.Logistica;
+import java.io.File;
 import javax.swing.JOptionPane;
 
 /**
@@ -573,6 +574,24 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
     ventanaAyuda.setVisible(true);
     ventanaAyuda.setLocationRelativeTo(null);
                                            
+    //Ferdynand Monroy mayo 2026: agregue la ayuda junto al archivo .chm
+        
+        try {
+        String ruta = "C:\\Users\\ferit\\Desktop\\proyectop32k26b\\proyectop32k26b\\src\\main\\java\\Ayudas\\Logistica\\Logistica.chm";
+
+        File archivo = new File(ruta);
+
+        if (archivo.exists()) {
+            Runtime.getRuntime().exec(
+                "rundll32 url.dll,FileProtocolHandler \"" + ruta + "\""
+            );
+        } else {
+            System.out.println("La ayuda no fue encontrada");
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
 
     }//GEN-LAST:event_btnAyudaActionPerformed
 

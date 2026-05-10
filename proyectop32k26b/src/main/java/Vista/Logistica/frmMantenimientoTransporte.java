@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import Controlador.Logistica.clsTransportistas;
 import Modelo.Logistica.TransportistasDAO;
+import java.io.File;
 
 /**
  *
@@ -304,6 +305,25 @@ Modelo.Logistica.TransportistasDAO transporteDAO = new Modelo.Logistica.Transpor
     
     ventanaAyuda.setVisible(true);
     ventanaAyuda.setLocationRelativeTo(null);
+    
+    //Ferdynand Monroy mayo 2026: agregue la ayuda junto al archivo .chm
+        
+        try {
+        String ruta = "C:\\Users\\ferit\\Desktop\\proyectop32k26b\\proyectop32k26b\\src\\main\\java\\Ayudas\\Logistica\\Logistica.chm";
+
+        File archivo = new File(ruta);
+
+        if (archivo.exists()) {
+            Runtime.getRuntime().exec(
+                "rundll32 url.dll,FileProtocolHandler \"" + ruta + "\""
+            );
+        } else {
+            System.out.println("La ayuda no fue encontrada");
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
     }//GEN-LAST:event_btnAyudaActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
