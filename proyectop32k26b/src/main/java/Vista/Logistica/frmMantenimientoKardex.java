@@ -11,6 +11,7 @@
 package Vista.Logistica;
 import Controlador.clsUsuarioConectado;
 import Modelo.PermisosDAO;
+import java.io.File;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.RowFilter;
@@ -319,6 +320,24 @@ switch (criterio) {
     
     ventanaAyuda.setVisible(true);
     ventanaAyuda.setLocationRelativeTo(null);
+    //Ferdynand Monroy mayo 2026: agregue la ayuda junto al archivo .chm
+        
+        try {
+        String ruta = "C:\\Users\\ferit\\Desktop\\proyectop32k26b\\proyectop32k26b\\src\\main\\java\\Ayudas\\Logistica\\Logistica.chm";
+
+        File archivo = new File(ruta);
+
+        if (archivo.exists()) {
+            Runtime.getRuntime().exec(
+                "rundll32 url.dll,FileProtocolHandler \"" + ruta + "\""
+            );
+        } else {
+            System.out.println("La ayuda no fue encontrada");
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
     }//GEN-LAST:event_btnAyudaActionPerformed
 private void buscarPorIDk() {
         System.out.println("Buscando por ID en la BD...");
