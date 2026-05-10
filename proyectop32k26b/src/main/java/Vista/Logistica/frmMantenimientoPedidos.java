@@ -546,8 +546,9 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
     }//GEN-LAST:event_btnLimpiar1ActionPerformed
 
     private void btnReportes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportes1ActionPerformed
-        // TODO add your handling code here:
-
+Vista.Logistica.frmReportes ventana = new Vista.Logistica.frmReportes();
+    ventana.setVisible(true);
+    ventana.setLocationRelativeTo(null);        
     }//GEN-LAST:event_btnReportes1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
