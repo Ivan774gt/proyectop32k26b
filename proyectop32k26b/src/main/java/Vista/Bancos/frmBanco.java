@@ -25,6 +25,7 @@ private final Modelo.Bancos.BancoDAO bancoDAO = new Modelo.Bancos.BancoDAO();
     setIconifiable(true);   
     cargarTabla();
     configurarSeleccionTabla();
+    setDefaultCloseOperation(javax.swing.JInternalFrame.DISPOSE_ON_CLOSE);
 }
 
     /**

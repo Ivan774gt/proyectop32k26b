@@ -358,11 +358,11 @@ public void configurarVisibilidadBotones(List<Integer> appsPermitidas) {
     }//GEN-LAST:event_mnuCatalogosMantenimientosActionPerformed
 
     private void mantenimientoBancosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mantenimientoBancosActionPerformed
-        System.out.println("Abriendo Mantenimiento Bancos");
+       System.out.println("Abriendo Mantenimiento Bancos");
     frmBanco ventana = new frmBanco();
     jDesktopPane1.add(ventana);
-    Dimension desktopSize = jDesktopPane1.getSize();
-    Dimension frameSize = ventana.getSize();
+    java.awt.Dimension desktopSize = jDesktopPane1.getSize();
+    java.awt.Dimension frameSize   = ventana.getSize();
     ventana.setLocation(
         (desktopSize.width  - frameSize.width)  / 2,
         (desktopSize.height - frameSize.height) / 2
@@ -371,17 +371,7 @@ public void configurarVisibilidadBotones(List<Integer> appsPermitidas) {
     }//GEN-LAST:event_mantenimientoBancosActionPerformed
 
     private void frmMantenimientoClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmMantenimientoClientesActionPerformed
-        //Camila Araujo
-        System.out.println("entre a mantenimiento perfiles");
-        frmMantenimientoPerfil ventana = new frmMantenimientoPerfil();
-        jDesktopPane1.add(ventana);
-        Dimension desktopSize = jDesktopPane1.getSize();
-        Dimension FrameSize = ventana.getSize();
-        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-    }//GEN-LAST:event_frmMantenimientoClientesActionPerformed
-
-    private void frmMantenimientoClientesAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_frmMantenimientoClientesAncestorAdded
-        //Camila Araujo
+       
         System.out.println("Abriendo Mantenimiento Clientes");
     frmCliente ventana = new frmCliente();
     jDesktopPane1.add(ventana);
@@ -392,6 +382,11 @@ public void configurarVisibilidadBotones(List<Integer> appsPermitidas) {
         (desktopSize.height - frameSize.height) / 2
     );
     ventana.setVisible(true);
+    }//GEN-LAST:event_frmMantenimientoClientesActionPerformed
+
+    private void frmMantenimientoClientesAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_frmMantenimientoClientesAncestorAdded
+        
+      
     }//GEN-LAST:event_frmMantenimientoClientesAncestorAdded
 
     private void frmMantenimientoTipoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmMantenimientoTipoCuentaActionPerformed

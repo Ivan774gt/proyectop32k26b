@@ -26,8 +26,8 @@ private final Modelo.Bancos.ClientesDAO clientesDAO = new Modelo.Bancos.Clientes
     setTitle("Mantenimiento de Clientes");
     cargarTabla();
     configurarSeleccionTabla();
+    setDefaultCloseOperation(javax.swing.JInternalFrame.DISPOSE_ON_CLOSE);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
