@@ -8,6 +8,7 @@
 //Marco. Hernandez 9959-24-6291 24-04-2026  1. Creacion frmMantenimientPedidos, implementaciones basicas
                               //09-05-2026  2. Corregido, funcionalidad de botnoes --Falta Reportes--
                               //09-05-2026  3. Implementacion, boton ayuda  
+                              //11-05-2026  4. Implementacion Marca y Linea
 package Vista.Logistica;
 import javax.swing.JOptionPane;
 
@@ -21,7 +22,7 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
 
     public frmMantenimientoPedidos() {
         initComponents();
-        String[] titulos = {"ID Cliente", "Estado Pedido", "Producto ID", "Cantidad"};
+        String[] titulos = {"ID Cliente", "Estado Pedido", "Producto ID", "Cantidad", "Marca", "Linea"};
         modeloLocal = new javax.swing.table.DefaultTableModel(null, titulos);
         tablaUsuarios1.setModel(modeloLocal);
         cargarPermisos();
@@ -112,6 +113,10 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
         btnEliminar1 = new javax.swing.JButton();
         btnRegistrar1 = new javax.swing.JButton();
         txtCantidad = new javax.swing.JTextField();
+        label16 = new javax.swing.JLabel();
+        txtMarcaPedido = new javax.swing.JTextField();
+        txtLineaPedido = new javax.swing.JTextField();
+        label17 = new javax.swing.JLabel();
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -299,11 +304,11 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
 
             },
             new String [] {
-                "ID Cliente", "Estado Pedido", "ProductoID", "Cantidad"
+                "ID Cliente", "Estado Pedido", "ProductoID", "Cantidad", "Marca", "Linea"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -360,11 +365,54 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
 
         txtCantidad.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         txtCantidad.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCantidadActionPerformed(evt);
+            }
+        });
+
+        label16.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label16.setText("Marca");
+
+        txtMarcaPedido.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtMarcaPedido.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+
+        txtLineaPedido.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtLineaPedido.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+
+        label17.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label17.setText("Linea");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(label19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtbuscado1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnRegistrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnModificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnLimpiar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEliminar1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                            .addComponent(btnReportes1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1019, Short.MAX_VALUE)
+                .addComponent(btnActualizar1)
+                .addGap(0, 125, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -372,29 +420,6 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
                         .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(83, 83, 83)
                         .addComponent(lb1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(label19)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtbuscado1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnRegistrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnModificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnLimpiar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(14, 14, 14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnEliminar1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                                    .addComponent(btnReportes1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(label15)
@@ -405,69 +430,77 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label21)
                             .addComponent(label14)
-                            .addComponent(label12))
+                            .addComponent(label12)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label17)
+                                    .addComponent(label16))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(txtProductoId, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtEstadoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 994, Short.MAX_VALUE)
-                        .addComponent(btnActualizar1)
-                        .addGap(0, 100, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(161, 161, 161)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1019, Short.MAX_VALUE))))
+                            .addComponent(txtEstadoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMarcaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLineaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1168, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lb1)
-                            .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(label15)
-                            .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(label21)
-                            .addComponent(txtEstadoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(label14)
-                            .addComponent(txtProductoId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(label12)
-                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnRegistrar1)
-                            .addComponent(btnEliminar1)
-                            .addComponent(btnModificar1))
-                        .addGap(3, 3, 3)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnLimpiar1)
-                            .addComponent(btnAyuda)
-                            .addComponent(btnReportes1))
-                        .addGap(5, 5, 5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnBuscar1)
-                            .addComponent(txtbuscado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label19))
-                        .addGap(23, 23, 23))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(btnActualizar1)
-                        .addContainerGap(194, Short.MAX_VALUE))))
+                    .addComponent(lb1)
+                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label15)
+                    .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label21)
+                    .addComponent(txtEstadoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label14)
+                    .addComponent(txtProductoId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label12)
+                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(label16)
+                    .addComponent(txtMarcaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtLineaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegistrar1)
+                    .addComponent(btnEliminar1)
+                    .addComponent(btnModificar1))
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLimpiar1)
+                    .addComponent(btnAyuda)
+                    .addComponent(btnReportes1))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBuscar1)
+                    .addComponent(txtbuscado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label19))
+                .addGap(23, 23, 23))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnActualizar1)
+                .addContainerGap(194, Short.MAX_VALUE))
         );
 
         pack();
@@ -528,6 +561,8 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
             txtEstadoPedido.setText(modeloLocal.getValueAt(i, 1).toString());
             txtProductoId.setText(modeloLocal.getValueAt(i, 2).toString());
             txtCantidad.setText(modeloLocal.getValueAt(i, 3).toString());
+            txtMarcaPedido.setText(modeloLocal.getValueAt(i, 4).toString());
+            txtLineaPedido.setText(modeloLocal.getValueAt(i, 5).toString());
             tablaUsuarios1.setRowSelectionInterval(i, i);
             encontrado = true;
             break;
@@ -541,18 +576,21 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
 
     private void btnModificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificar1ActionPerformed
                                              
-  int filaSeleccionada = tablaUsuarios1.getSelectedRow();
-        if (filaSeleccionada >= 0) {
-            modeloLocal.setValueAt(txtIdCliente.getText(), filaSeleccionada, 0);
-            modeloLocal.setValueAt(txtEstadoPedido.getText(), filaSeleccionada, 1);
-            modeloLocal.setValueAt(txtProductoId.getText(), filaSeleccionada, 2);
-            modeloLocal.setValueAt(txtCantidad.getText(), filaSeleccionada, 3);
-            
-            JOptionPane.showMessageDialog(null, "Registro actualizado correctamente.");
-            limpiarCampos();
-        } else {
-            JOptionPane.showMessageDialog(null, "Seleccione una fila de la tabla para modificar.");
-        }
+ int filaSeleccionada = tablaUsuarios1.getSelectedRow();
+    if (filaSeleccionada >= 0) {
+        modeloLocal.setValueAt(txtIdCliente.getText(), filaSeleccionada, 0);
+        modeloLocal.setValueAt(txtEstadoPedido.getText(), filaSeleccionada, 1);
+        modeloLocal.setValueAt(txtProductoId.getText(), filaSeleccionada, 2);
+        modeloLocal.setValueAt(txtCantidad.getText(), filaSeleccionada, 3);
+        // Actualiza las nuevas columnas
+        modeloLocal.setValueAt(txtMarcaPedido.getText(), filaSeleccionada, 4);
+        modeloLocal.setValueAt(txtLineaPedido.getText(), filaSeleccionada, 5);
+        
+        JOptionPane.showMessageDialog(null, "Registro actualizado correctamente.");
+        limpiarCampos();
+    } else {
+        JOptionPane.showMessageDialog(null, "Seleccione una fila de la tabla para modificar.");
+    }
        
     }//GEN-LAST:event_btnModificar1ActionPerformed
 
@@ -604,24 +642,31 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
 
 }
     private void btnRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrar1ActionPerformed
-   String idCliente = txtIdCliente.getText(); 
-        String estado = txtEstadoPedido.getText();
-        String producto = txtProductoId.getText();
-        String cantidad = txtCantidad.getText();
+  String idCliente = txtIdCliente.getText(); 
+    String estado = txtEstadoPedido.getText();
+    String producto = txtProductoId.getText();
+    String cantidad = txtCantidad.getText();
+    String marca = txtMarcaPedido.getText(); // Captura el texto del nuevo campo
+    String linea = txtLineaPedido.getText(); // Captura el texto del nuevo campo
 
-        if (idCliente.isEmpty() || producto.isEmpty() || cantidad.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Por favor llene los campos obligatorios");
-            return;
-        }
+    if (idCliente.isEmpty() || producto.isEmpty() || cantidad.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Por favor llene los campos obligatorios");
+        return;
+    }
 
-        Object[] fila = {idCliente, estado, producto, cantidad};
-        modeloLocal.addRow(fila); 
+    // Corregido: Ahora el arreglo tiene 6 elementos para coincidir con la tabla
+    Object[] fila = {idCliente, estado, producto, cantidad, marca, linea};
+    modeloLocal.addRow(fila); 
 
-        JOptionPane.showMessageDialog(null, "Pedido agregado a la lista visual.");
-        limpiarCampos();
+    JOptionPane.showMessageDialog(null, "Pedido agregado a la lista visual.");
+    limpiarCampos();
 
 
     }//GEN-LAST:event_btnRegistrar1ActionPerformed
+
+    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadActionPerformed
 
     public void limpiarCampos() {
   txtIdCliente.setText("");      
@@ -629,6 +674,8 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
         txtProductoId.setText("");      
         txtCantidad.setText("");    
         txtbuscado1.setText("");
+        txtMarcaPedido.setText("");
+        txtLineaPedido.setText("");
 }
 
 
@@ -690,6 +737,8 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
     private javax.swing.JLabel label13;
     private javax.swing.JLabel label14;
     private javax.swing.JLabel label15;
+    private javax.swing.JLabel label16;
+    private javax.swing.JLabel label17;
     private javax.swing.JLabel label19;
     private javax.swing.JLabel label2;
     private javax.swing.JLabel label21;
@@ -712,6 +761,8 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
     private javax.swing.JTextField txtEstadoPedido;
     private javax.swing.JTextField txtEstatus;
     private javax.swing.JTextField txtIdCliente;
+    private javax.swing.JTextField txtLineaPedido;
+    private javax.swing.JTextField txtMarcaPedido;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNombreReal;
     private javax.swing.JTextField txtProductoId;

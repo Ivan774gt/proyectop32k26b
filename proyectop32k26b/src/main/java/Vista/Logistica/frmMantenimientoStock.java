@@ -6,6 +6,7 @@
 //Marco. Hernandez 9959-24-6201 
 //Marco. Hernandez 9959-24-6291 24-04-2026  1. Creacion frmMantenimientStock, implementaciones basicas
                               //09-05-2026  2. Implementacion de funcionalidad de botones
+                              //11-05-2026  3. Implementacion Marca y Linea
 package Vista.Logistica;
 import Controlador.clsUsuarioConectado;
 import Modelo.PermisosDAO;
@@ -40,10 +41,9 @@ public frmMantenimientoStock() {
     }
 
     private void cargarDatosPrueba() {
-        modeloStock.setRowCount(0); 
-        modeloStock.addRow(new Object[]{"101", "Martillo", "50", "Unidades"});
-        modeloStock.addRow(new Object[]{"102", "Clavos 2 pulg", "200", "Bolsas"});
-        modeloStock.addRow(new Object[]{"103", "Pintura Látex", "15", "Cubetas"});
+      modeloStock.addRow(new Object[]{"101", "Martillo", "50", "Unidades", "Truper", "Ferretería"});
+    modeloStock.addRow(new Object[]{"102", "Clavos 2 pulg", "200", "Bolsas", "Standley", "Construcción"});
+    modeloStock.addRow(new Object[]{"103", "Pintura Látex", "15", "Cubetas", "Sherwin", "Pinturas"});
     };
 
   
@@ -101,7 +101,7 @@ public frmMantenimientoStock() {
 
             },
             new String [] {
-                "ID Producto", "Nombrer", "Stock Actual", "Existencias"
+                "ID Producto", "Nombrer", "Stock Actual", "Existencias", "Marca", "Linea"
             }
         ));
         tablaStock.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -119,7 +119,7 @@ public frmMantenimientoStock() {
         jLabel3.setText("Stock");
 
         cboxTipoBusqueda.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboxTipoBusqueda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID Producto", "Nombre", " " }));
+        cboxTipoBusqueda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID Producto", "Nombre", "Marca", "Linea" }));
         cboxTipoBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboxTipoBusquedaActionPerformed(evt);
@@ -154,7 +154,7 @@ public frmMantenimientoStock() {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 12, Short.MAX_VALUE)
+                .addGap(0, 45, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
@@ -175,9 +175,9 @@ public frmMantenimientoStock() {
                         .addGap(223, 223, 223))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(203, 209, Short.MAX_VALUE)
+                    .addGap(203, 226, Short.MAX_VALUE)
                     .addComponent(btnBuscar)
-                    .addGap(0, 419, Short.MAX_VALUE)))
+                    .addGap(0, 435, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,47 +246,75 @@ public frmMantenimientoStock() {
             case "Nombre":
             buscarPorNombreS();
             break;
-        
+           case "Marca":
+             buscarPorMarca();
+            break;
+        case "Linea":
+            buscarPorLinea(); 
+            break; 
         }
     }//GEN-LAST:event_cboxTipoBusquedaActionPerformed
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         
-        String filtro = txtBuscar.getText().trim();
-        if (filtro.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ingrese un valor para buscar", "Advertencia", javax.swing.JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+       String filtro = txtBuscar.getText().trim();
+    if (filtro.isEmpty()) {
+        return;
+    }
 
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(modeloStock);
-        tablaStock.setRowSorter(sorter);
-        
-        String seleccion = cboxTipoBusqueda.getSelectedItem().toString();
-        int columnaIndex = seleccion.equals("ID Producto") ? 0 : 1;
+    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(modeloStock);
+    tablaStock.setRowSorter(sorter);
+    
+    String seleccion = cboxTipoBusqueda.getSelectedItem().toString();
+    int columnaIndex = 0;
 
-        sorter.setRowFilter(RowFilter.regexFilter("(?i)" + filtro, columnaIndex));
+    // Asignación de índices según las columnas de la tabla
+    switch (seleccion) {
+        case "ID Producto": columnaIndex = 0; break;
+        case "Nombre":      columnaIndex = 1; break;
+        case "Marca":       columnaIndex = 4; break;
+        case "Linea":       columnaIndex = 5; break;
+    }
+
+    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + filtro, columnaIndex));
         
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        if (txtBuscar.getText().isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ingrese un valor para buscar", "Advertencia", javax.swing.JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+     String filtro = txtBuscar.getText().trim();
+    
+    if (filtro.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Ingrese un valor para buscar", "Advertencia", javax.swing.JOptionPane.WARNING_MESSAGE);
+        return;
+    }
 
-        String seleccion = cboxTipoBusqueda.getSelectedItem().toString();
+    // Creamos el sorter para la tabla
+    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(modeloStock);
+    tablaStock.setRowSorter(sorter);
 
-        switch (seleccion) {
-            case "ID":
-            buscarPorIDS();
-            break;
-            case "Nombre":
-            buscarPorNombreS();
-            break;
-            default: 
-            javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un tipo de búsqueda");
-            break;
+    String seleccion = cboxTipoBusqueda.getSelectedItem().toString();
+    int columnaIndex = 0;
+
+    // Determinamos el índice de la columna según lo seleccionado
+    switch (seleccion) {
+        case "ID Producto": columnaIndex = 0; break;
+        case "Nombre":      columnaIndex = 1; break;
+        case "Marca":       columnaIndex = 4; break;
+        case "Linea":       columnaIndex = 5; break;
+        default: columnaIndex = 0; break;
+    }
+
+    // Aplicamos el filtro (insensible a mayúsculas/minúsculas)
+    try {
+        sorter.setRowFilter(RowFilter.regexFilter("(?i)" + filtro, columnaIndex));
+        
+        // Si no hay resultados, avisamos al usuario
+        if (tablaStock.getRowCount() == 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, "No se encontraron coincidencias.");
         }
+    } catch (Exception e) {
+        System.err.println("Error en filtro: " + e.getMessage());
+    }
         //Registro de la accion en bitacora
         //     BitacoraDAO bitacoraDAO = new BitacoraDAO();
         //    bitacoraDAO.insert(idUsuario, Aplcodigo, "CONSULTA");
@@ -305,6 +333,13 @@ public frmMantenimientoStock() {
 private void buscarPorIDS() {
         System.out.println("Buscando por ID en la BD...");
     }
+private void buscarPorMarca() {
+    System.out.println("Buscando por Marca en Stock...");
+}
+
+private void buscarPorLinea() {
+    System.out.println("Buscando por Línea en Stock...");
+}
 
     private void buscarPorNombreS() {
         System.out.println("Buscando por Tipo (Entrada/Salida)...");
