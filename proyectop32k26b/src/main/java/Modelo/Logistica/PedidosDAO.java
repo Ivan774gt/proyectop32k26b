@@ -2,6 +2,8 @@ package Modelo.Logistica;
 
 import Modelo.Conexion;
 import Controlador.Logistica.clsPedidos;
+import Controlador.clsUsuarioConectado;
+import Modelo.BitacoraDAO;
 import java.sql.*;
 import java.util.*;
 
@@ -123,5 +125,26 @@ public class PedidosDAO {
         }
 
         return obj;
+    }
+    /**
+     * Registra una acción en la bitácora del sistema.
+     * 
+     * @param accion Descripción de la acción realizada
+     */
+    private void registrarBitacora(String accion) {
+
+        int usuario = clsUsuarioConectado.getUsuId();
+
+        // Validación de usuario autenticado
+        if (usuario == 0) {
+            throw new RuntimeException("No hay usuario autenticado");
+        }
+
+        BitacoraDAO bitacora = new BitacoraDAO();
+
+        // ID de aplicación para bitácora (debe existir en la BD)
+        int aplCodigoBitacora = 2000;
+
+        bitacora.insert(usuario, aplCodigoBitacora, accion);
     }
 }
