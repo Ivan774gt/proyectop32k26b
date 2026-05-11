@@ -401,13 +401,16 @@ public void configurarVisibilidadBotones(List<Integer> appsPermitidas) {
     }//GEN-LAST:event_frmMantenimientoTipoCuentaActionPerformed
 
     private void frmMantenimientoBitacoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmMantenimientoBitacoraActionPerformed
-        // TODO add your handling code here:
-        System.out.println("entre a mantenimiento Bitacora");
-        frmMantenimientoBitacora ventana = new frmMantenimientoBitacora();
-        jDesktopPane1.add(ventana);
-        Dimension desktopSize = jDesktopPane1.getSize();
-        Dimension FrameSize = ventana.getSize();
-        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        System.out.println("Abriendo Bitácora Bancaria");
+    frmBitacoraBancaria ventana = new frmBitacoraBancaria();
+    jDesktopPane1.add(ventana);
+    java.awt.Dimension desktopSize = jDesktopPane1.getSize();
+    java.awt.Dimension frameSize   = ventana.getSize();
+    ventana.setLocation(
+        (desktopSize.width  - frameSize.width)  / 2,
+        (desktopSize.height - frameSize.height) / 2
+    );
+    ventana.setVisible(true);
     }//GEN-LAST:event_frmMantenimientoBitacoraActionPerformed
 
     private void frmProcesoPerfilUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmProcesoPerfilUsuarioActionPerformed

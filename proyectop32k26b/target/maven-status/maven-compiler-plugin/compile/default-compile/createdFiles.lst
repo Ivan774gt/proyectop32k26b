@@ -11,6 +11,7 @@ Vista\MdiComercio$3.class
 Vista\vistaCuentasCorrientes\MdiGeneralCC$1.class
 Vista\frmProcesoPerfilUsuario$6.class
 Vista\vistaPlanilla\MdiPlanillas$4.class
+Vista\Bancos\frmBitacoraBancaria$5.class
 Vista\frmMantenimientoAplicaciones.class
 Controlador\Bancos\clsConciliacionBancaria.class
 Controlador\Bancos\clsTipoTransaccion.class
@@ -97,7 +98,9 @@ Vista\vistaCuentasCorrientes\MdiGeneralCC$5.class
 Vista\frmProcesoAplicacionPerfil$7.class
 Controlador\clsBitacora.class
 Modelo\ComisionesVentas\RepostesDAO.class
+Vista\Bancos\frmBitacoraBancaria.class
 Vista\Bancos\MdiBancos$6.class
+Vista\Bancos\frmBitacoraBancaria$2.class
 Controlador\controladorPlanilla\prueba1.class
 Vista\vistaCuentasCorrientes\MdiGeneralCC$4.class
 Vista\frmProcesoAplicacionPerfil$1.class
@@ -159,6 +162,7 @@ Vista\MdiSeguridad$6.class
 Vista\ComisionesVentas\frmComisionesVentas.class
 Vista\frmMantenimientoPerfil$3.class
 Modelo\modeloPlanilla\provicionalprueba.class
+Vista\Bancos\frmBitacoraBancaria$1.class
 Vista\Bancos\MdiBancos$15.class
 Vista\frmMantenimientoUsuario$3.class
 Vista\Bancos\frmCliente.class
@@ -182,11 +186,13 @@ Vista\vistaCuentasCorrientes\MdiGeneralCC.class
 Vista\Bancos\frmBanco$3.class
 Vista\frmProcesoAplicacionUsuario$9.class
 Vista\Bancos\frmCliente$3.class
+Vista\Bancos\frmBitacoraBancaria$4.class
 Vista\frmLogin.class
 Vista\frmRestablecerContraseña$4.class
 Vista\MdiComercio$1.class
 Modelo\modeloCuentasCorrientes\provicionalDao.class
 Vista\Bancos\frmBanco$2.class
+Vista\Bancos\frmBitacoraBancaria$3.class
 Vista\frmMantenimientoUsuario$5.class
 Controlador\clsAsignacionPerfilUsuario.class
 Vista\frmMantenimientoPerfil$1.class
