@@ -7,6 +7,7 @@
 //Marco. Hernandez 9959-24-6201 
 //Marco. Hernandez 9959-24-6291 24-04-2026  1. Creacion frmMantenimientoKardex, implementaciones basicas
                               //09-05-2026  2. Implementacion de funcionalidad de botones
+                              //11-05-2026  3. Implementacion Marca y Linea
                               
 package Vista.Logistica;
 import Controlador.clsUsuarioConectado;
@@ -35,7 +36,7 @@ public class frmMantenimientoKardex extends javax.swing.JInternalFrame {
 
     modeloKardex = new javax.swing.table.DefaultTableModel(
         new Object [][] {}, 
-        new String [] { "ID Movimiento", "Tipo de Movimiento", "Producto", "Fecha", "Cantidad" }
+        new String [] { "ID Movimiento", "Tipo de Movimiento", "Producto", "Fecha", "Cantidad", "Marca", "Linea" }
     ) {
         @Override
         public boolean isCellEditable(int row, int column) {
@@ -103,7 +104,7 @@ public class frmMantenimientoKardex extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID Movimiento", "Tipo de Movimiento", "Producto", "Fecha", "Cantidad"
+                "ID Movimiento", "Tipo de Movimiento", "Producto", "Fecha", "Cantidad", "Marca", "Linea"
             }
         ));
         tablaKardex.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -121,7 +122,7 @@ public class frmMantenimientoKardex extends javax.swing.JInternalFrame {
         jLabel3.setText("Kardex Bodega");
 
         cboxTipoBusqueda.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cboxTipoBusqueda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID Movimiento", "Tipo de Movimiento", "Producto\t", "Fecha", " " }));
+        cboxTipoBusqueda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID Movimiento", "Tipo de Movimiento", "Producto", "Fecha", "Marca", "Linea" }));
         cboxTipoBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboxTipoBusquedaActionPerformed(evt);
@@ -235,6 +236,12 @@ public class frmMantenimientoKardex extends javax.swing.JInternalFrame {
         case "Fecha":
             buscarPorFechak();
             break;
+         case "Marca":
+             buscarPorMarca();
+            break;
+        case "Linea":
+            buscarPorLinea(); 
+            break; 
     }
     }//GEN-LAST:event_cboxTipoBusquedaActionPerformed
 
@@ -293,16 +300,21 @@ switch (criterio) {
     case "Fecha":
         indiceColumna = 3; 
         break;
+    case "Marca":
+        indiceColumna = 5;
+        break;
+     case "Linea": 
+         indiceColumna = 6;
+         break;
+    
     default:
         indiceColumna = 0;
         break;
 }
 
         try {
-            // 3. Aplicamos el filtro (el (?i) es para que ignore mayúsculas/minúsculas)
+
             sorter.setRowFilter(RowFilter.regexFilter("(?i)" + filtro, indiceColumna));
-            
-            // Verificamos si quedó algo después de filtrar
             if (tablaKardex.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(this, "No se encontraron resultados.");
             }
@@ -354,6 +366,15 @@ private void buscarPorIDk() {
     private void buscarPorFechak() {
         System.out.println("Buscando por Fecha...");
     }
+     private void buscarPorMarca() {
+        System.out.println("Buscando por Marca...");
+    }
+      private void buscarPorLinea() {
+        System.out.println("Buscando por Linea...");
+    }
+    
+    
+    
     
     
     /**
@@ -382,15 +403,15 @@ private void buscarPorIDk() {
     }
 
 private void cargarDatosEjemplo() {
-    modeloKardex.addRow(new Object[]{"101", "Entrada", "Martillo", "24/04/2026", "50"});
-    modeloKardex.addRow(new Object[]{"102", "Salida", "Clavos", "25/04/2026", "200"});
+  modeloKardex.addRow(new Object[]{"101", "Entrada", "Martillo", "24/04/2026", "50", "Truper", "Ferretería"});
+    modeloKardex.addRow(new Object[]{"102", "Salida", "Clavos", "25/04/2026", "200", "Standley", "Construcción"});
 }
 
 public void registrarMovimientoExterno(Object[] fila) {
-    if (fila.length == 5) {
+    if (fila.length == 7) {
         modeloKardex.addRow(fila);
     } else {
-        System.out.println("Error: El movimiento no tiene las 5 columnas requeridas.");
+        System.out.println("Error: El movimiento no tiene las 7 columnas requeridas.");
     }
 }
     
