@@ -105,7 +105,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="frmProcesoPerfilUsuario">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Asignacion Cociliaci&#xf3;n Bancaria"/>
+                <Property name="text" type="java.lang.String" value="Asignacion Movimiento Bancario"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="frmProcesoPerfilUsuarioActionPerformed"/>
@@ -129,8 +129,11 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Asignaci&#xf3;n Movimiento Bancario"/>
+                <Property name="text" type="java.lang.String" value="Asignacion Conciliaci&#xf3;n Bancaria"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
               <Properties>
@@ -156,19 +159,6 @@
               </Events>
             </MenuItem>
           </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="mnuReportes">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Reportes"/>
-          </Properties>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="mnuAyudas">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Ayudas"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuAyudasActionPerformed"/>
-          </Events>
         </Menu>
       </SubComponents>
     </Menu>
