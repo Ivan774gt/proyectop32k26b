@@ -20,15 +20,29 @@ public class ProductosDAO {
 
     // INSERTAR
     public boolean insertar(clsProductos obj) {
-        String sql = "INSERT INTO productos (Prodnombre, Prodpuntoreorden) VALUES (?, ?)";
+
+        String sql = "INSERT INTO productos "
+                + "(Prodnombre, Prodstockactual, Prodpuntoreorden, "
+                + "Prodprecioventa, lineaid, marcaid) "
+                + "VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setString(1, obj.getProdnombre());
-            ps.setInt(2, obj.getProdpuntoreorden());
+            ps.setString(1, obj.getProdNombre());
+            ps.setInt(2, obj.getProdStockActual());
+            ps.setInt(3, obj.getProdPuntoReorden());
+            ps.setBigDecimal(4, obj.getProdPrecioVenta());
+            ps.setInt(5, obj.getLineaId());
+            ps.setInt(6, obj.getMarcaId());
 
-            return ps.executeUpdate() > 0;
+            boolean resultado = ps.executeUpdate() > 0;
+
+            if (resultado) {
+                registrarBitacora("Insertó un nuevo producto: " + obj.getProdNombre());
+            }
+
+            return resultado;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -38,16 +52,34 @@ public class ProductosDAO {
 
     // ACTUALIZAR
     public boolean actualizar(clsProductos obj) {
-        String sql = "UPDATE productos SET Prodnombre=?, Prodpuntoreorden=? WHERE Prodid=?";
+
+        String sql = "UPDATE productos SET "
+                + "Prodnombre=?, "
+                + "Prodstockactual=?, "
+                + "Prodpuntoreorden=?, "
+                + "Prodprecioventa=?, "
+                + "lineaid=?, "
+                + "marcaid=? "
+                + "WHERE Prodid=?";
 
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setString(1, obj.getProdnombre());
-            ps.setInt(2, obj.getProdpuntoreorden());
-            ps.setInt(3, obj.getProdid());
+            ps.setString(1, obj.getProdNombre());
+            ps.setInt(2, obj.getProdStockActual());
+            ps.setInt(3, obj.getProdPuntoReorden());
+            ps.setBigDecimal(4, obj.getProdPrecioVenta());
+            ps.setInt(5, obj.getLineaId());
+            ps.setInt(6, obj.getMarcaId());
+            ps.setInt(7, obj.getProdId());
 
-            return ps.executeUpdate() > 0;
+            boolean resultado = ps.executeUpdate() > 0;
+
+            if (resultado) {
+                registrarBitacora("Actualizó el producto ID: " + obj.getProdId());
+            }
+
+            return resultado;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,13 +89,21 @@ public class ProductosDAO {
 
     // ELIMINAR
     public boolean eliminar(int id) {
+
         String sql = "DELETE FROM productos WHERE Prodid=?";
 
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, id);
-            return ps.executeUpdate() > 0;
+
+            boolean resultado = ps.executeUpdate() > 0;
+
+            if (resultado) {
+                registrarBitacora("Eliminó el producto ID: " + id);
+            }
+
+            return resultado;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,7 +113,9 @@ public class ProductosDAO {
 
     // LISTAR
     public List<clsProductos> listar() {
+
         List<clsProductos> lista = new ArrayList<>();
+
         String sql = "SELECT * FROM productos";
 
         try (Connection con = Conexion.getConnection();
@@ -81,11 +123,16 @@ public class ProductosDAO {
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
+
                 clsProductos obj = new clsProductos();
 
-                obj.setProdid(rs.getInt("Prodid"));
-                obj.setProdnombre(rs.getString("Prodnombre"));
-                obj.setProdpuntoreorden(rs.getInt("Prodpuntoreorden"));
+                obj.setProdId(rs.getInt("Prodid"));
+                obj.setProdNombre(rs.getString("Prodnombre"));
+                obj.setProdStockActual(rs.getInt("Prodstockactual"));
+                obj.setProdPuntoReorden(rs.getInt("Prodpuntoreorden"));
+                obj.setProdPrecioVenta(rs.getBigDecimal("Prodprecioventa"));
+                obj.setLineaId(rs.getInt("lineaid"));
+                obj.setMarcaId(rs.getInt("marcaid"));
 
                 lista.add(obj);
             }
@@ -99,21 +146,29 @@ public class ProductosDAO {
 
     // BUSCAR POR ID
     public clsProductos buscarPorId(int id) {
+
         String sql = "SELECT * FROM productos WHERE Prodid=?";
+
         clsProductos obj = null;
 
         try (Connection con = Conexion.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, id);
+
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
+
                 obj = new clsProductos();
 
-                obj.setProdid(rs.getInt("Prodid"));
-                obj.setProdnombre(rs.getString("Prodnombre"));
-                obj.setProdpuntoreorden(rs.getInt("Prodpuntoreorden"));
+                obj.setProdId(rs.getInt("Prodid"));
+                obj.setProdNombre(rs.getString("Prodnombre"));
+                obj.setProdStockActual(rs.getInt("Prodstockactual"));
+                obj.setProdPuntoReorden(rs.getInt("Prodpuntoreorden"));
+                obj.setProdPrecioVenta(rs.getBigDecimal("Prodprecioventa"));
+                obj.setLineaId(rs.getInt("lineaid"));
+                obj.setMarcaId(rs.getInt("marcaid"));
             }
 
         } catch (Exception e) {
@@ -122,6 +177,7 @@ public class ProductosDAO {
 
         return obj;
     }
+
     /**
      * Registra una acción en la bitácora del sistema.
      * 
