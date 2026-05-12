@@ -5,7 +5,7 @@
 package Vista.ComercialComprasyVentas;
 
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableModel; 
 /**
  *
  * @author Marice
