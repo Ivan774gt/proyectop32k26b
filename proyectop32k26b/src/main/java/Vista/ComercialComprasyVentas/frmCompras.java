@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Vista.ComercialComprayVentas;
+package Vista.ComercialComprasyVentas;
 
 import javax.swing.JOptionPane;
 
@@ -166,7 +166,7 @@ public class frmCompras extends javax.swing.JFrame {
                                 .addComponent(btnsalir)
                                 .addGap(18, 18, 18)
                                 .addComponent(help)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
