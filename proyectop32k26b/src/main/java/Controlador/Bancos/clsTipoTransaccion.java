@@ -1,15 +1,37 @@
+//Karina Alejandra Arriaza Ortiz 9959-24-14190
 package Controlador.Bancos;
 
+/**
+ * Clase que representa un tipo de transacción bancaria.
+ * Define las operaciones que se pueden realizar (depósito, retiro, etc.).
+ * 
+ * @author Proyecto Final - Sistema Bancario
+ */
 public class clsTipoTransaccion {
+
+    // Identificador único del tipo de transacción
     private int TTid;
+
+    // Nombre del tipo de transacción
     private String TTnombretipo;
+
+    // Descripción del tipo de transacción
     private String TTdescripcion;
-    
-public clsTipoTransaccion(int id, String nombre, String descripcion) {
+
+    /**
+     * Constructor con parámetros.
+     * 
+     * @param id Identificador del tipo de transacción
+     * @param nombre Nombre del tipo de transacción
+     * @param descripcion Descripción del tipo de transacción
+     */
+    public clsTipoTransaccion(int id, String nombre, String descripcion) {
         this.TTid = id;
         this.TTnombretipo = nombre;
         this.TTdescripcion = descripcion;
     }
+
+    // Métodos getters y setters
 
     public int getTTid() { return TTid; }
     public void setTTid(int TTid) { this.TTid = TTid; }
@@ -20,9 +42,14 @@ public clsTipoTransaccion(int id, String nombre, String descripcion) {
     public String getTTdescripcion() { return TTdescripcion; }
     public void setTTdescripcion(String TTdescripcion) { this.TTdescripcion = TTdescripcion; }
 
-@Override
-public String toString() {
-    return "TipoTransaccion{ id=" + TTid + ", nombre=" + TTnombretipo + " }";
-}
-
+    /**
+     * Devuelve una representación en texto del tipo de transacción.
+     * 
+     * @return Información básica del tipo de transacción
+     */
+    @Override
+    public String toString() {
+        return "TipoTransaccion{ id=" + TTid
+                + ", nombre=" + TTnombretipo + " }";
+    }
 }

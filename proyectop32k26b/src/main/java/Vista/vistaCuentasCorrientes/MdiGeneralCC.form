@@ -53,6 +53,26 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="mnuAcreedores">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Acreedores"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuMantenimientoAcre">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Mantenimiento Acreedores"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuMantenimientoAcreActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Registro factura Acreedor"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="mnuGestionCobros">
           <Properties>
             <Property name="text" type="java.lang.String" value="Gesti&#xf3;n de Cobros"/>
@@ -101,11 +121,6 @@
               </Events>
             </MenuItem>
           </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="mnuReportes">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Reportes"/>
-          </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnuAyudas">
           <Properties>

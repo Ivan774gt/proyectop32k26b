@@ -4,11 +4,16 @@
  * and open the template in the editor.
  */
 package Vista.Bancos;
-
+//Modificado Por Angoly Camila Araujo Mayen 9959-24-17623
 
 import Vista.*;
 import Controlador.clsUsuarioConectado;
 import Modelo.PermisosDAO;
+import Controlador.Bancos.clsBanco;
+import Controlador.clsUsuarioConectado;
+import Modelo.BitacoraDAO;
+import Modelo.Bancos.BancoDAO;
+import Modelo.Conexion;
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -231,6 +236,11 @@ public class MdiBancos extends javax.swing.JFrame {
         mnuGeneral.add(mnuReportes);
 
         mnuAyudas.setText("Ayudas");
+        mnuAyudas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAyudasActionPerformed(evt);
+            }
+        });
         mnuGeneral.add(mnuAyudas);
 
         setJMenuBar(mnuGeneral);
@@ -348,27 +358,35 @@ public void configurarVisibilidadBotones(List<Integer> appsPermitidas) {
     }//GEN-LAST:event_mnuCatalogosMantenimientosActionPerformed
 
     private void mantenimientoBancosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mantenimientoBancosActionPerformed
-        // TODO add your handling code here:
-        System.out.println("entre a mantenimiento usuarios");
-        frmMantenimientoUsuario ventana = new frmMantenimientoUsuario();
-        jDesktopPane1.add(ventana);
-        Dimension desktopSize = jDesktopPane1.getSize();
-        Dimension FrameSize = ventana.getSize();
-        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+       System.out.println("Abriendo Mantenimiento Bancos");
+    frmBanco ventana = new frmBanco();
+    jDesktopPane1.add(ventana);
+    java.awt.Dimension desktopSize = jDesktopPane1.getSize();
+    java.awt.Dimension frameSize   = ventana.getSize();
+    ventana.setLocation(
+        (desktopSize.width  - frameSize.width)  / 2,
+        (desktopSize.height - frameSize.height) / 2
+    );
+    ventana.setVisible(true);
     }//GEN-LAST:event_mantenimientoBancosActionPerformed
 
     private void frmMantenimientoClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmMantenimientoClientesActionPerformed
-        // TODO add your handling code here:
-        System.out.println("entre a mantenimiento perfiles");
-        frmMantenimientoPerfil ventana = new frmMantenimientoPerfil();
-        jDesktopPane1.add(ventana);
-        Dimension desktopSize = jDesktopPane1.getSize();
-        Dimension FrameSize = ventana.getSize();
-        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+       
+        System.out.println("Abriendo Mantenimiento Clientes");
+    frmCliente ventana = new frmCliente();
+    jDesktopPane1.add(ventana);
+    java.awt.Dimension desktopSize = jDesktopPane1.getSize();
+    java.awt.Dimension frameSize   = ventana.getSize();
+    ventana.setLocation(
+        (desktopSize.width  - frameSize.width)  / 2,
+        (desktopSize.height - frameSize.height) / 2
+    );
+    ventana.setVisible(true);
     }//GEN-LAST:event_frmMantenimientoClientesActionPerformed
 
     private void frmMantenimientoClientesAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_frmMantenimientoClientesAncestorAdded
-        // TODO add your handling code here:
+        
+      
     }//GEN-LAST:event_frmMantenimientoClientesAncestorAdded
 
     private void frmMantenimientoTipoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmMantenimientoTipoCuentaActionPerformed
@@ -383,13 +401,16 @@ public void configurarVisibilidadBotones(List<Integer> appsPermitidas) {
     }//GEN-LAST:event_frmMantenimientoTipoCuentaActionPerformed
 
     private void frmMantenimientoBitacoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmMantenimientoBitacoraActionPerformed
-        // TODO add your handling code here:
-        System.out.println("entre a mantenimiento Bitacora");
-        frmMantenimientoBitacora ventana = new frmMantenimientoBitacora();
-        jDesktopPane1.add(ventana);
-        Dimension desktopSize = jDesktopPane1.getSize();
-        Dimension FrameSize = ventana.getSize();
-        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        System.out.println("Abriendo Bitácora Bancaria");
+    frmBitacoraBancaria ventana = new frmBitacoraBancaria();
+    jDesktopPane1.add(ventana);
+    java.awt.Dimension desktopSize = jDesktopPane1.getSize();
+    java.awt.Dimension frameSize   = ventana.getSize();
+    ventana.setLocation(
+        (desktopSize.width  - frameSize.width)  / 2,
+        (desktopSize.height - frameSize.height) / 2
+    );
+    ventana.setVisible(true);
     }//GEN-LAST:event_frmMantenimientoBitacoraActionPerformed
 
     private void frmProcesoPerfilUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmProcesoPerfilUsuarioActionPerformed
@@ -422,6 +443,21 @@ public void configurarVisibilidadBotones(List<Integer> appsPermitidas) {
         Dimension FrameSize = ventana.getSize();
         ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
     }//GEN-LAST:event_frmProcesoAplicacionUsuarioActionPerformed
+
+    private void mnuAyudasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAyudasActionPerformed
+ System.out.println("Abriendo ayuda del sistema");
+
+    try {
+        String ruta = System.getProperty("user.dir") + "C:\\Users\\VA\\Desktop\\proyectop32k26b\\proyectop32k26b\\src\\main\\java\\Ayudas\\Bancos";
+
+        // Ejecuta el archivo de ayuda
+        Runtime.getRuntime().exec("hh.exe \"" + ruta + "\"");
+
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(this,
+                "No se pudo abrir la ayuda");
+    }
+    }//GEN-LAST:event_mnuAyudasActionPerformed
 
     /**
      * @param args the command line arguments
