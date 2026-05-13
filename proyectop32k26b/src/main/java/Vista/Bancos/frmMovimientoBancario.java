@@ -5,6 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
+import java.sql.Connection;
+import Modelo.Conexion;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class frmMovimientoBancario extends javax.swing.JInternalFrame {
     
@@ -241,9 +251,24 @@ private void configurarBotones() {
         }
     });
 
-    btnReporte.addActionListener(e ->
-        JOptionPane.showMessageDialog(this, "Reporte pendiente.")
-    );
+    btnReporte.addActionListener(e -> {
+    Connection conn = null;
+    Map p = new HashMap();
+    JasperReport report;
+    JasperPrint print;
+    try {
+        conn = Conexion.getConnection();
+        report = JasperCompileManager.compileReport(
+            new File("").getAbsolutePath()
+            + "/src/main/java/Reportes/Bancos/RMovimientoBancario.jrxml");
+        print = JasperFillManager.fillReport(report, p, conn);
+        JasperViewer view = new JasperViewer(print, false);
+        view.setTitle("Reporte Cuenta Bancaria");
+        view.setVisible(true);
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+});
 
     btnAyuda.addActionListener(e ->
         JOptionPane.showMessageDialog(this,
@@ -453,26 +478,25 @@ private void limpiarCampos() {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel5)
                                     .addGap(18, 18, 18)
-                                    .addComponent(txtDescripcion))))
+                                    .addComponent(txtDescripcion)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnInsertar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnActualizar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEliminar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnLimpiar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnReporte)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAyuda)
+                                .addGap(82, 82, 82)))
                         .addContainerGap(129, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnInsertar)
-                .addGap(18, 18, 18)
-                .addComponent(btnActualizar)
-                .addGap(18, 18, 18)
-                .addComponent(btnEliminar)
-                .addGap(18, 18, 18)
-                .addComponent(btnLimpiar)
-                .addGap(18, 18, 18)
-                .addComponent(btnReporte)
-                .addGap(18, 18, 18)
-                .addComponent(btnAyuda)
-                .addGap(173, 173, 173))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

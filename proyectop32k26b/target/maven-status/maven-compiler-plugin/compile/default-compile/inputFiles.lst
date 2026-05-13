@@ -1,12 +1,16 @@
+C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Controlador\Bancos\clsCatEstadoConciliacion.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Modelo\AsignacionAplicacionPerfilDAO.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Controlador\ComisionesVentas\clsReportes.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Modelo\UsuarioDAO.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\Bancos\frmBitacoraBancaria.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\frmProcesoAplicacionPerfil.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Modelo\modeloPlanilla\DepartamentoDAO.java
+C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Modelo\Bancos\ConciliacionBancariaDAO.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Modelo\PerfilDAO.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Controlador\controladorPlanilla\clsDepartamento.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\ComisionesVentas\frmComisionesVentas.java
+C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\Bancos\frmCatEstadoConciliacion.java
+C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\Bancos\frmCatTipoTransaccion.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\vistaPlanilla\MdiPlanillas.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Modelo\Bancos\MovimientoBancarioDAO.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Controlador\controladorPlanilla\prueba1.java
@@ -22,12 +26,13 @@ C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Modelo\Banc
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\frmMantenimientoBitacora.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\MdiSeguridad.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Modelo\Conexion.java
+C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Modelo\Bancos\CatEstadoConciliacionDAO.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Modelo\ComisionesVentas\RepostesDAO.java
+C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Controlador\Bancos\clsCatTipoTransaccion.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Modelo\AplicacionesDAO.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\Bancos\MdiBancos.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Controlador\clsAsignacionAplicacionUsuario.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\frmLogin.java
-C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Controlador\Bancos\clsTipoTransaccion.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\frmProcesoAplicacionUsuario.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\Bancos\frmMovimientoBancario.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\frmMantenimientoAplicaciones.java
@@ -38,7 +43,6 @@ C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\frmPr
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Controlador\Bancos\clsCuentaBancaria.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Modelo\modeloCuentasCorrientes\provicionalDao.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\frmRestablecerContraseña.java
-C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Controlador\Bancos\clsEstadoConciliacion.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Controlador\Bancos\clsMovimientoBancario.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\vistaCuentasCorrientes\NewJFrame.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\vistaPlanilla\frmMantenimientoDepartamento.java
@@ -52,6 +56,7 @@ C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Controlador
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Controlador\Bancos\clsBanco.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Modelo\PermisosDAO.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\Bancos\frmCliente.java
+C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Modelo\Bancos\CatTipoTransaccionDAO.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Controlador\clsAsignacionPerfilUsuario.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\Bancos\frmCuentaBancaria.java
 C:\Users\mende\Desktop\proyectop32k26b\proyectop32k26b\src\main\java\Vista\MdiComercio.java

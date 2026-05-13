@@ -4,6 +4,16 @@ import Controlador.Bancos.clsTipoCuenta;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
+import java.sql.Connection;
+import Modelo.Conexion;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class frmMantenimientoTipoCuenta extends javax.swing.JInternalFrame {
 
@@ -163,9 +173,24 @@ btnEliminar.addActionListener(e -> {
     }
 });
 
-    btnReporte.addActionListener(e ->
-        JOptionPane.showMessageDialog(this, "Función de reporte pendiente.")
-    );
+    btnReporte.addActionListener(e -> {
+    Connection conn = null;
+    Map p = new HashMap();
+    JasperReport report;
+    JasperPrint print;
+    try {
+        conn = Conexion.getConnection();
+        report = JasperCompileManager.compileReport(
+            new File("").getAbsolutePath()
+            + "/src/main/java/Reportes/Bancos/RTipoCuenta.jrxml");
+        print = JasperFillManager.fillReport(report, p, conn);
+        JasperViewer view = new JasperViewer(print, false);
+        view.setTitle("Reporte Tipo Cuenta");
+        view.setVisible(true);
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+});
 
     btnAyuda.addActionListener(e ->
         JOptionPane.showMessageDialog(this,
@@ -196,8 +221,6 @@ btnEliminar.addActionListener(e -> {
         TCidcuenta = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel1.setText("Datos del Registro:");
 
@@ -207,7 +230,7 @@ btnEliminar.addActionListener(e -> {
         jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel3.setText("Descripcion:");
 
-        txtDescripcion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtDescripcion.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDescripcionActionPerformed(evt);
@@ -217,7 +240,7 @@ btnEliminar.addActionListener(e -> {
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel4.setText("Nombre del Tipo de Cuenta:");
 
-        txtNombreTipo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtNombreTipo.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
 
         btnInsertar.setBackground(new java.awt.Color(204, 204, 204));
         btnInsertar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -257,7 +280,7 @@ btnEliminar.addActionListener(e -> {
         ));
         jScrollPane1.setViewportView(tblTipoCuenta);
 
-        TCidcuenta.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        TCidcuenta.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel5.setText("TIPO CUENTA");
@@ -324,7 +347,7 @@ btnEliminar.addActionListener(e -> {
                     .addComponent(btnAyuda))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         pack();

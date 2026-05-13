@@ -7,6 +7,16 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
+import java.sql.Connection;
+import Modelo.Conexion;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class frmCuentaBancaria extends javax.swing.JInternalFrame {
 
@@ -196,9 +206,24 @@ private void configurarBotones() {
         }
     });
 
-    btnReporte.addActionListener(e ->
-        JOptionPane.showMessageDialog(this, "Reporte pendiente.")
-    );
+    btnReporte.addActionListener(e -> {
+    Connection conn = null;
+    Map p = new HashMap();
+    JasperReport report;
+    JasperPrint print;
+    try {
+        conn = Conexion.getConnection();
+        report = JasperCompileManager.compileReport(
+            new File("").getAbsolutePath()
+            + "/src/main/java/Reportes/Bancos/RCuentaBancaria.jrxml");
+        print = JasperFillManager.fillReport(report, p, conn);
+        JasperViewer view = new JasperViewer(print, false);
+        view.setTitle("Reporte Cuenta Bancaria");
+        view.setVisible(true);
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+});
 
     btnAyuda.addActionListener(e ->
         JOptionPane.showMessageDialog(this,
@@ -248,8 +273,6 @@ private void limpiarCampos() {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel1.setText("Datos del Registro:");
 
@@ -259,29 +282,40 @@ private void limpiarCampos() {
         jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel3.setText("ID");
 
+        txtNumeroCuenta.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel4.setText("Saldo Actual:");
+
+        txtSaldoActual.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel5.setText("Fecha Apertura:");
 
+        cmbTipoCuenta.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         cmbTipoCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        btnInsertar.setBackground(new java.awt.Color(204, 204, 204));
         btnInsertar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnInsertar.setText("Insertar");
 
+        btnActualizar.setBackground(new java.awt.Color(204, 204, 204));
         btnActualizar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnActualizar.setText("Actualizar");
 
+        btnEliminar.setBackground(new java.awt.Color(204, 204, 204));
         btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
 
+        btnLimpiar.setBackground(new java.awt.Color(204, 204, 204));
         btnLimpiar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnLimpiar.setText("Limpiar");
 
+        btnReporte.setBackground(new java.awt.Color(204, 204, 204));
         btnReporte.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnReporte.setText("Reporte");
 
+        btnAyuda.setBackground(new java.awt.Color(204, 204, 204));
         btnAyuda.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAyuda.setText("Ayuda");
 
@@ -298,8 +332,12 @@ private void limpiarCampos() {
         ));
         jScrollPane1.setViewportView(tblTipoCuenta);
 
+        CBANid.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+
+        idbanco.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         idbanco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        idcliente.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         idcliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
@@ -420,7 +458,7 @@ private void limpiarCampos() {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(240, 240, 240)
                     .addComponent(jLabel12)
-                    .addContainerGap(573, Short.MAX_VALUE)))
+                    .addContainerGap(585, Short.MAX_VALUE)))
         );
 
         pack();
