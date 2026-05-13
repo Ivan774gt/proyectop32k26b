@@ -1,4 +1,5 @@
 //Karina Alejandra Arriaza Ortiz 9959-24-14190
+//Documentado
 package Controlador.Bancos;
 
 /**
@@ -7,7 +8,7 @@ package Controlador.Bancos;
  * 
  * @author Proyecto Final - Sistema Bancario
  */
-public class clsTipoTransaccion {
+public class clsCatTipoTransaccion {
 
     // Identificador único del tipo de transacción
     private int TTid;
@@ -25,7 +26,7 @@ public class clsTipoTransaccion {
      * @param nombre Nombre del tipo de transacción
      * @param descripcion Descripción del tipo de transacción
      */
-    public clsTipoTransaccion(int id, String nombre, String descripcion) {
+    public clsCatTipoTransaccion(int id, String nombre, String descripcion) {
         this.TTid = id;
         this.TTnombretipo = nombre;
         this.TTdescripcion = descripcion;

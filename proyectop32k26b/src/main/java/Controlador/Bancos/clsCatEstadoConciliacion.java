@@ -1,15 +1,19 @@
 //Karina Alejandra Arriaza Ortiz 9959-24-14190
+//Documentación
 package Controlador.Bancos;
 
 /**
  * Clase que representa un estado de conciliación bancaria.
- * Define si una conciliación está pendiente, conciliada o con diferencia.
+ * Se utiliza para indicar el estado de una conciliación
+ * (por ejemplo: Conciliado, Pendiente, Con diferencia).
  * 
- * @author Proyecto Final - Sistema Bancario
+ * Esta clase corresponde al catálogo CatEstadoConciliacion.
+ * 
+ * @author Proyecto Final
  */
-public class clsEstadoConciliacion {
+public class clsCatEstadoConciliacion {
 
-    // Identificador único del estado
+    // Identificador único del estado de conciliación
     private int Catesid;
 
     // Nombre del estado de conciliación
@@ -21,7 +25,7 @@ public class clsEstadoConciliacion {
      * @param id Identificador del estado
      * @param nombre Nombre del estado de conciliación
      */
-    public clsEstadoConciliacion(int id, String nombre) {
+    public clsCatEstadoConciliacion(int id, String nombre) {
         this.Catesid = id;
         this.Catesnombreestado = nombre;
     }
@@ -32,7 +36,9 @@ public class clsEstadoConciliacion {
     public void setCatesid(int Catesid) { this.Catesid = Catesid; }
 
     public String getCatesnombreestado() { return Catesnombreestado; }
-    public void setCatesnombreestado(String Catesnombreestado) { this.Catesnombreestado = Catesnombreestado; }
+    public void setCatesnombreestado(String Catesnombreestado) { 
+        this.Catesnombreestado = Catesnombreestado; 
+    }
 
     /**
      * Devuelve una representación en texto del estado de conciliación.
