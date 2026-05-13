@@ -29,9 +29,12 @@ DefaultTableModel modeloBodega;
      */
     public frmMantenimientoBodega() {
        initComponents();
-        // Inicialización correcta del modelo
+       
+        this.setClosable(true);     
+        this.setIconifiable(true);   
+        this.setMaximizable(true);  
+        this.setResizable(true); 
         modeloBodega = (DefaultTableModel) tablaStock.getModel();
-        // Evitar edición directa en las celdas de la tabla
         tablaStock.setDefaultEditor(Object.class, null);
   
     }
@@ -65,7 +68,10 @@ DefaultTableModel modeloBodega;
         btnBuscar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximizable(true);
+        setResizable(true);
 
         btnAdyda.setText("Ayuda");
         btnAdyda.addActionListener(new java.awt.event.ActionListener() {
@@ -330,27 +336,18 @@ DefaultTableModel modeloBodega;
     }//GEN-LAST:event_tablaStockAncestorAdded
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-// 1. Quitar filtros de la tabla si existen para mostrar todos los datos de nuevo
+
     if (tablaStock.getRowSorter() != null) {
         tablaStock.setRowSorter(null);
     }
-
-    // 2. Limpiar el área de búsqueda
     txtBuscar.setText("");
     cboxTipoBusqueda.setSelectedIndex(0);
 
-    // 3. Limpiar los campos específicos de Bodega
     txtIdBodega.setText("");
     txtNombreBodega.setText("");
     txtUbicacionBodega.setText("");
-
-    // 4. Limpiar selección de la tabla y refrescar
     tablaStock.clearSelection();
     
-    // Opcional: Si tienes un método para recargar datos desde la BD, llámalo aquí
-    // llenarTabla(); 
-
-    // 5. Notificar al usuario
     JOptionPane.showMessageDialog(this, "Formulario de Bodega restablecido correctamente.");
     }//GEN-LAST:event_btnActualizarActionPerformed
 
@@ -415,9 +412,7 @@ DefaultTableModel modeloBodega;
         if (filtro.isEmpty()) {
             sorter.setRowFilter(null);
         } else {
-            // 0 = ID, 1 = Nombre, 2 = Ubicación (según el JComboBox)
             int columnaIndex = cboxTipoBusqueda.getSelectedIndex();
-            // Evitar error si el índice del combo no coincide con las columnas de la tabla
             if(columnaIndex > 2) columnaIndex = 0; 
             
             sorter.setRowFilter(RowFilter.regexFilter("(?i)" + filtro, columnaIndex));
@@ -441,20 +436,22 @@ DefaultTableModel modeloBodega;
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String filtro = txtBuscar.getText().trim();
+      String filtro = txtBuscar.getText().trim();
 
+  
     if (filtro.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Ingrese un valor para buscar", "Advertencia", JOptionPane.WARNING_MESSAGE);
         return;
     }
     
+   
     TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(modeloBodega);
     tablaStock.setRowSorter(sorter);
 
+   
     String seleccion = cboxTipoBusqueda.getSelectedItem().toString();
     int columnaIndex = 0;
 
-    // Ajustado exactamente a los nombres de tu ComboBox y columnas de tabla
     switch (seleccion) {
         case "ID Bodega": 
             columnaIndex = 0; 
@@ -471,16 +468,17 @@ DefaultTableModel modeloBodega;
     }
 
     try {
-        // (?i) hace que la búsqueda ignore mayúsculas y minúsculas
+        // 4. Aplicar el filtro (el (?i) es para ignorar mayúsculas/minúsculas)
         sorter.setRowFilter(RowFilter.regexFilter("(?i)" + filtro, columnaIndex));
 
+        // 5. Validar si hubo resultados
         if (tablaStock.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(this, "No se encontraron coincidencias.");
+            JOptionPane.showMessageDialog(this, "No se encontraron coincidencias para: " + filtro);
         }
     } catch (Exception e) {
-        System.err.println("Error en filtro: " + e.getMessage());
+        JOptionPane.showMessageDialog(this, "Error al filtrar: " + e.getMessage());
     
-        }
+    }
         //Registro de la accion en bitacora
         //     BitacoraDAO bitacoraDAO = new BitacoraDAO();
         //    bitacoraDAO.insert(idUsuario, Aplcodigo, "CONSULTA");
@@ -491,7 +489,6 @@ DefaultTableModel modeloBodega;
        int filaSeleccionada = tablaStock.getSelectedRow();
 
         if (filaSeleccionada != -1) {
-            // Convertir índice por si la tabla está filtrada
             int filaModelo = tablaStock.convertRowIndexToModel(filaSeleccionada);
 
             modeloBodega.setValueAt(txtIdBodega.getText(), filaModelo, 0);
