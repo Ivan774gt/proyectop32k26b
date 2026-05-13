@@ -86,9 +86,11 @@ public class MdiLogistica extends javax.swing.JFrame {
         mnuGeneral = new javax.swing.JMenuBar();
         mnuTransporte = new javax.swing.JMenu();
         frmTansportes = new javax.swing.JMenuItem();
-        mnuBodega = new javax.swing.JMenu();
+        mnuInventario = new javax.swing.JMenu();
         frmKardex = new javax.swing.JMenuItem();
         frmStock = new javax.swing.JMenuItem();
+        mnuBodega = new javax.swing.JMenu();
+        frmEntadaSalida = new javax.swing.JMenuItem();
         mnuPedidos = new javax.swing.JMenu();
         frmGestion = new javax.swing.JMenuItem();
         mnuArchivo = new javax.swing.JMenu();
@@ -125,7 +127,12 @@ public class MdiLogistica extends javax.swing.JFrame {
 
         mnuGeneral.add(mnuTransporte);
 
-        mnuBodega.setText("Bodega");
+        mnuInventario.setText("Inventarios");
+        mnuInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuInventarioActionPerformed(evt);
+            }
+        });
 
         frmKardex.setText("Kardex");
         frmKardex.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +140,7 @@ public class MdiLogistica extends javax.swing.JFrame {
                 frmKardexActionPerformed(evt);
             }
         });
-        mnuBodega.add(frmKardex);
+        mnuInventario.add(frmKardex);
 
         frmStock.setText("Stock");
         frmStock.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +148,24 @@ public class MdiLogistica extends javax.swing.JFrame {
                 frmStockActionPerformed(evt);
             }
         });
-        mnuBodega.add(frmStock);
+        mnuInventario.add(frmStock);
+
+        mnuGeneral.add(mnuInventario);
+
+        mnuBodega.setText("Bodega");
+        mnuBodega.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuBodegaActionPerformed(evt);
+            }
+        });
+
+        frmEntadaSalida.setText("Entrada/Salida");
+        frmEntadaSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                frmEntadaSalidaActionPerformed(evt);
+            }
+        });
+        mnuBodega.add(frmEntadaSalida);
 
         mnuGeneral.add(mnuBodega);
 
@@ -243,30 +267,6 @@ public class MdiLogistica extends javax.swing.JFrame {
        
     }//GEN-LAST:event_mnuTransporteActionPerformed
 
-    private void frmKardexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmKardexActionPerformed
-         System.out.println("Abriendo Informacion de Transportes");
-    frmMantenimientoKardex ventana = new frmMantenimientoKardex();
-    
-    
-    ventana.setVisible(true); 
-    
-    jDesktopPane1.add(ventana);
-    
-    
-    Dimension desktopSize = jDesktopPane1.getSize();
-    Dimension FrameSize = ventana.getSize();
-    ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-    
-   try {
-        ventana.setSelected(true); 
-    } catch (java.beans.PropertyVetoException e) {
-        System.out.println("Error al seleccionar ventana: " + e);
-    }
-    
-    ventana.toFront();
-                                                 
-    }//GEN-LAST:event_frmKardexActionPerformed
-
     private void frmGestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmGestionActionPerformed
           System.out.println("Abriendo Informacion de Transportes");
     frmMantenimientoPedidos ventana = new frmMantenimientoPedidos();
@@ -290,34 +290,66 @@ public class MdiLogistica extends javax.swing.JFrame {
     ventana.toFront(); 
     }//GEN-LAST:event_frmGestionActionPerformed
 
-    private void frmStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmStockActionPerformed
-         System.out.println("Abriendo Informacion de Transportes");
-    frmMantenimientoStock ventana = new frmMantenimientoStock();
-    
-   
-    ventana.setVisible(true); 
-    
-    jDesktopPane1.add(ventana);
-    
-  
-    Dimension desktopSize = jDesktopPane1.getSize();
-    Dimension FrameSize = ventana.getSize();
-    ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-    
-    try {
-        ventana.setSelected(true); 
-    } catch (java.beans.PropertyVetoException e) {
-        System.out.println("Error al seleccionar ventana: " + e);
-    }
-    ventana.toFront(); 
-                               
-    }//GEN-LAST:event_frmStockActionPerformed
-
     private void frmAyudainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmAyudainActionPerformed
 Vista.Logistica.frmAyuda ventana = new Vista.Logistica.frmAyuda();
     ventana.setVisible(true);
     ventana.setLocationRelativeTo(null);
     }//GEN-LAST:event_frmAyudainActionPerformed
+
+    private void mnuInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuInventarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuInventarioActionPerformed
+
+    private void frmStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmStockActionPerformed
+        System.out.println("Abriendo Informacion de Transportes");
+        frmMantenimientoStock ventana = new frmMantenimientoStock();
+
+        ventana.setVisible(true);
+
+        jDesktopPane1.add(ventana);
+
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = ventana.getSize();
+        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+
+        try {
+            ventana.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {
+            System.out.println("Error al seleccionar ventana: " + e);
+        }
+        ventana.toFront();
+
+    }//GEN-LAST:event_frmStockActionPerformed
+
+    private void frmKardexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmKardexActionPerformed
+        System.out.println("Abriendo Informacion de Transportes");
+        frmMantenimientoKardex ventana = new frmMantenimientoKardex();
+
+        ventana.setVisible(true);
+
+        jDesktopPane1.add(ventana);
+
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = ventana.getSize();
+        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+
+        try {
+            ventana.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {
+            System.out.println("Error al seleccionar ventana: " + e);
+        }
+
+        ventana.toFront();
+
+    }//GEN-LAST:event_frmKardexActionPerformed
+
+    private void frmEntadaSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmEntadaSalidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_frmEntadaSalidaActionPerformed
+
+    private void mnuBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuBodegaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuBodegaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,6 +378,7 @@ Vista.Logistica.frmAyuda ventana = new Vista.Logistica.frmAyuda();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBoxMenuItem frmAyudain;
+    private javax.swing.JMenuItem frmEntadaSalida;
     private javax.swing.JMenuItem frmGestion;
     private javax.swing.JMenuItem frmKardex;
     private javax.swing.JMenuItem frmStock;
@@ -354,6 +387,7 @@ Vista.Logistica.frmAyuda ventana = new Vista.Logistica.frmAyuda();
     private javax.swing.JMenu mnuArchivo;
     private javax.swing.JMenu mnuBodega;
     private javax.swing.JMenuBar mnuGeneral;
+    private javax.swing.JMenu mnuInventario;
     private javax.swing.JMenu mnuPedidos;
     private javax.swing.JCheckBoxMenuItem mnuSalirSistema;
     private javax.swing.JMenu mnuTransporte;
