@@ -211,6 +211,14 @@ if (txtid.getText().trim().isEmpty()) {
         clsCatEstadoConciliacion cates = dao.query(id);
         if (cates != null) {
             jTextField1.setText(cates.getCatesnombreestado());
+            frmBitacoraBancaria.registrarBitacora(
+    "SELECT",
+    "CatEstadoConciliacion",
+    Integer.parseInt(txtid.getText().trim()),
+    null,
+    null,
+    "Consulta de estado de conciliación por ID"
+);
         } else {
             javax.swing.JOptionPane.showMessageDialog(this,
                 "No se encontró un estado de conciliación con ID: " + id,
@@ -295,6 +303,14 @@ if (txtid.getText().trim().isEmpty()) {
         javax.swing.JOptionPane.showMessageDialog(this,
             "Estado de conciliación eliminado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "DELETE",
+    "CatEstadoConciliacion",
+    Integer.parseInt(txtid.getText().trim()),
+    "Nombre Estado: " + jTextField1.getText().trim(),
+    null,
+    "Estado de conciliación eliminado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (NumberFormatException ex) {
@@ -317,6 +333,14 @@ if (!camposCompletos()) return;
         javax.swing.JOptionPane.showMessageDialog(this,
             "Estado de conciliación registrado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "INSERT",
+    "CatEstadoConciliacion",
+    null,
+    null,
+    "Nombre Estado: " + jTextField1.getText().trim(),
+    "Estado de conciliación registrado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (Exception e) {
@@ -342,6 +366,14 @@ if (!camposCompletos()) return;
         javax.swing.JOptionPane.showMessageDialog(this,
             "Estado de conciliación actualizado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "UPDATE",
+    "CatEstadoConciliacion",
+    Integer.parseInt(txtid.getText().trim()),
+    null,
+    "Nombre Estado: " + jTextField1.getText().trim(),
+    "Estado de conciliación actualizado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (NumberFormatException ex) {

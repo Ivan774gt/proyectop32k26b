@@ -72,7 +72,7 @@ public class frmBitacoraBancaria extends javax.swing.JInternalFrame {
                 b.getBBusuarioaccion(),
                 b.getBBaccion(),
                 b.getBBtabla(),
-
+                codigoStr, // Para código
                 b.getBBregistroid(),
                 b.getBBvaloranterior(),
                 b.getBBvalornuevo(),
@@ -108,11 +108,10 @@ public class frmBitacoraBancaria extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
 
-        // Descripción final
-        String descFinal = "[" + codigo + "] "
-                         + "| PC: " + nombrePC
-                         + " | IP: " + ip
-                         + " | " + descripcion;
+        //Descripción final
+       String descFinal = "[" + codigo + "] "
+                 + "| IP: " + ip
+                 + " | " + descripcion;
 
         clsBitacoraBancaria b = new clsBitacoraBancaria(
             nombrePC,
@@ -197,7 +196,7 @@ public class frmBitacoraBancaria extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Código", "Usuario", "Acción", "Tabla", "Registro", "Valor Anterior", "Valor Nuevo", "Fecha", "Descripción"
+                "ID", "Usuario", "Acción", "Tabla", "Código", "Registro", "Valor Anterior", "Valor Nuevo", "Fecha", "Descripción"
             }
         ));
         jScrollPane2.setViewportView(tablaBitacora);
@@ -215,7 +214,7 @@ public class frmBitacoraBancaria extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(43, 279, Short.MAX_VALUE)
+                        .addGap(43, 495, Short.MAX_VALUE)
                         .addComponent(btnBuscar)
                         .addGap(47, 47, 47)
                         .addComponent(btnLimpiar)

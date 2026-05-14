@@ -231,6 +231,14 @@ if (txtid.getText().trim().isEmpty()) {
         javax.swing.JOptionPane.showMessageDialog(this,
             "Tipo de transacción eliminado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "DELETE",
+    "CatTipoTransaccion",
+    Integer.parseInt(txtid.getText().trim()),
+    "Nombre: " + jTextField1.getText().trim(),
+    null,
+    "Tipo de transacción eliminado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (NumberFormatException ex) {
@@ -259,6 +267,14 @@ if (txtid.getText().trim().isEmpty()) {
         if (tt != null) {
             jTextField1.setText(tt.getTTnombretipo());
             txtid.setText(tt.getTTdescripcion());
+            frmBitacoraBancaria.registrarBitacora(
+    "SELECT",
+    "CatTipoTransaccion",
+    Integer.parseInt(txtid.getText().trim()),
+    null,
+    null,
+    "Consulta de tipo de transacción por ID"
+);
         } else {
             javax.swing.JOptionPane.showMessageDialog(this,
                 "No se encontró un tipo de transacción con ID: " + id,
@@ -351,6 +367,15 @@ if (!camposCompletos()) return;
         javax.swing.JOptionPane.showMessageDialog(this,
             "Tipo de transacción registrado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "INSERT",
+    "CatTipoTransaccion",
+    null,
+    null,
+    "Nombre: " + jTextField1.getText().trim() +
+    " | Descripción: " + jTextField3.getText().trim(),
+    "Tipo de transacción registrado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (Exception e) {
@@ -376,6 +401,15 @@ if (!camposCompletos()) return;
         javax.swing.JOptionPane.showMessageDialog(this,
             "Tipo de transacción actualizado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "UPDATE",
+    "CatTipoTransaccion",
+    Integer.parseInt(txtid.getText().trim()),
+    null,
+    "Nombre: " + jTextField1.getText().trim() +
+    " | Descripción: " + jTextField3.getText().trim(),
+    "Tipo de transacción actualizado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (NumberFormatException ex) {

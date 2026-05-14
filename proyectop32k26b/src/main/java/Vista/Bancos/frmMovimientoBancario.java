@@ -178,6 +178,13 @@ private void configurarBotones() {
             int r = new clsMovimientoBancario().setInsertar(mov);
             if (r > 0) {
             JOptionPane.showMessageDialog(this, "Movimiento insertado correctamente.");
+            frmBitacoraBancaria.registrarBitacora(
+    "INSERT", "MovimientoBancario", null, null,
+    "Monto: " + txtMonto.getText().trim() +
+    " | Tipo: " + cmbTipoMovimiento.getSelectedItem().toString() +
+    " | Descripción: " + txtDescripcion.getText().trim(),
+    "Movimiento bancario insertado"
+);
             limpiarCampos(); 
             cargarDatos();
             } else if (r == -1) {
@@ -212,6 +219,13 @@ private void configurarBotones() {
             int r = new clsMovimientoBancario().setActualizar(mov);
             if (r > 0) {
                 JOptionPane.showMessageDialog(this, "Actualizado correctamente.");
+                frmBitacoraBancaria.registrarBitacora(
+    "UPDATE", "MovimientoBancario", idSeleccionado, null,
+    "Monto: " + txtMonto.getText().trim() +
+    " | Tipo: " + cmbTipoMovimiento.getSelectedItem().toString() +
+    " | Descripción: " + txtDescripcion.getText().trim(),
+    "Movimiento bancario actualizado"
+);
                 idSeleccionado = -1; limpiarCampos(); cargarDatos();
             } else {
                 JOptionPane.showMessageDialog(this, "Error al actualizar.");
@@ -232,6 +246,11 @@ private void configurarBotones() {
             int r = new clsMovimientoBancario().setEliminar(idSeleccionado);
             if (r > 0) {
                 JOptionPane.showMessageDialog(this, "Eliminado correctamente.");
+                frmBitacoraBancaria.registrarBitacora(
+    "DELETE", "MovimientoBancario", idSeleccionado,
+    "Monto: " + txtMonto.getText().trim(),
+    null, "Movimiento bancario eliminado"
+);
                 idSeleccionado = -1; limpiarCampos(); cargarDatos();
             } else {
                 JOptionPane.showMessageDialog(this, "Error al eliminar.");

@@ -300,6 +300,19 @@ public class frmConciliacionBancaria extends javax.swing.JInternalFrame {
             javax.swing.JOptionPane.showMessageDialog(this,
                 "Estado de conciliación registrado correctamente.",
                 "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            frmBitacoraBancaria.registrarBitacora(
+    "INSERT",
+    "ConciliacionBancaria",
+    null,
+    null,
+    "Fecha: " + txtFecha.getText().trim() +
+    " | Cuenta: " + jTextField2.getText().trim() +
+    " | Saldo Sistema: " + jTextField1.getText().trim() +
+    " | Saldo Banco: " + jTextField4.getText().trim() +
+    " | Diferencia: " + jTextField3.getText().trim() +
+    " | Estado: " + cmbEstado.getSelectedItem().toString(),
+    "Conciliación bancaria registrada"
+);
             cargarTabla();
             limpiarCampos();
         } catch (Exception e) {
@@ -327,6 +340,15 @@ public class frmConciliacionBancaria extends javax.swing.JInternalFrame {
             javax.swing.JOptionPane.showMessageDialog(this,
                 "Estado de conciliación eliminado correctamente.",
                 "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            frmBitacoraBancaria.registrarBitacora(
+    "DELETE",
+    "ConciliacionBancaria",
+    Integer.parseInt(txtid.getText().trim()),
+    "Fecha: " + txtFecha.getText().trim() +
+    " | Estado: " + cmbEstado.getSelectedItem().toString(),
+    null,
+    "Conciliación bancaria eliminada"
+);
             cargarTabla();
             limpiarCampos();
         } catch (NumberFormatException ex) {
@@ -356,6 +378,19 @@ public class frmConciliacionBancaria extends javax.swing.JInternalFrame {
             javax.swing.JOptionPane.showMessageDialog(this,
                 "Estado de conciliación actualizado correctamente.",
                 "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            frmBitacoraBancaria.registrarBitacora(
+    "UPDATE",
+    "ConciliacionBancaria",
+    Integer.parseInt(txtid.getText().trim()),
+    null,
+    "Fecha: " + txtFecha.getText().trim() +
+    " | Cuenta: " + jTextField2.getText().trim() +
+    " | Saldo Sistema: " + jTextField1.getText().trim() +
+    " | Saldo Banco: " + jTextField4.getText().trim() +
+    " | Diferencia: " + jTextField3.getText().trim() +
+    " | Estado: " + cmbEstado.getSelectedItem().toString(),
+    "Conciliación bancaria actualizada"
+);
             cargarTabla();
             limpiarCampos();
         } catch (NumberFormatException ex) {
@@ -384,6 +419,14 @@ try {
         if (cb.getConbfecha() != null) {
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
             txtFecha.setText(sdf.format(cb.getConbfecha()));
+            frmBitacoraBancaria.registrarBitacora(
+    "SELECT",
+    "ConciliacionBancaria",
+    Integer.parseInt(txtid.getText().trim()),
+    null,
+    null,
+    "Consulta de conciliación bancaria por ID"
+);
         } else {
             txtFecha.setText("");
         }

@@ -275,6 +275,15 @@ if (!camposCompletos()) return;
         javax.swing.JOptionPane.showMessageDialog(this,
             "Banco registrado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        // ← AQUÍ se registra en la bitácora
+        frmBitacoraBancaria.registrarBitacora(
+            "INSERT", "Banco", null, null,
+            "Nombre: " + jTextField1.getText().trim() +
+            " | Dirección: " + jTextField2.getText().trim() +
+            " | Teléfono: " + jTextField3.getText().trim() +
+            " | Correo: " + jTextField4.getText().trim(),
+            "Banco registrado"
+        );
         cargarTabla();
         limpiarCampos();
     } catch (Exception e) {
@@ -303,6 +312,14 @@ if (!camposCompletos()) return;
         javax.swing.JOptionPane.showMessageDialog(this,
             "Banco eliminado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "DELETE",
+    "Banco",
+    Integer.parseInt(txtbuscado.getText().trim()),
+    "Nombre: " + jTextField1.getText().trim(),
+    null,
+    "Banco eliminado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (NumberFormatException ex) {
@@ -333,6 +350,14 @@ if (!camposCompletos()) return;
             jTextField2.setText(banco.getBandireccion());
             jTextField3.setText(banco.getBantelefono());
             jTextField4.setText(banco.getBancorreo());
+            frmBitacoraBancaria.registrarBitacora(
+    "SELECT",
+    "Banco",
+    Integer.parseInt(txtbuscado.getText().trim()),
+    null,
+    null,
+    "Consulta de banco por ID"
+);
         } else {
             javax.swing.JOptionPane.showMessageDialog(this,
                 "No se encontró un banco con ID: " + id,
@@ -366,6 +391,17 @@ if (!camposCompletos()) return;
         javax.swing.JOptionPane.showMessageDialog(this,
             "Banco actualizado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "UPDATE",
+    "Banco",
+    Integer.parseInt(txtbuscado.getText().trim()),
+    null,
+    "Nombre: " + jTextField1.getText().trim() +
+    " | Dirección: " + jTextField2.getText().trim() +
+    " | Teléfono: " + jTextField3.getText().trim() +
+    " | Correo: " + jTextField4.getText().trim(),
+    "Banco actualizado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (NumberFormatException ex) {

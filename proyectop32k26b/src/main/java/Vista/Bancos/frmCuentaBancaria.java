@@ -140,6 +140,12 @@ private void configurarBotones() {
             int r = new clsCuentaBancaria().setInsertar(cb);
             if (r > 0) {
                 JOptionPane.showMessageDialog(this, "Cuenta insertada correctamente.");
+                frmBitacoraBancaria.registrarBitacora(
+    "INSERT", "CuentaBancaria", null, null,
+    "Número: " + txtNumeroCuenta.getText().trim() +
+    " | Saldo: " + txtSaldoActual.getText().trim(),
+    "Cuenta bancaria insertada"
+);
                 limpiarCampos(); cargarDatos();
             } else {
                 JOptionPane.showMessageDialog(this, "Error al insertar. ¿Número de cuenta duplicado?");
@@ -166,6 +172,12 @@ private void configurarBotones() {
             int r = new clsCuentaBancaria().setActualizar(cb);
             if (r > 0) {
                 JOptionPane.showMessageDialog(this, "Actualizado correctamente.");
+                frmBitacoraBancaria.registrarBitacora(
+    "UPDATE", "CuentaBancaria", idSeleccionado, null,
+    "Número: " + txtNumeroCuenta.getText().trim() +
+    " | Saldo: " + txtSaldoActual.getText().trim(),
+    "Cuenta bancaria actualizada"
+);
                 idSeleccionado = -1; limpiarCampos(); cargarDatos();
             } else {
                 JOptionPane.showMessageDialog(this, "Error al actualizar.");
@@ -186,6 +198,11 @@ private void configurarBotones() {
             int r = new clsCuentaBancaria().setEliminar(idSeleccionado);
             if (r > 0) {
                 JOptionPane.showMessageDialog(this, "Eliminado correctamente.");
+                frmBitacoraBancaria.registrarBitacora(
+    "DELETE", "CuentaBancaria", idSeleccionado,
+    "Número: " + txtNumeroCuenta.getText().trim(),
+    null, "Cuenta bancaria eliminada"
+);
                 idSeleccionado = -1; limpiarCampos(); cargarDatos();
             } else {
                 JOptionPane.showMessageDialog(this, "Error al eliminar.");
