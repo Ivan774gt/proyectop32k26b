@@ -90,6 +90,9 @@ public class MdiLogistica extends javax.swing.JFrame {
         frmTansportes = new javax.swing.JMenuItem();
         mnuInventario = new javax.swing.JMenu();
         frmKardex = new javax.swing.JMenuItem();
+        frmMantenimientoProductos = new javax.swing.JMenuItem();
+        frmMarcas = new javax.swing.JMenuItem();
+        frmLinea = new javax.swing.JMenuItem();
         mnuEntradaSalida = new javax.swing.JMenu();
         frmKBodega = new javax.swing.JMenuItem();
         frmStock = new javax.swing.JMenuItem();
@@ -138,6 +141,30 @@ public class MdiLogistica extends javax.swing.JFrame {
             }
         });
         mnuInventario.add(frmKardex);
+
+        frmMantenimientoProductos.setText("Mantenimiento Productos");
+        frmMantenimientoProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                frmMantenimientoProductosActionPerformed(evt);
+            }
+        });
+        mnuInventario.add(frmMantenimientoProductos);
+
+        frmMarcas.setText("Marcas");
+        frmMarcas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                frmMarcasActionPerformed(evt);
+            }
+        });
+        mnuInventario.add(frmMarcas);
+
+        frmLinea.setText("Linea");
+        frmLinea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                frmLineaActionPerformed(evt);
+            }
+        });
+        mnuInventario.add(frmLinea);
 
         mnuGeneral.add(mnuInventario);
 
@@ -369,6 +396,78 @@ Vista.Logistica.frmAyuda ventana = new Vista.Logistica.frmAyuda();
         // TODO add your handling code here:
     }//GEN-LAST:event_mnuEntradaSalidaActionPerformed
 
+    private void frmMarcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmMarcasActionPerformed
+        // TODO add your handling code here:
+        System.out.println("Abriendo Informacion de Marcas");
+    frmMarcas ventana = new frmMarcas();
+    
+    ventana.setSize(900, 600);
+    ventana.setVisible(true); 
+    
+    jDesktopPane1.add(ventana);
+    
+  
+    Dimension desktopSize = jDesktopPane1.getSize();
+    Dimension FrameSize = ventana.getSize();
+    ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+    
+    ventana.setVisible(true); 
+    try {
+        ventana.setSelected(true); 
+    } catch (java.beans.PropertyVetoException e) {
+        System.out.println("Error al seleccionar ventana: " + e);
+    }
+    ventana.toFront(); 
+    }//GEN-LAST:event_frmMarcasActionPerformed
+
+    private void frmMantenimientoProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmMantenimientoProductosActionPerformed
+        // TODO add your handling code here:
+        System.out.println("Abriendo Informacion de Productos");
+    frmMantenimientoProductos ventana = new frmMantenimientoProductos();
+    
+    ventana.setSize(900, 600);
+    ventana.setVisible(true); 
+    
+    jDesktopPane1.add(ventana);
+    
+  
+    Dimension desktopSize = jDesktopPane1.getSize();
+    Dimension FrameSize = ventana.getSize();
+    ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+    
+    ventana.setVisible(true); 
+    try {
+        ventana.setSelected(true); 
+    } catch (java.beans.PropertyVetoException e) {
+        System.out.println("Error al seleccionar ventana: " + e);
+    }
+    ventana.toFront(); 
+    }//GEN-LAST:event_frmMantenimientoProductosActionPerformed
+
+    private void frmLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmLineaActionPerformed
+        // TODO add your handling code here:
+         System.out.println("Abriendo Informacion de Linea");
+    frmLinea ventana = new frmLinea();
+    
+    ventana.setSize(900, 600);
+    ventana.setVisible(true); 
+    
+    jDesktopPane1.add(ventana);
+    
+  
+    Dimension desktopSize = jDesktopPane1.getSize();
+    Dimension FrameSize = ventana.getSize();
+    ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+    
+    ventana.setVisible(true); 
+    try {
+        ventana.setSelected(true); 
+    } catch (java.beans.PropertyVetoException e) {
+        System.out.println("Error al seleccionar ventana: " + e);
+    }
+    ventana.toFront(); 
+    }//GEN-LAST:event_frmLineaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -399,6 +498,9 @@ Vista.Logistica.frmAyuda ventana = new Vista.Logistica.frmAyuda();
     private javax.swing.JMenuItem frmGestion;
     private javax.swing.JMenuItem frmKBodega;
     private javax.swing.JMenuItem frmKardex;
+    private javax.swing.JMenuItem frmLinea;
+    private javax.swing.JMenuItem frmMantenimientoProductos;
+    private javax.swing.JMenuItem frmMarcas;
     private javax.swing.JMenuItem frmStock;
     private javax.swing.JMenuItem frmTansportes;
     private javax.swing.JDesktopPane jDesktopPane1;
