@@ -7,10 +7,13 @@ package Vista.ComercialComprasyVentas;
 import java.awt.Dimension;
 import java.io.File;
 import javax.swing.JOptionPane;
+<<<<<<< HEAD
 import Vista.ComercialComprasyVentas.frmVentas;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+=======
+>>>>>>> origin/CM9959-23-3775
 import javax.swing.JFrame;
 
 
