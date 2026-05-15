@@ -3,29 +3,31 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+//Boris de Leon 9959-24-6203
 
-//Marco. Hernandez 9959-24-6201 
-//Marco. Hernandez 9959-24-6291 24-04-2026  1. Creacion frmMantenimientPedidos, implementaciones basicas
-                              //09-05-2026  2. Corregido, funcionalidad de botnoes --Falta Reportes--
-                              //09-05-2026  3. Implementacion, boton ayuda  
-                              //11-05-2026  4. Implementacion Marca y Linea
 package Vista.Logistica;
 import java.io.File;
 import javax.swing.JOptionPane;
+import Controlador.Logistica.clsProductos;
+import Modelo.Logistica.ProductosDAO;
+import Modelo.Logistica.MarcaDAO;
+import Modelo.Logistica.LineaDAO;
+import java.math.BigDecimal;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author macoh
  */
-public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
+public class frmMantenimientoProductos extends javax.swing.JInternalFrame  {
   javax.swing.table.DefaultTableModel modeloLocal;
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(frmMantenimientoPedidos.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(frmMantenimientoProductos.class.getName());
 
-    public frmMantenimientoPedidos() {
+    public frmMantenimientoProductos() {
         initComponents();
-        String[] titulos = {"ID Cliente", "Estado Pedido", "Producto ID", "Cantidad", "Marca", "Linea"};
-        modeloLocal = new javax.swing.table.DefaultTableModel(null, titulos);
-        tablaUsuarios1.setModel(modeloLocal);
+        llenarTabla(); // Llama directamente a la BD al abrir
         cargarPermisos();
         
         this.setClosable(true);
@@ -97,10 +99,10 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
         label2 = new javax.swing.JLabel();
         label14 = new javax.swing.JLabel();
         btnModificar1 = new javax.swing.JButton();
-        txtProductoId = new javax.swing.JTextField();
+        txtStockProd = new javax.swing.JTextField();
         label15 = new javax.swing.JLabel();
         txtbuscado1 = new javax.swing.JTextField();
-        txtIdCliente = new javax.swing.JTextField();
+        txtIdprod = new javax.swing.JTextField();
         btnLimpiar1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaUsuarios1 = new javax.swing.JTable();
@@ -109,15 +111,19 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
         btnAyuda = new javax.swing.JButton();
         label19 = new javax.swing.JLabel();
         btnActualizar1 = new javax.swing.JButton();
-        txtEstadoPedido = new javax.swing.JTextField();
+        txtNombreProd = new javax.swing.JTextField();
         label21 = new javax.swing.JLabel();
         btnEliminar1 = new javax.swing.JButton();
         btnRegistrar1 = new javax.swing.JButton();
-        txtCantidad = new javax.swing.JTextField();
+        txtProdReorden = new javax.swing.JTextField();
         label16 = new javax.swing.JLabel();
-        txtMarcaPedido = new javax.swing.JTextField();
-        txtLineaPedido = new javax.swing.JTextField();
+        txtProdPrecio = new javax.swing.JTextField();
+        txtProdComision = new javax.swing.JTextField();
         label17 = new javax.swing.JLabel();
+        txtLineaID = new javax.swing.JTextField();
+        txtMarcaId = new javax.swing.JTextField();
+        label18 = new javax.swing.JLabel();
+        label20 = new javax.swing.JLabel();
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -268,13 +274,13 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
         });
 
         label12.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label12.setText("Cantidad");
+        label12.setText("Reorden");
 
         label2.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label2.setText("Pedidos");
 
         label14.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label14.setText("Producto ID");
+        label14.setText("Stock");
 
         btnModificar1.setText("Modificar");
         btnModificar1.addActionListener(new java.awt.event.ActionListener() {
@@ -283,14 +289,14 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
             }
         });
 
-        txtProductoId.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtProductoId.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtStockProd.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtStockProd.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
         label15.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label15.setText("ID cliente");
+        label15.setText("ID Producto");
 
-        txtIdCliente.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtIdCliente.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtIdprod.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtIdprod.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
         btnLimpiar1.setText("Limpiar");
         btnLimpiar1.addActionListener(new java.awt.event.ActionListener() {
@@ -305,11 +311,11 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
 
             },
             new String [] {
-                "ID Cliente", "Estado Pedido", "ProductoID", "Cantidad", "Marca", "Linea"
+                "ID Producto", "Nombre Prod", "Stock", "Reorden", "Precio", "Comision", "Linea", "Marca"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true
+                false, false, false, false, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -344,11 +350,11 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
             }
         });
 
-        txtEstadoPedido.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtEstadoPedido.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtNombreProd.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtNombreProd.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
         label21.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label21.setText("Estado Pedido");
+        label21.setText("Nombre Prod");
 
         btnEliminar1.setText("Eliminar");
         btnEliminar1.addActionListener(new java.awt.event.ActionListener() {
@@ -364,25 +370,47 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
             }
         });
 
-        txtCantidad.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtCantidad.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        txtCantidad.addActionListener(new java.awt.event.ActionListener() {
+        txtProdReorden.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtProdReorden.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtProdReorden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCantidadActionPerformed(evt);
+                txtProdReordenActionPerformed(evt);
             }
         });
 
         label16.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label16.setText("Marca");
 
-        txtMarcaPedido.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtMarcaPedido.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtProdPrecio.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtProdPrecio.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtProdPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProdPrecioActionPerformed(evt);
+            }
+        });
 
-        txtLineaPedido.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtLineaPedido.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtProdComision.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtProdComision.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtProdComision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProdComisionActionPerformed(evt);
+            }
+        });
 
         label17.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label17.setText("Linea");
+
+        txtLineaID.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtLineaID.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+
+        txtMarcaId.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtMarcaId.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+
+        label18.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label18.setText("Precio");
+
+        label20.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label20.setText("Comision");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -411,9 +439,9 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnEliminar1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                             .addComponent(btnReportes1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1019, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1045, Short.MAX_VALUE)
                 .addComponent(btnActualizar1)
-                .addGap(0, 125, Short.MAX_VALUE))
+                .addGap(0, 151, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -425,7 +453,7 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
                         .addContainerGap()
                         .addComponent(label15)
                         .addGap(48, 48, 48)
-                        .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtIdprod, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -436,18 +464,23 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
                                 .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(label17)
-                                    .addComponent(label16))))
+                                    .addComponent(label16)))
+                            .addComponent(label18)
+                            .addComponent(label20))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtProdReorden, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(txtProductoId, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtEstadoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMarcaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtLineaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtStockProd, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNombreProd, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtProdPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtProdComision, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLineaID, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMarcaId, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1168, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -459,27 +492,35 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label15)
-                    .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIdprod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label21)
-                    .addComponent(txtEstadoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombreProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label14)
-                    .addComponent(txtProductoId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtStockProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label12)
-                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(label16)
-                    .addComponent(txtMarcaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtProdReorden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtLineaPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtProdPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtProdComision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label20))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtLineaID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMarcaId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar1)
@@ -549,50 +590,58 @@ public class frmMantenimientoPedidos extends javax.swing.JInternalFrame  {
 
     private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
   String idBuscado = txtbuscado1.getText().trim();
-    
-    if(idBuscado.isEmpty()){
-        JOptionPane.showMessageDialog(null, "Ingrese el ID del Pedido para buscar.");
-        return;
-    }
-
-    boolean encontrado = false;
-    for (int i = 0; i < modeloLocal.getRowCount(); i++) {
-        if (modeloLocal.getValueAt(i, 0).toString().equals(idBuscado)) {
-            txtIdCliente.setText(modeloLocal.getValueAt(i, 0).toString());
-            txtEstadoPedido.setText(modeloLocal.getValueAt(i, 1).toString());
-            txtProductoId.setText(modeloLocal.getValueAt(i, 2).toString());
-            txtCantidad.setText(modeloLocal.getValueAt(i, 3).toString());
-            txtMarcaPedido.setText(modeloLocal.getValueAt(i, 4).toString());
-            txtLineaPedido.setText(modeloLocal.getValueAt(i, 5).toString());
-            tablaUsuarios1.setRowSelectionInterval(i, i);
-            encontrado = true;
-            break;
+        
+        if(idBuscado.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingrese el ID del Producto para buscar.");
+            return;
         }
-    }
 
-    if (!encontrado) {
-        JOptionPane.showMessageDialog(null, "No se encontró el pedido con ID: " + idBuscado);
-    }
+        ProductosDAO dao = new ProductosDAO();
+        clsProductos producto = dao.buscarPorId(Integer.parseInt(idBuscado));
+
+        if (producto != null) {
+            txtIdprod.setText(String.valueOf(producto.getProdId()));
+            txtNombreProd.setText(producto.getProdNombre());
+            txtStockProd.setText(String.valueOf(producto.getProdStockActual()));
+            txtProdReorden.setText(String.valueOf(producto.getProdPuntoReorden()));
+            txtProdPrecio.setText(producto.getProdPrecioVenta().toString());
+            txtProdComision.setText(producto.getProdcomision().toString());
+            txtLineaID.setText(String.valueOf(producto.getLineaId()));
+            txtMarcaId.setText(String.valueOf(producto.getMarcaId()));
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró el producto con ID: " + idBuscado);
+        }
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     private void btnModificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificar1ActionPerformed
-                                             
- int filaSeleccionada = tablaUsuarios1.getSelectedRow();
-    if (filaSeleccionada >= 0) {
-        modeloLocal.setValueAt(txtIdCliente.getText(), filaSeleccionada, 0);
-        modeloLocal.setValueAt(txtEstadoPedido.getText(), filaSeleccionada, 1);
-        modeloLocal.setValueAt(txtProductoId.getText(), filaSeleccionada, 2);
-        modeloLocal.setValueAt(txtCantidad.getText(), filaSeleccionada, 3);
-        // Actualiza las nuevas columnas
-        modeloLocal.setValueAt(txtMarcaPedido.getText(), filaSeleccionada, 4);
-        modeloLocal.setValueAt(txtLineaPedido.getText(), filaSeleccionada, 5);
-        
-        JOptionPane.showMessageDialog(null, "Registro actualizado correctamente.");
-        limpiarCampos();
-    } else {
-        JOptionPane.showMessageDialog(null, "Seleccione una fila de la tabla para modificar.");
-    }
-       
+   try {
+            if (txtIdprod.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar un producto de la tabla primero.");
+                return;
+            }
+
+            clsProductos producto = new clsProductos();
+            ProductosDAO dao = new ProductosDAO();
+
+            producto.setProdId(Integer.parseInt(txtIdprod.getText()));
+            producto.setProdNombre(txtNombreProd.getText());
+            producto.setProdStockActual(Integer.parseInt(txtStockProd.getText()));
+            producto.setProdPuntoReorden(Integer.parseInt(txtProdReorden.getText()));
+            producto.setProdPrecioVenta(new BigDecimal(txtProdPrecio.getText()));
+            producto.setProdcomision(new BigDecimal(txtProdComision.getText()));
+            producto.setLineaId(Integer.parseInt(txtLineaID.getText()));
+            producto.setMarcaId(Integer.parseInt(txtMarcaId.getText()));
+
+            if (dao.actualizar(producto)) {
+                JOptionPane.showMessageDialog(null, "Registro actualizado correctamente.");
+                limpiarCampos();
+                llenarTabla();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al actualizar en la base de datos.");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Verifique los datos numéricos.");
+        }
     }//GEN-LAST:event_btnModificar1ActionPerformed
 
     private void btnLimpiar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar1ActionPerformed
@@ -634,48 +683,61 @@ Vista.Logistica.frmReportes ventana = new Vista.Logistica.frmReportes();
     }//GEN-LAST:event_btnAyudaActionPerformed
 
     private void btnActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizar1ActionPerformed
-      String idBuscar = txtbuscado1.getText();
-        if(idBuscar.trim().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Por favor ingrese un ID para buscar");
-            return;
-        }
-        JOptionPane.showMessageDialog(null, "Buscando ID: " + idBuscar);
+      llenarTabla(); // Se usa para refrescar el JTable manualmente
+        JOptionPane.showMessageDialog(null, "Tabla actualizada.");
     
     }//GEN-LAST:event_btnActualizar1ActionPerformed
 
     private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
    String idEliminar = txtbuscado1.getText();
         if(idEliminar.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Debe buscar un pedido primero.");
+            idEliminar = txtIdprod.getText(); // Intenta tomarlo del campo principal si no usó el buscador
+        }
+
+        if(idEliminar.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto o buscarlo primero.");
             return;
         }
 
-        int respuesta = JOptionPane.showConfirmDialog(null, "¿Eliminar pedido " + idEliminar + "?", "Advertencia", JOptionPane.YES_NO_OPTION);
+        int respuesta = JOptionPane.showConfirmDialog(null, "¿Eliminar producto con ID " + idEliminar + "?", "Advertencia", JOptionPane.YES_NO_OPTION);
         if (respuesta == JOptionPane.YES_OPTION) {
-            System.out.println("Vista: Solicitando eliminar Pedido: " + idEliminar);
-            JOptionPane.showMessageDialog(null, "Eliminación procesada.");
-            limpiarCampos();
-            llenarTabla();
+            ProductosDAO dao = new ProductosDAO();
+            if (dao.eliminar(Integer.parseInt(idEliminar))) {
+                JOptionPane.showMessageDialog(null, "Eliminación procesada.");
+                limpiarCampos();
+                llenarTabla();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al eliminar el producto.");
+            }
       
     }//GEN-LAST:event_btnEliminar1ActionPerformed
 
 }
     private void btnRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrar1ActionPerformed
-  String idCliente = txtIdCliente.getText(); 
-    String estado = txtEstadoPedido.getText();
-    String producto = txtProductoId.getText();
-    String cantidad = txtCantidad.getText();
-    String marca = txtMarcaPedido.getText(); // Captura el texto del nuevo campo
-    String linea = txtLineaPedido.getText(); // Captura el texto del nuevo campo
+  try {
+            clsProductos producto = new clsProductos();
+            ProductosDAO dao = new ProductosDAO();
 
-    if (idCliente.isEmpty() || producto.isEmpty() || cantidad.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Por favor llene los campos obligatorios");
-        return;
+            producto.setProdNombre(txtNombreProd.getText());
+            producto.setProdStockActual(Integer.parseInt(txtStockProd.getText()));
+            producto.setProdPuntoReorden(Integer.parseInt(txtProdReorden.getText()));
+            producto.setProdPrecioVenta(new BigDecimal(txtProdPrecio.getText()));
+            producto.setProdcomision(new BigDecimal(txtProdComision.getText()));
+            producto.setLineaId(Integer.parseInt(txtLineaID.getText()));
+            producto.setMarcaId(Integer.parseInt(txtMarcaId.getText()));
+
+            if (dao.insertar(producto)) {
+                JOptionPane.showMessageDialog(null, "Producto guardado con éxito.");
+                limpiarCampos();
+                llenarTabla();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al guardar el producto.");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: Verifica que los números no tengan letras o espacios vacíos.");
+        
     }
 
-    // Corregido: Ahora el arreglo tiene 6 elementos para coincidir con la tabla
-    Object[] fila = {idCliente, estado, producto, cantidad, marca, linea};
-    modeloLocal.addRow(fila); 
 
     JOptionPane.showMessageDialog(null, "Pedido agregado a la lista visual.");
     limpiarCampos();
@@ -683,24 +745,59 @@ Vista.Logistica.frmReportes ventana = new Vista.Logistica.frmReportes();
 
     }//GEN-LAST:event_btnRegistrar1ActionPerformed
 
-    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
+    private void txtProdReordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdReordenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCantidadActionPerformed
+    }//GEN-LAST:event_txtProdReordenActionPerformed
+
+    private void txtProdPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProdPrecioActionPerformed
+
+    private void txtProdComisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdComisionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProdComisionActionPerformed
 
     public void limpiarCampos() {
-  txtIdCliente.setText("");      
-        txtEstadoPedido.setText("");  
-        txtProductoId.setText("");      
-        txtCantidad.setText("");    
+        txtIdprod.setText("");      
+        txtNombreProd.setText("");  
+        txtStockProd.setText("");      
+        txtProdReorden.setText("");    
         txtbuscado1.setText("");
-        txtMarcaPedido.setText("");
-        txtLineaPedido.setText("");
+        txtProdPrecio.setText("");
+        txtProdComision.setText("");
+        txtLineaID.setText("");
+        txtMarcaId.setText("");
+        txtIdprod.requestFocus();
 }
 
 
     public void llenarTabla() {
-  modeloLocal.setRowCount(0); 
-        System.out.println("Vista: Solicitando datos a la base de datos...");
+  DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Stock");
+        modelo.addColumn("Reorden");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Comisión");
+        modelo.addColumn("Línea ID");
+        modelo.addColumn("Marca ID");
+        
+        ProductosDAO dao = new ProductosDAO();
+        List<clsProductos> lista = dao.listar();
+        
+        Object[] fila = new Object[8];
+        for (clsProductos prod : lista) {
+            fila[0] = prod.getProdId();
+            fila[1] = prod.getProdNombre();
+            fila[2] = prod.getProdStockActual();
+            fila[3] = prod.getProdPuntoReorden();
+            fila[4] = prod.getProdPrecioVenta();
+            fila[5] = prod.getProdcomision();
+            fila[6] = prod.getLineaId();
+            fila[7] = prod.getMarcaId();
+            modelo.addRow(fila);
+        }
+        tablaUsuarios1.setModel(modelo);
 }
     
     
@@ -726,7 +823,7 @@ Vista.Logistica.frmReportes ventana = new Vista.Logistica.frmReportes();
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new frmMantenimientoPedidos().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new frmMantenimientoProductos().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -758,8 +855,10 @@ Vista.Logistica.frmReportes ventana = new Vista.Logistica.frmReportes();
     private javax.swing.JLabel label15;
     private javax.swing.JLabel label16;
     private javax.swing.JLabel label17;
+    private javax.swing.JLabel label18;
     private javax.swing.JLabel label19;
     private javax.swing.JLabel label2;
+    private javax.swing.JLabel label20;
     private javax.swing.JLabel label21;
     private javax.swing.JLabel label3;
     private javax.swing.JLabel label4;
@@ -772,19 +871,21 @@ Vista.Logistica.frmReportes ventana = new Vista.Logistica.frmReportes();
     private javax.swing.JLabel lb1;
     private javax.swing.JTable tablaUsuarios;
     private javax.swing.JTable tablaUsuarios1;
-    private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtConfContraseña;
     private javax.swing.JTextField txtContrasena;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtEstadoPedido;
     private javax.swing.JTextField txtEstatus;
-    private javax.swing.JTextField txtIdCliente;
-    private javax.swing.JTextField txtLineaPedido;
-    private javax.swing.JTextField txtMarcaPedido;
+    private javax.swing.JTextField txtIdprod;
+    private javax.swing.JTextField txtLineaID;
+    private javax.swing.JTextField txtMarcaId;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombreProd;
     private javax.swing.JTextField txtNombreReal;
-    private javax.swing.JTextField txtProductoId;
+    private javax.swing.JTextField txtProdComision;
+    private javax.swing.JTextField txtProdPrecio;
+    private javax.swing.JTextField txtProdReorden;
+    private javax.swing.JTextField txtStockProd;
     private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtUltimaSesion;
     private javax.swing.JTextField txtbuscado;
