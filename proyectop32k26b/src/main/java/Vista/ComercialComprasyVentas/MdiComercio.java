@@ -2,8 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Vista;
+package Vista.ComercialComprasyVentas;
 
+import Vista.ComercialComprasyVentas.frmCompras;
+import Vista.ComercialComprasyVentas.frmCompras;
+import java.awt.Dimension;
 import java.io.File;
 import javax.swing.JOptionPane;
 
@@ -36,6 +39,8 @@ public class MdiComercio extends javax.swing.JFrame {
         mnuAyudas = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        mnuCompras = new javax.swing.JMenuItem();
+        proveedor = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -80,6 +85,23 @@ public class MdiComercio extends javax.swing.JFrame {
         mnuGeneral.add(jMenu1);
 
         jMenu2.setText("Compras");
+
+        mnuCompras.setText("Compras");
+        mnuCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuComprasActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuCompras);
+
+        proveedor.setText("Productos");
+        proveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                proveedorActionPerformed(evt);
+            }
+        });
+        jMenu2.add(proveedor);
+
         mnuGeneral.add(jMenu2);
 
         setJMenuBar(mnuGeneral);
@@ -132,6 +154,32 @@ public class MdiComercio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_mnuAyudasActionPerformed
 
+    private void mnuComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuComprasActionPerformed
+        // TODO add your handling code here:
+        frmCompras ventana = new frmCompras();
+        jDesktopPane1.add(ventana);
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = ventana.getSize();
+        ventana.setLocation(
+        (desktopSize.width - FrameSize.width) / 2,
+        (desktopSize.height - FrameSize.height) / 2
+        );
+        ventana.setVisible(true);
+    }//GEN-LAST:event_mnuComprasActionPerformed
+
+    private void proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proveedorActionPerformed
+        // TODO add your handling code here:
+        frmProductos ventana = new frmProductos();
+        jDesktopPane1.add(ventana);
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = ventana.getSize();
+        ventana.setLocation(
+        (desktopSize.width - FrameSize.width) / 2,
+        (desktopSize.height - FrameSize.height) / 2
+        );
+        ventana.setVisible(true);
+    }//GEN-LAST:event_proveedorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -173,7 +221,9 @@ public class MdiComercio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu mnuArchivo;
     private javax.swing.JMenu mnuAyudas;
+    private javax.swing.JMenuItem mnuCompras;
     private javax.swing.JMenuBar mnuGeneral;
     private javax.swing.JCheckBoxMenuItem mnuSalirSistema;
+    private javax.swing.JMenuItem proveedor;
     // End of variables declaration//GEN-END:variables
 }
