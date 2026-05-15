@@ -67,7 +67,7 @@ public class MdiComercio extends javax.swing.JFrame {
         mnuSalirSistema = new javax.swing.JCheckBoxMenuItem();
         mnuAyudas = new javax.swing.JMenu();
         ventasmenu = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        menudelasventas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         mnuCompras = new javax.swing.JMenuItem();
         proveedor = new javax.swing.JMenuItem();
@@ -118,13 +118,13 @@ public class MdiComercio extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem1.setText("Ventas");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menudelasventas.setText("Ventas");
+        menudelasventas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menudelasventasActionPerformed(evt);
             }
         });
-        ventasmenu.add(jMenuItem1);
+        ventasmenu.add(menudelasventas);
 
         mnuGeneral.add(ventasmenu);
 
@@ -226,17 +226,19 @@ public class MdiComercio extends javax.swing.JFrame {
 
     private void ventasmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventasmenuActionPerformed
 
-        System.out.println("Ventas");
+         System.out.println("Ventas");
         frmVentas ventana = new frmVentas();
         jDesktopPane1.add(ventana);
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = ventana.getSize();
         ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         ventana.setVisible(true);
+       
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_ventasmenuActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menudelasventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         frmVentas ventana = new frmVentas();
         jDesktopPane1.add(ventana);
         Dimension desktopSize = jDesktopPane1.getSize();
@@ -283,7 +285,7 @@ public class MdiComercio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem menudelasventas;
     private javax.swing.JMenu mnuArchivo;
     private javax.swing.JMenu mnuAyudas;
     private javax.swing.JMenuItem mnuCompras;
