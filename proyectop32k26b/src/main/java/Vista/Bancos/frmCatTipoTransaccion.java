@@ -5,11 +5,11 @@ import Controlador.Bancos.clsCatTipoTransaccion;
 import Modelo.Bancos.CatTipoTransaccionDAO;
 import java.io.File;
 import java.sql.Connection;
-//import net.sf.jasperreports.engine.JasperCompileManager;
-//import net.sf.jasperreports.engine.JasperFillManager;
-//import net.sf.jasperreports.engine.JasperPrint;
-//import net.sf.jasperreports.engine.JasperReport;
-//import net.sf.jasperreports.view.JasperViewer;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class frmCatTipoTransaccion extends javax.swing.JInternalFrame {
 
@@ -231,6 +231,14 @@ if (txtid.getText().trim().isEmpty()) {
         javax.swing.JOptionPane.showMessageDialog(this,
             "Tipo de transacción eliminado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "DELETE",
+    "CatTipoTransaccion",
+    Integer.parseInt(txtid.getText().trim()),
+    "Nombre: " + jTextField1.getText().trim(),
+    null,
+    "Tipo de transacción eliminado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (NumberFormatException ex) {
@@ -259,6 +267,14 @@ if (txtid.getText().trim().isEmpty()) {
         if (tt != null) {
             jTextField1.setText(tt.getTTnombretipo());
             txtid.setText(tt.getTTdescripcion());
+            frmBitacoraBancaria.registrarBitacora(
+    "SELECT",
+    "CatTipoTransaccion",
+    Integer.parseInt(txtid.getText().trim()),
+    null,
+    null,
+    "Consulta de tipo de transacción por ID"
+);
         } else {
             javax.swing.JOptionPane.showMessageDialog(this,
                 "No se encontró un tipo de transacción con ID: " + id,
@@ -297,20 +313,20 @@ Connection conn = null;
         
         java.util.Map<String, Object> parametros = new java.util.HashMap<>();
         
-        //net.sf.jasperreports.engine.JasperReport reporte =
-         //   net.sf.jasperreports.engine.JasperCompileManager.compileReport(ruta);
+        net.sf.jasperreports.engine.JasperReport reporte =
+            net.sf.jasperreports.engine.JasperCompileManager.compileReport(ruta);
         
-        //net.sf.jasperreports.engine.JasperPrint print =
-        //    net.sf.jasperreports.engine.JasperFillManager.fillReport(reporte, parametros, conn);
+        net.sf.jasperreports.engine.JasperPrint print =
+            net.sf.jasperreports.engine.JasperFillManager.fillReport(reporte, parametros, conn);
         
-        //net.sf.jasperreports.engine.JasperExportManager.exportReportToPdfFile(print,"reporte.pdf");
-        //net.sf.jasperreports.swing.JRViewer viewer = new net.sf.jasperreports.swing.JRViewer(print);
+        net.sf.jasperreports.engine.JasperExportManager.exportReportToPdfFile(print,"reporte.pdf");
+        net.sf.jasperreports.swing.JRViewer viewer = new net.sf.jasperreports.swing.JRViewer(print);
         
         javax.swing.JFrame frame = new javax.swing.JFrame("Reporte de Tipo Transacción");
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
-        //frame.add(viewer);
+        frame.add(viewer);
         frame.setVisible(true);
         
     } catch (Exception e) {
@@ -351,6 +367,15 @@ if (!camposCompletos()) return;
         javax.swing.JOptionPane.showMessageDialog(this,
             "Tipo de transacción registrado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "INSERT",
+    "CatTipoTransaccion",
+    null,
+    null,
+    "Nombre: " + jTextField1.getText().trim() +
+    " | Descripción: " + jTextField3.getText().trim(),
+    "Tipo de transacción registrado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (Exception e) {
@@ -376,6 +401,15 @@ if (!camposCompletos()) return;
         javax.swing.JOptionPane.showMessageDialog(this,
             "Tipo de transacción actualizado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "UPDATE",
+    "CatTipoTransaccion",
+    Integer.parseInt(txtid.getText().trim()),
+    null,
+    "Nombre: " + jTextField1.getText().trim() +
+    " | Descripción: " + jTextField3.getText().trim(),
+    "Tipo de transacción actualizado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (NumberFormatException ex) {

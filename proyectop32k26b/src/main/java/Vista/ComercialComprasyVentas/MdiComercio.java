@@ -4,11 +4,29 @@
  */
 package Vista.ComercialComprasyVentas;
 
-import Vista.ComercialComprasyVentas.frmCompras;
-import Vista.ComercialComprasyVentas.frmCompras;
 import java.awt.Dimension;
 import java.io.File;
+
+import java.lang.Process;
+
+import java.lang.Runtime;
+
 import javax.swing.JOptionPane;
+
+import Vista.ComercialComprasyVentas.frmCompras;
+
+import Vista.ComercialComprasyVentas.frmMantenimientoProveedores; 
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+
+import Vista.ComercialComprasyVentas.frmVentas;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JFrame;
+
 
 /**
  *
@@ -21,8 +39,33 @@ public class MdiComercio extends javax.swing.JFrame {
      */
     public MdiComercio() {
         initComponents();
+        setLocationRelativeTo(null);
+        this.setExtendedState(MdiComercio.MAXIMIZED_BOTH);
+        this.setTitle("Sistema Comercial - Compras y Ventas");
+        cerrar();
     }
 
+    private void cerrar() {
+        try {
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            addWindowListener(new WindowAdapter() {
+                public void windowsClosing(WindowEvent e) {
+                    confirmarSalida();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void confirmarSalida() {
+        int valor = JOptionPane.showConfirmDialog(this, "¿Está seguro de cerrar?", "Advertencia", JOptionPane.YES_NO_OPTION);
+        if (valor == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null, "Gracias por su visita, hasta pronto", "Gracias", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,10 +80,13 @@ public class MdiComercio extends javax.swing.JFrame {
         mnuArchivo = new javax.swing.JMenu();
         mnuSalirSistema = new javax.swing.JCheckBoxMenuItem();
         mnuAyudas = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
+        ventasmenu = new javax.swing.JMenu();
+        menudelasventas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         mnuCompras = new javax.swing.JMenuItem();
         proveedor = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        proveedoresMantenimiento = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -81,8 +127,22 @@ public class MdiComercio extends javax.swing.JFrame {
         });
         mnuGeneral.add(mnuAyudas);
 
-        jMenu1.setText("Ventas");
-        mnuGeneral.add(jMenu1);
+        ventasmenu.setText("Ventas");
+        ventasmenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ventasmenuActionPerformed(evt);
+            }
+        });
+
+        menudelasventas.setText("Ventas");
+        menudelasventas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menudelasventasActionPerformed(evt);
+            }
+        });
+        ventasmenu.add(menudelasventas);
+
+        mnuGeneral.add(ventasmenu);
 
         jMenu2.setText("Compras");
 
@@ -104,17 +164,29 @@ public class MdiComercio extends javax.swing.JFrame {
 
         mnuGeneral.add(jMenu2);
 
+        jMenu1.setText("Proveedores");
+
+        proveedoresMantenimiento.setText("Mantenimiento Proveedores");
+        proveedoresMantenimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                proveedoresMantenimientoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(proveedoresMantenimiento);
+
+        mnuGeneral.add(jMenu1);
+
         setJMenuBar(mnuGeneral);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -155,16 +227,9 @@ public class MdiComercio extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuAyudasActionPerformed
 
     private void mnuComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuComprasActionPerformed
-        // TODO add your handling code here:
-        frmCompras ventana = new frmCompras();
-        jDesktopPane1.add(ventana);
-        Dimension desktopSize = jDesktopPane1.getSize();
-        Dimension FrameSize = ventana.getSize();
-        ventana.setLocation(
-        (desktopSize.width - FrameSize.width) / 2,
-        (desktopSize.height - FrameSize.height) / 2
-        );
+        frmCompras ventana = new frmCompras(); 
         ventana.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_mnuComprasActionPerformed
 
     private void proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proveedorActionPerformed
@@ -179,6 +244,36 @@ public class MdiComercio extends javax.swing.JFrame {
         );
         ventana.setVisible(true);
     }//GEN-LAST:event_proveedorActionPerformed
+
+    private void ventasmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventasmenuActionPerformed
+
+         System.out.println("Ventas");
+        frmVentas ventana = new frmVentas();
+        jDesktopPane1.add(ventana);
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = ventana.getSize();
+        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        ventana.setVisible(true);
+       
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ventasmenuActionPerformed
+
+    private void menudelasventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        frmVentas ventana = new frmVentas();
+        jDesktopPane1.add(ventana);
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = ventana.getSize();
+        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        ventana.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void proveedoresMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proveedoresMantenimientoActionPerformed
+        frmMantenimientoProveedores ventana = new frmMantenimientoProveedores(); 
+        ventana.setVisible(true);
+        
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_proveedoresMantenimientoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,11 +314,14 @@ public class MdiComercio extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuItem menudelasventas;
     private javax.swing.JMenu mnuArchivo;
     private javax.swing.JMenu mnuAyudas;
     private javax.swing.JMenuItem mnuCompras;
     private javax.swing.JMenuBar mnuGeneral;
     private javax.swing.JCheckBoxMenuItem mnuSalirSistema;
     private javax.swing.JMenuItem proveedor;
+    private javax.swing.JMenuItem proveedoresMantenimiento;
+    private javax.swing.JMenu ventasmenu;
     // End of variables declaration//GEN-END:variables
 }

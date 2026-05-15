@@ -109,6 +109,12 @@ private void configurarBotones() {
     int resultado = new clsTipoCuenta().setInsertar(tc);
     if (resultado > 0) {
         JOptionPane.showMessageDialog(this, "Tipo de cuenta insertado correctamente.");
+        frmBitacoraBancaria.registrarBitacora(
+    "INSERT", "CatTipoCuenta", null, null,
+    "Nombre: " + txtNombreTipo.getText().trim() +
+    " | Descripción: " + txtDescripcion.getText().trim(),
+    "Tipo de cuenta insertado"
+);
         limpiarCampos();
         cargarDatos();
     } else {
@@ -133,6 +139,12 @@ btnActualizar.addActionListener(e -> {
     if (resultado > 0) {
         JOptionPane.showMessageDialog(this, "Actualizado correctamente.");
         idSeleccionado = -1;
+        frmBitacoraBancaria.registrarBitacora(
+    "UPDATE", "CatTipoCuenta", idSeleccionado, null,
+    "Nombre: " + txtNombreTipo.getText().trim() +
+    " | Descripción: " + txtDescripcion.getText().trim(),
+    "Tipo de cuenta actualizado"
+);
         limpiarCampos();
         cargarDatos();
     } else {
@@ -154,6 +166,11 @@ btnEliminar.addActionListener(e -> {
         int resultado = new clsTipoCuenta().setEliminar(id);
         if (resultado > 0) {
             JOptionPane.showMessageDialog(this, "Eliminado correctamente.");
+            frmBitacoraBancaria.registrarBitacora(
+    "DELETE", "CatTipoCuenta", id,
+    "Nombre: " + txtNombreTipo.getText().trim(),
+    null, "Tipo de cuenta eliminado"
+);
             limpiarCampos();
             cargarDatos();
         } else {

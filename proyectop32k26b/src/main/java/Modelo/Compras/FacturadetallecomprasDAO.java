@@ -1,12 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Modelo.Compras;
+
 import Controlador.Compras.clsFacturadetallecompras;
 import Modelo.Conexion;
-import Modelo.BitacoraDAO;
-import Controlador.clsUsuarioConectado;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,238 +11,239 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * DAO para la gestión de los detalles de facturas de compras.
+ * Maneja operaciones CRUD sobre la tabla facturadetallecompras.
  *
- * @author Isaias Cedillo
+ * Relación:
+ * - facturadetallecompras → facturascompras (FK Faccomid)
+ * - facturadetallecompras → productos (FK Prodid)
  */
 public class FacturadetallecomprasDAO {
 
-    private static final int APL_CODIGO = 30000;
-
-    // LISTAR
-    public List<clsFacturadetallecompras> listar() {
-
-        List<clsFacturadetallecompras> lista =
-                new ArrayList<>();
+    // =========================
+    // INSERTAR DETALLE
+    // =========================
+    public void insert(clsFacturadetallecompras detalle) {
 
         String sql =
-                "SELECT * FROM Facturadetallecompras";
+                "INSERT INTO facturadetallecompras "
+              + "(Faccomid, Prodid, Faccomcantidad, Faccomprecio, Faccomsubtotal) "
+              + "VALUES (?,?,?,?,?)";
 
         try (Connection conn = Conexion.getConnection();
-             PreparedStatement ps =
-                     conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            while (rs.next()) {
+            ps.setInt(1, detalle.getFaccomid());
+            ps.setInt(2, detalle.getProdid());
+            ps.setDouble(3, detalle.getFaccomcantidad());
+            ps.setDouble(4, detalle.getFaccomprecio());
+            ps.setDouble(5, detalle.getFaccomsubtotal());
 
-                clsFacturadetallecompras detalle =
-                        new clsFacturadetallecompras();
+            ps.executeUpdate();
 
-                detalle.setFaccomdetid(
-                        rs.getInt("Faccomdetid"));
+        } catch (Exception e) {
+            throw new RuntimeException("Error al insertar detalle de factura", e);
+        }
+    }
 
-                detalle.setFaccomid(
-                        rs.getInt("Faccomid"));
+    // =========================
+    // ACTUALIZAR DETALLE
+    // =========================
+    public void update(clsFacturadetallecompras detalle) {
 
-                detalle.setProid(
-                        rs.getInt("Proid"));
-                
-                detalle.setPronombre(rs.getString("Pronombre"));
-                
-                detalle.setFaccomcantidad(
-                        rs.getDouble("Faccomcantidad"));
+        String sql =
+                "UPDATE facturadetallecompras SET "
+              + "Faccomid=?, "
+              + "Prodid=?, "
+              + "Faccomcantidad=?, "
+              + "Faccomprecio=?, "
+              + "Faccomsubtotal=? "
+              + "WHERE Faccomdetid=?";
 
-                detalle.setFaccomprecio(
-                        rs.getDouble("Faccomprecio"));
+        try (Connection conn = Conexion.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
-                detalle.setFaccomsubtotal(
-                        rs.getDouble("Faccomsubtotal"));
+            ps.setInt(1, detalle.getFaccomid());
+            ps.setInt(2, detalle.getProdid());
+            ps.setDouble(3, detalle.getFaccomcantidad());
+            ps.setDouble(4, detalle.getFaccomprecio());
+            ps.setDouble(5, detalle.getFaccomsubtotal());
+            ps.setInt(6, detalle.getFaccomdetid());
 
-                lista.add(detalle);
+            int rows = ps.executeUpdate();
+
+            if (rows == 0) {
+                throw new RuntimeException("No se encontró el detalle a actualizar");
             }
 
         } catch (Exception e) {
+            throw new RuntimeException("Error al actualizar detalle de factura", e);
+        }
+    }
 
-            e.printStackTrace();
+    // =========================
+    // ELIMINAR DETALLE POR ID
+    // =========================
+    public void delete(int idDetalle) {
+
+        String sql =
+                "DELETE FROM facturadetallecompras WHERE Faccomdetid=?";
+
+        try (Connection conn = Conexion.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idDetalle);
+
+            int rows = ps.executeUpdate();
+
+            if (rows == 0) {
+                throw new RuntimeException("No se encontró el detalle a eliminar");
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error al eliminar detalle de factura", e);
+        }
+    }
+
+    // =========================
+    // CONSULTAR DETALLE POR ID
+    // =========================
+    public clsFacturadetallecompras query(int idDetalle) {
+
+        clsFacturadetallecompras detalle = null;
+
+        String sql =
+                "SELECT * FROM facturadetallecompras WHERE Faccomdetid=?";
+
+        try (Connection conn = Conexion.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idDetalle);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                if (rs.next()) {
+
+                    detalle = new clsFacturadetallecompras();
+
+                    detalle.setFaccomdetid(rs.getInt("Faccomdetid"));
+                    detalle.setFaccomid(rs.getInt("Faccomid"));
+                    detalle.setProdid(rs.getInt("Prodid"));
+                    detalle.setFaccomcantidad(rs.getDouble("Faccomcantidad"));
+                    detalle.setFaccomprecio(rs.getDouble("Faccomprecio"));
+                    detalle.setFaccomsubtotal(rs.getDouble("Faccomsubtotal"));
+                }
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error al consultar detalle de factura", e);
+        }
+
+        return detalle;
+    }
+
+    // =========================
+    // LISTAR DETALLES POR FACTURA
+    // =========================
+    /**
+     * Devuelve todos los detalles pertenecientes a una factura específica.
+     *
+     * @param idFactura ID de la factura de compra
+     * @return lista de detalles asociados
+     */
+    public List<clsFacturadetallecompras> listarPorFactura(int idFactura) {
+
+        List<clsFacturadetallecompras> lista = new ArrayList<>();
+
+        String sql =
+                "SELECT * FROM facturadetallecompras WHERE Faccomid=?";
+
+        try (Connection conn = Conexion.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idFactura);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                while (rs.next()) {
+
+                    clsFacturadetallecompras detalle = new clsFacturadetallecompras();
+
+                    detalle.setFaccomdetid(rs.getInt("Faccomdetid"));
+                    detalle.setFaccomid(rs.getInt("Faccomid"));
+                    detalle.setProdid(rs.getInt("Prodid"));
+                    detalle.setFaccomcantidad(rs.getDouble("Faccomcantidad"));
+                    detalle.setFaccomprecio(rs.getDouble("Faccomprecio"));
+                    detalle.setFaccomsubtotal(rs.getDouble("Faccomsubtotal"));
+
+                    lista.add(detalle);
+                }
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error al listar detalles por factura", e);
         }
 
         return lista;
     }
 
-    // INSERTAR
-    public void insert(
-            clsFacturadetallecompras detalle) {
+    // =========================
+    // ELIMINAR POR FACTURA (CASCADE MANUAL)
+    // =========================
+    /**
+     * Elimina todos los detalles asociados a una factura.
+     * Útil antes de eliminar la factura principal.
+     */
+    public void deleteByFactura(int idFactura) {
 
-        String sql = "INSERT INTO Facturadetallecompras "
-           + "(Faccomid, Proid, Pronombre, " // nuevo campo
-           + "Faccomcantidad, Faccomprecio, Faccomsubtotal) "
-           + "VALUES (?,?,?,?,?,?)"; 
+        String sql =
+                "DELETE FROM facturadetallecompras WHERE Faccomid=?";
 
         try (Connection conn = Conexion.getConnection();
-             PreparedStatement ps =
-                     conn.prepareStatement(sql)) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setInt(1, detalle.getFaccomid());
-            ps.setInt(2, detalle.getProid());
-            ps.setString(3, detalle.getPronombre()); // nuevo - posición 3
-            ps.setDouble(4, detalle.getFaccomcantidad()); // se corrió a 4
-            ps.setDouble(5, detalle.getFaccomprecio());   // se corrió a 5
-            ps.setDouble(6, detalle.getFaccomsubtotal()); // se corrió a 6
-
+            ps.setInt(1, idFactura);
             ps.executeUpdate();
 
-            new BitacoraDAO().insert(
-                    clsUsuarioConectado.getUsuId(),
-                    APL_CODIGO,
-                    "INSERT");
-
         } catch (Exception e) {
-
-            e.printStackTrace();
-
-            throw new RuntimeException(
-                    "Error al insertar detalle",
-                    e);
+            throw new RuntimeException("Error al eliminar detalles por factura", e);
         }
     }
+    // =========================
+// LISTAR TODOS LOS DETALLES
+// =========================
+public List<clsFacturadetallecompras> listar() {
 
-    // ACTUALIZAR
-    public void update(
-            clsFacturadetallecompras detalle) {
+    List<clsFacturadetallecompras> lista = new ArrayList<>();
 
-        String sql = "UPDATE Facturadetallecompras SET "
-           + "Faccomid=?, Proid=?, Pronombre=?, " 
-           + "Faccomcantidad=?, Faccomprecio=?, Faccomsubtotal=? "
-           + "WHERE Faccomdetid=?";
+    String sql =
+            "SELECT Faccomdetid, Faccomid, Prodid, "
+          + "Faccomcantidad, Faccomprecio, Faccomsubtotal "
+          + "FROM facturadetallecompras";
 
-        try (Connection conn = Conexion.getConnection();
-             PreparedStatement ps =
-                     conn.prepareStatement(sql)) {
+    try (Connection conn = Conexion.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
 
-            ps.setInt(1, detalle.getFaccomid());
-            ps.setInt(2, detalle.getProid());
-            ps.setString(3, detalle.getPronombre()); // nuevo
-            ps.setDouble(4, detalle.getFaccomcantidad());
-            ps.setDouble(5, detalle.getFaccomprecio());
-            ps.setDouble(6, detalle.getFaccomsubtotal());
-            ps.setInt(7, detalle.getFaccomdetid()); // WHERE se corrió a 7
+        while (rs.next()) {
 
-            int rows =
-                    ps.executeUpdate();
+            clsFacturadetallecompras detalle =
+                    new clsFacturadetallecompras();
 
-            if (rows == 0) {
+            detalle.setFaccomdetid(rs.getInt("Faccomdetid"));
+            detalle.setFaccomid(rs.getInt("Faccomid"));
+            detalle.setProdid(rs.getInt("Prodid"));
+            detalle.setFaccomcantidad(rs.getDouble("Faccomcantidad"));
+            detalle.setFaccomprecio(rs.getDouble("Faccomprecio"));
+            detalle.setFaccomsubtotal(rs.getDouble("Faccomsubtotal"));
 
-                throw new RuntimeException(
-                        "No se encontró el detalle");
-            }
-
-            new BitacoraDAO().insert(
-                    clsUsuarioConectado.getUsuId(),
-                    APL_CODIGO,
-                    "UPDATE");
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-            throw new RuntimeException(
-                    "Error al actualizar detalle",
-                    e);
-        }
-    }
-
-    // ELIMINAR
-    public void delete(int idDetalle) {
-
-        String sql =
-                "DELETE FROM Facturadetallecompras "
-              + "WHERE Faccomdetid=?";
-
-        try (Connection conn = Conexion.getConnection();
-             PreparedStatement ps =
-                     conn.prepareStatement(sql)) {
-
-            ps.setInt(1, idDetalle);
-
-            int rows =
-                    ps.executeUpdate();
-
-            if (rows == 0) {
-
-                throw new RuntimeException(
-                        "No se encontró el detalle");
-            }
-
-            new BitacoraDAO().insert(
-                    clsUsuarioConectado.getUsuId(),
-                    APL_CODIGO,
-                    "DELETE");
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-            throw new RuntimeException(
-                    "Error al eliminar detalle",
-                    e);
-        }
-    }
-
-    // CONSULTAR
-    public clsFacturadetallecompras query(
-            int idDetalle) {
-
-        clsFacturadetallecompras detalle =
-                null;
-
-        String sql =
-                "SELECT * FROM Facturadetallecompras "
-              + "WHERE Faccomdetid=?";
-
-        try (Connection conn = Conexion.getConnection();
-             PreparedStatement ps =
-                     conn.prepareStatement(sql)) {
-
-            ps.setInt(1, idDetalle);
-
-            try (ResultSet rs =
-                         ps.executeQuery()) {
-
-                if (rs.next()) {
-
-                    detalle =
-                            new clsFacturadetallecompras();
-
-                    detalle.setFaccomdetid(
-                            rs.getInt("Faccomdetid"));
-
-                    detalle.setFaccomid(
-                            rs.getInt("Faccomid"));
-
-                    detalle.setProid(
-                            rs.getInt("Proid"));
-                    
-                    detalle.setPronombre(rs.getString("Pronombre"));
-
-                    detalle.setFaccomcantidad(
-                            rs.getDouble("Faccomcantidad"));
-
-                    detalle.setFaccomprecio(
-                            rs.getDouble("Faccomprecio"));
-
-                    detalle.setFaccomsubtotal(
-                            rs.getDouble("Faccomsubtotal"));
-                }
-            }
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-            throw new RuntimeException(
-                    "Error al consultar detalle",
-                    e);
+            lista.add(detalle);
         }
 
-        return detalle;
+    } catch (Exception e) {
+        throw new RuntimeException("Error al listar detalles de compras", e);
     }
+
+    return lista;
+}
 }

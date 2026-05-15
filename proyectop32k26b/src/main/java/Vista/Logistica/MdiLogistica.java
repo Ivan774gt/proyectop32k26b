@@ -20,6 +20,8 @@ import Controlador.clsUsuarioConectado;
 import Modelo.PermisosDAO;
 import java.util.List;
 import Vista.Logistica.frmAyuda;
+import java.awt.Dimension;
+import javax.swing.JInternalFrame;
 
 //formulario
 
@@ -86,8 +88,13 @@ public class MdiLogistica extends javax.swing.JFrame {
         mnuGeneral = new javax.swing.JMenuBar();
         mnuTransporte = new javax.swing.JMenu();
         frmTansportes = new javax.swing.JMenuItem();
-        mnuBodega = new javax.swing.JMenu();
+        mnuInventario = new javax.swing.JMenu();
         frmKardex = new javax.swing.JMenuItem();
+        frmMantenimientoProductos = new javax.swing.JMenuItem();
+        frmMarcas = new javax.swing.JMenuItem();
+        frmLinea = new javax.swing.JMenuItem();
+        mnuEntradaSalida = new javax.swing.JMenu();
+        frmKBodega = new javax.swing.JMenuItem();
         frmStock = new javax.swing.JMenuItem();
         mnuPedidos = new javax.swing.JMenu();
         frmGestion = new javax.swing.JMenuItem();
@@ -125,7 +132,7 @@ public class MdiLogistica extends javax.swing.JFrame {
 
         mnuGeneral.add(mnuTransporte);
 
-        mnuBodega.setText("Bodega");
+        mnuInventario.setText("Inventarios");
 
         frmKardex.setText("Kardex");
         frmKardex.addActionListener(new java.awt.event.ActionListener() {
@@ -133,17 +140,58 @@ public class MdiLogistica extends javax.swing.JFrame {
                 frmKardexActionPerformed(evt);
             }
         });
-        mnuBodega.add(frmKardex);
+        mnuInventario.add(frmKardex);
 
-        frmStock.setText("Stock");
+        frmMantenimientoProductos.setText("Mantenimiento Productos");
+        frmMantenimientoProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                frmMantenimientoProductosActionPerformed(evt);
+            }
+        });
+        mnuInventario.add(frmMantenimientoProductos);
+
+        frmMarcas.setText("Marcas");
+        frmMarcas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                frmMarcasActionPerformed(evt);
+            }
+        });
+        mnuInventario.add(frmMarcas);
+
+        frmLinea.setText("Linea");
+        frmLinea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                frmLineaActionPerformed(evt);
+            }
+        });
+        mnuInventario.add(frmLinea);
+
+        mnuGeneral.add(mnuInventario);
+
+        mnuEntradaSalida.setText("Bodega");
+        mnuEntradaSalida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuEntradaSalidaActionPerformed(evt);
+            }
+        });
+
+        frmKBodega.setText("Gestion Bodega");
+        frmKBodega.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                frmKBodegaActionPerformed(evt);
+            }
+        });
+        mnuEntradaSalida.add(frmKBodega);
+
+        frmStock.setText("Existencias");
         frmStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 frmStockActionPerformed(evt);
             }
         });
-        mnuBodega.add(frmStock);
+        mnuEntradaSalida.add(frmStock);
 
-        mnuGeneral.add(mnuBodega);
+        mnuGeneral.add(mnuEntradaSalida);
 
         mnuPedidos.setText("Pedidos");
 
@@ -319,6 +367,107 @@ Vista.Logistica.frmAyuda ventana = new Vista.Logistica.frmAyuda();
     ventana.setLocationRelativeTo(null);
     }//GEN-LAST:event_frmAyudainActionPerformed
 
+    private void frmKBodegaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmKBodegaActionPerformed
+      boolean abierta = false;
+    for (javax.swing.JInternalFrame f : jDesktopPane1.getAllFrames()) {
+        if (f instanceof frmMantenimientoBodega) {
+            abierta = true;
+            f.toFront(); // Si ya existe, solo la traemos al frente
+            try { f.setSelected(true); } catch (Exception e) {}
+            break;
+        }
+    }
+
+    if (!abierta) {
+        frmMantenimientoBodega ventana = new frmMantenimientoBodega();
+        jDesktopPane1.add(ventana);
+        
+        // Centrar
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = ventana.getSize();
+        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, 
+                            (desktopSize.height - FrameSize.height) / 2);
+        
+        ventana.setVisible(true);
+    }
+    }//GEN-LAST:event_frmKBodegaActionPerformed
+
+    private void mnuEntradaSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuEntradaSalidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuEntradaSalidaActionPerformed
+
+    private void frmMarcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmMarcasActionPerformed
+        // TODO add your handling code here:
+        System.out.println("Abriendo Informacion de Marcas");
+    frmMarcas ventana = new frmMarcas();
+    
+    ventana.setSize(900, 600);
+    ventana.setVisible(true); 
+    
+    jDesktopPane1.add(ventana);
+    
+  
+    Dimension desktopSize = jDesktopPane1.getSize();
+    Dimension FrameSize = ventana.getSize();
+    ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+    
+    ventana.setVisible(true); 
+    try {
+        ventana.setSelected(true); 
+    } catch (java.beans.PropertyVetoException e) {
+        System.out.println("Error al seleccionar ventana: " + e);
+    }
+    ventana.toFront(); 
+    }//GEN-LAST:event_frmMarcasActionPerformed
+
+    private void frmMantenimientoProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmMantenimientoProductosActionPerformed
+        // TODO add your handling code here:
+        System.out.println("Abriendo Informacion de Productos");
+    frmMantenimientoProductos ventana = new frmMantenimientoProductos();
+    
+    ventana.setSize(900, 600);
+    ventana.setVisible(true); 
+    
+    jDesktopPane1.add(ventana);
+    
+  
+    Dimension desktopSize = jDesktopPane1.getSize();
+    Dimension FrameSize = ventana.getSize();
+    ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+    
+    ventana.setVisible(true); 
+    try {
+        ventana.setSelected(true); 
+    } catch (java.beans.PropertyVetoException e) {
+        System.out.println("Error al seleccionar ventana: " + e);
+    }
+    ventana.toFront(); 
+    }//GEN-LAST:event_frmMantenimientoProductosActionPerformed
+
+    private void frmLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmLineaActionPerformed
+        // TODO add your handling code here:
+         System.out.println("Abriendo Informacion de Linea");
+    frmLinea ventana = new frmLinea();
+    
+    ventana.setSize(900, 600);
+    ventana.setVisible(true); 
+    
+    jDesktopPane1.add(ventana);
+    
+  
+    Dimension desktopSize = jDesktopPane1.getSize();
+    Dimension FrameSize = ventana.getSize();
+    ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+    
+    ventana.setVisible(true); 
+    try {
+        ventana.setSelected(true); 
+    } catch (java.beans.PropertyVetoException e) {
+        System.out.println("Error al seleccionar ventana: " + e);
+    }
+    ventana.toFront(); 
+    }//GEN-LAST:event_frmLineaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -347,13 +496,18 @@ Vista.Logistica.frmAyuda ventana = new Vista.Logistica.frmAyuda();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBoxMenuItem frmAyudain;
     private javax.swing.JMenuItem frmGestion;
+    private javax.swing.JMenuItem frmKBodega;
     private javax.swing.JMenuItem frmKardex;
+    private javax.swing.JMenuItem frmLinea;
+    private javax.swing.JMenuItem frmMantenimientoProductos;
+    private javax.swing.JMenuItem frmMarcas;
     private javax.swing.JMenuItem frmStock;
     private javax.swing.JMenuItem frmTansportes;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu mnuArchivo;
-    private javax.swing.JMenu mnuBodega;
+    private javax.swing.JMenu mnuEntradaSalida;
     private javax.swing.JMenuBar mnuGeneral;
+    private javax.swing.JMenu mnuInventario;
     private javax.swing.JMenu mnuPedidos;
     private javax.swing.JCheckBoxMenuItem mnuSalirSistema;
     private javax.swing.JMenu mnuTransporte;

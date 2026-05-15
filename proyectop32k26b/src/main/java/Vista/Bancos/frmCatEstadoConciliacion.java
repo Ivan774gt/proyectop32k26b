@@ -5,11 +5,11 @@ import Controlador.Bancos.clsCatEstadoConciliacion;
 import Modelo.Bancos.CatEstadoConciliacionDAO;
 import java.io.File;
 import java.sql.Connection;
-//import net.sf.jasperreports.engine.JasperCompileManager;
-//import net.sf.jasperreports.engine.JasperFillManager;
-//import net.sf.jasperreports.engine.JasperPrint;
-//import net.sf.jasperreports.engine.JasperReport;
-//import net.sf.jasperreports.view.JasperViewer;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 public class frmCatEstadoConciliacion extends javax.swing.JInternalFrame {
@@ -211,6 +211,14 @@ if (txtid.getText().trim().isEmpty()) {
         clsCatEstadoConciliacion cates = dao.query(id);
         if (cates != null) {
             jTextField1.setText(cates.getCatesnombreestado());
+            frmBitacoraBancaria.registrarBitacora(
+    "SELECT",
+    "CatEstadoConciliacion",
+    Integer.parseInt(txtid.getText().trim()),
+    null,
+    null,
+    "Consulta de estado de conciliación por ID"
+);
         } else {
             javax.swing.JOptionPane.showMessageDialog(this,
                 "No se encontró un estado de conciliación con ID: " + id,
@@ -249,20 +257,20 @@ Connection conn = null;
         
         java.util.Map<String, Object> parametros = new java.util.HashMap<>();
         
-        //net.sf.jasperreports.engine.JasperReport reporte =
-         //   net.sf.jasperreports.engine.JasperCompileManager.compileReport(ruta);
+        net.sf.jasperreports.engine.JasperReport reporte =
+            net.sf.jasperreports.engine.JasperCompileManager.compileReport(ruta);
         
-        //net.sf.jasperreports.engine.JasperPrint print =
-        //    net.sf.jasperreports.engine.JasperFillManager.fillReport(reporte, parametros, conn);
+        net.sf.jasperreports.engine.JasperPrint print =
+            net.sf.jasperreports.engine.JasperFillManager.fillReport(reporte, parametros, conn);
         
-        //net.sf.jasperreports.engine.JasperExportManager.exportReportToPdfFile(print,"reporte.pdf");
-        //net.sf.jasperreports.swing.JRViewer viewer = new net.sf.jasperreports.swing.JRViewer(print);
+        net.sf.jasperreports.engine.JasperExportManager.exportReportToPdfFile(print,"reporte.pdf");
+        net.sf.jasperreports.swing.JRViewer viewer = new net.sf.jasperreports.swing.JRViewer(print);
         
         javax.swing.JFrame frame = new javax.swing.JFrame("Reporte de Estado Conciliacion");
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
-        //frame.add(viewer);
+        frame.add(viewer);
         frame.setVisible(true);
         
     } catch (Exception e) {
@@ -295,6 +303,14 @@ if (txtid.getText().trim().isEmpty()) {
         javax.swing.JOptionPane.showMessageDialog(this,
             "Estado de conciliación eliminado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "DELETE",
+    "CatEstadoConciliacion",
+    Integer.parseInt(txtid.getText().trim()),
+    "Nombre Estado: " + jTextField1.getText().trim(),
+    null,
+    "Estado de conciliación eliminado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (NumberFormatException ex) {
@@ -317,6 +333,14 @@ if (!camposCompletos()) return;
         javax.swing.JOptionPane.showMessageDialog(this,
             "Estado de conciliación registrado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "INSERT",
+    "CatEstadoConciliacion",
+    null,
+    null,
+    "Nombre Estado: " + jTextField1.getText().trim(),
+    "Estado de conciliación registrado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (Exception e) {
@@ -342,6 +366,14 @@ if (!camposCompletos()) return;
         javax.swing.JOptionPane.showMessageDialog(this,
             "Estado de conciliación actualizado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "UPDATE",
+    "CatEstadoConciliacion",
+    Integer.parseInt(txtid.getText().trim()),
+    null,
+    "Nombre Estado: " + jTextField1.getText().trim(),
+    "Estado de conciliación actualizado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (NumberFormatException ex) {

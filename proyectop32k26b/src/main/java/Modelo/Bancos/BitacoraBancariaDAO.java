@@ -11,6 +11,19 @@ import java.util.List;
 public class BitacoraBancariaDAO {
 
     private static final int APL_CODIGO = 5800;
+    
+public boolean deleteAll() {
+    String sql = "DELETE FROM BitacoraBancaria";
+    try (Connection conn = Conexion.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.executeUpdate();
+        return true;
+    } catch (Exception e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+    
 
     // ── LISTAR TODOS ────────────────────────────────────────────
     public List<clsBitacoraBancaria> listar() {
@@ -186,5 +199,10 @@ public class BitacoraBancariaDAO {
         }
         return lista;
     }
+
+    private Connection getConexion() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
 }
 

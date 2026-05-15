@@ -72,7 +72,7 @@ public class frmBitacoraBancaria extends javax.swing.JInternalFrame {
                 b.getBBusuarioaccion(),
                 b.getBBaccion(),
                 b.getBBtabla(),
-
+                codigoStr, // Para código
                 b.getBBregistroid(),
                 b.getBBvaloranterior(),
                 b.getBBvalornuevo(),
@@ -108,11 +108,10 @@ public class frmBitacoraBancaria extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
 
-        // Descripción final
-        String descFinal = "[" + codigo + "] "
-                         + "| PC: " + nombrePC
-                         + " | IP: " + ip
-                         + " | " + descripcion;
+        //Descripción final
+       String descFinal = "[" + codigo + "] "
+                 + "| IP: " + ip
+                 + " | " + descripcion;
 
         clsBitacoraBancaria b = new clsBitacoraBancaria(
             nombrePC,
@@ -197,7 +196,7 @@ public class frmBitacoraBancaria extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Código", "Usuario", "Acción", "Tabla", "Registro", "Valor Anterior", "Valor Nuevo", "Fecha", "Descripción"
+                "ID", "Usuario", "Acción", "Tabla", "Código", "Registro", "Valor Anterior", "Valor Nuevo", "Fecha", "Descripción"
             }
         ));
         jScrollPane2.setViewportView(tablaBitacora);
@@ -215,7 +214,7 @@ public class frmBitacoraBancaria extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(43, 279, Short.MAX_VALUE)
+                        .addGap(43, 495, Short.MAX_VALUE)
                         .addComponent(btnBuscar)
                         .addGap(47, 47, 47)
                         .addComponent(btnLimpiar)
@@ -422,12 +421,41 @@ public class frmBitacoraBancaria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        txtBuscar.setText("");
-        fechaInicio.setDate(null);
-        fechaFin.setDate(null);
-        cboxTipoBusqueda.setSelectedIndex(0);
-        // Dispara cboxTipoBusquedaActionPerformed → oculta fechas y muestra txtBuscar
-        cargarTodos();
+         int confirmacion = javax.swing.JOptionPane.showConfirmDialog(
+        this,
+        "¿Está seguro que desea eliminar TODOS los registros de la bitácora?\nEsta acción no se puede deshacer.",
+        "Confirmar limpieza", //Para confirmar la eliminación de datos
+        javax.swing.JOptionPane.YES_NO_OPTION,
+        javax.swing.JOptionPane.WARNING_MESSAGE
+    );
+
+    if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
+        boolean exito = bitacoraDAO.deleteAll();
+
+        if (exito) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Bitácora limpiada correctamente.",
+                "Éxito",
+                javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                "Ocurrió un error al limpiar la bitácora.",
+                "Error",
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    // Limpiar filtros y recargar tabla (vacía)
+    txtBuscar.setText("");
+    fechaInicio.setDate(null);
+    fechaFin.setDate(null);
+    cboxTipoBusqueda.setSelectedIndex(0);
+    txtBuscar.setVisible(true);
+    jLabel1.setVisible(false);
+    jLabel2.setVisible(false);
+    fechaInicio.setVisible(false);
+    fechaFin.setVisible(false);
+    cargarTodos();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
 

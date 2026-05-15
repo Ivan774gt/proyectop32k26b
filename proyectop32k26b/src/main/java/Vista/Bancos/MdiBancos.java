@@ -460,13 +460,12 @@ vista.setVisible(true);
     }//GEN-LAST:event_frmProcesoAplicacionPerfilActionPerformed
 
     private void frmMantenimientoCatEstadoConciliacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmMantenimientoCatEstadoConciliacionActionPerformed
-        // TODO add your handling code here:
-        System.out.println("entre a proceso Aplicacion a Usuario");
-        frmProcesoAplicacionUsuario ventana = new frmProcesoAplicacionUsuario();
-        jDesktopPane1.add(ventana);
-        Dimension desktopSize = jDesktopPane1.getSize();
-        Dimension FrameSize = ventana.getSize();
-        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        frmCatEstadoConciliacion ventana = new frmCatEstadoConciliacion();
+    jDesktopPane1.add(ventana);
+    ventana.setVisible(true);
+    Dimension desktopSize = jDesktopPane1.getSize();
+    Dimension FrameSize = ventana.getSize();
+    ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
     }//GEN-LAST:event_frmMantenimientoCatEstadoConciliacionActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed

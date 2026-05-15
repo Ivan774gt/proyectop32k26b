@@ -6,12 +6,12 @@ package Vista.Bancos;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-/*import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
-*/
+
 import java.sql.Connection;
 
 /**
@@ -278,6 +278,19 @@ private final Modelo.Bancos.ClientesDAO clientesDAO = new Modelo.Bancos.Clientes
         javax.swing.JOptionPane.showMessageDialog(this,
             "Cliente actualizado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "UPDATE",
+    "Cliente",
+    Integer.parseInt(txtbuscado.getText().trim()),
+    null,
+    "Nombre: " + jTextField1.getText().trim() +
+    " | NIT: " + jTextField2.getText().trim() +
+    " | Teléfono: " + jTextField3.getText().trim() +
+    " | Estado: " + jTextField7.getText().trim() +
+    " | Dirección: " + jTextField6.getText().trim() +
+    " | Correo: " + jTextField4.getText().trim(),
+    "Cliente actualizado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (NumberFormatException ex) {
@@ -310,6 +323,14 @@ private final Modelo.Bancos.ClientesDAO clientesDAO = new Modelo.Bancos.Clientes
             jTextField7.setText(cliente.getCliestado());
             jTextField6.setText(cliente.getClidireccion());
             jTextField4.setText(cliente.getClicorreo());
+            frmBitacoraBancaria.registrarBitacora(
+    "SELECT",
+    "Cliente",
+    Integer.parseInt(txtbuscado.getText().trim()),
+    null,
+    null,
+    "Consulta de cliente por ID"
+);
         } else {
             javax.swing.JOptionPane.showMessageDialog(this,
                 "No se encontró un cliente con ID: " + id,
@@ -348,7 +369,7 @@ private final Modelo.Bancos.ClientesDAO clientesDAO = new Modelo.Bancos.Clientes
         
         java.util.Map<String, Object> parametros = new java.util.HashMap<>();
         
-        /*net.sf.jasperreports.engine.JasperReport reporte =
+        net.sf.jasperreports.engine.JasperReport reporte =
             net.sf.jasperreports.engine.JasperCompileManager.compileReport(ruta);
         
         net.sf.jasperreports.engine.JasperPrint print =
@@ -362,7 +383,7 @@ private final Modelo.Bancos.ClientesDAO clientesDAO = new Modelo.Bancos.Clientes
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
         frame.add(viewer);
-        frame.setVisible(true);*/
+        frame.setVisible(true);
         
     } catch (Exception e) {
         e.printStackTrace();
@@ -402,6 +423,19 @@ private final Modelo.Bancos.ClientesDAO clientesDAO = new Modelo.Bancos.Clientes
         javax.swing.JOptionPane.showMessageDialog(this,
             "Cliente registrado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "INSERT",
+    "Cliente",
+    null,
+    null,
+    "Nombre: " + jTextField1.getText().trim() +
+    " | NIT: " + jTextField2.getText().trim() +
+    " | Teléfono: " + jTextField3.getText().trim() +
+    " | Estado: " + jTextField7.getText().trim() +
+    " | Dirección: " + jTextField6.getText().trim() +
+    " | Correo: " + jTextField4.getText().trim(),
+    "Cliente registrado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (Exception e) {
@@ -430,6 +464,15 @@ private final Modelo.Bancos.ClientesDAO clientesDAO = new Modelo.Bancos.Clientes
         javax.swing.JOptionPane.showMessageDialog(this,
             "Cliente eliminado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "DELETE",
+    "Cliente",
+    Integer.parseInt(txtbuscado.getText().trim()),
+    "Nombre: " + jTextField1.getText().trim() +
+    " | NIT: " + jTextField2.getText().trim(),
+    null,
+    "Cliente eliminado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (NumberFormatException ex) {

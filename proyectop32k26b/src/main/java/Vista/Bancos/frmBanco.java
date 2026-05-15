@@ -5,11 +5,11 @@
 package Vista.Bancos;
 import java.io.File;
 import java.sql.Connection;
-//import net.sf.jasperreports.engine.JasperCompileManager;
-//import net.sf.jasperreports.engine.JasperFillManager;
-//import net.sf.jasperreports.engine.JasperPrint;
-//import net.sf.jasperreports.engine.JasperReport;
-//import net.sf.jasperreports.view.JasperViewer;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @Angoly Camila Araujo Mayen 9959 - 24 - 17623
@@ -275,6 +275,15 @@ if (!camposCompletos()) return;
         javax.swing.JOptionPane.showMessageDialog(this,
             "Banco registrado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        // ← AQUÍ se registra en la bitácora
+        frmBitacoraBancaria.registrarBitacora(
+            "INSERT", "Banco", null, null,
+            "Nombre: " + jTextField1.getText().trim() +
+            " | Dirección: " + jTextField2.getText().trim() +
+            " | Teléfono: " + jTextField3.getText().trim() +
+            " | Correo: " + jTextField4.getText().trim(),
+            "Banco registrado"
+        );
         cargarTabla();
         limpiarCampos();
     } catch (Exception e) {
@@ -303,6 +312,14 @@ if (!camposCompletos()) return;
         javax.swing.JOptionPane.showMessageDialog(this,
             "Banco eliminado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "DELETE",
+    "Banco",
+    Integer.parseInt(txtbuscado.getText().trim()),
+    "Nombre: " + jTextField1.getText().trim(),
+    null,
+    "Banco eliminado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (NumberFormatException ex) {
@@ -333,6 +350,14 @@ if (!camposCompletos()) return;
             jTextField2.setText(banco.getBandireccion());
             jTextField3.setText(banco.getBantelefono());
             jTextField4.setText(banco.getBancorreo());
+            frmBitacoraBancaria.registrarBitacora(
+    "SELECT",
+    "Banco",
+    Integer.parseInt(txtbuscado.getText().trim()),
+    null,
+    null,
+    "Consulta de banco por ID"
+);
         } else {
             javax.swing.JOptionPane.showMessageDialog(this,
                 "No se encontró un banco con ID: " + id,
@@ -366,6 +391,17 @@ if (!camposCompletos()) return;
         javax.swing.JOptionPane.showMessageDialog(this,
             "Banco actualizado correctamente.",
             "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        frmBitacoraBancaria.registrarBitacora(
+    "UPDATE",
+    "Banco",
+    Integer.parseInt(txtbuscado.getText().trim()),
+    null,
+    "Nombre: " + jTextField1.getText().trim() +
+    " | Dirección: " + jTextField2.getText().trim() +
+    " | Teléfono: " + jTextField3.getText().trim() +
+    " | Correo: " + jTextField4.getText().trim(),
+    "Banco actualizado"
+);
         cargarTabla();
         limpiarCampos();
     } catch (NumberFormatException ex) {
@@ -400,20 +436,20 @@ if (!camposCompletos()) return;
         
         java.util.Map<String, Object> parametros = new java.util.HashMap<>();
         
-        //net.sf.jasperreports.engine.JasperReport reporte =
-         //   net.sf.jasperreports.engine.JasperCompileManager.compileReport(ruta);
+        net.sf.jasperreports.engine.JasperReport reporte =
+           net.sf.jasperreports.engine.JasperCompileManager.compileReport(ruta);
         
-        //net.sf.jasperreports.engine.JasperPrint print =
-        //    net.sf.jasperreports.engine.JasperFillManager.fillReport(reporte, parametros, conn);
+        net.sf.jasperreports.engine.JasperPrint print =
+           net.sf.jasperreports.engine.JasperFillManager.fillReport(reporte, parametros, conn);
         
-        //net.sf.jasperreports.engine.JasperExportManager.exportReportToPdfFile(print,"reporte.pdf");
-        //net.sf.jasperreports.swing.JRViewer viewer = new net.sf.jasperreports.swing.JRViewer(print);
+        net.sf.jasperreports.engine.JasperExportManager.exportReportToPdfFile(print,"reporte.pdf");
+        net.sf.jasperreports.swing.JRViewer viewer = new net.sf.jasperreports.swing.JRViewer(print);
         
         javax.swing.JFrame frame = new javax.swing.JFrame("Reporte de Clientes");
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
-        //frame.add(viewer);
+        frame.add(viewer);
         frame.setVisible(true);
         
     } catch (Exception e) {
