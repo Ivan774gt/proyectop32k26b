@@ -4,12 +4,11 @@
  */
 package Vista.ComercialComprasyVentas;
 
-import Vista.ComercialComprasyVentas.frmCompras;
-import Vista.ComercialComprasyVentas.frmCompras;
 import java.awt.Dimension;
 import java.io.File;
 import javax.swing.JOptionPane;
 import Vista.ComercialComprasyVentas.frmVentas;
+import Vista.ComercialComprasyVentas.frmCompras;
 
 /**
  *
@@ -171,16 +170,9 @@ public class MdiComercio extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuAyudasActionPerformed
 
     private void mnuComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuComprasActionPerformed
-        // TODO add your handling code here:
-        frmCompras ventana = new frmCompras();
-        jDesktopPane1.add(ventana);
-        Dimension desktopSize = jDesktopPane1.getSize();
-        Dimension FrameSize = ventana.getSize();
-        ventana.setLocation(
-        (desktopSize.width - FrameSize.width) / 2,
-        (desktopSize.height - FrameSize.height) / 2
-        );
+        frmCompras ventana = new frmCompras(); 
         ventana.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_mnuComprasActionPerformed
 
     private void proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proveedorActionPerformed
