@@ -11,7 +11,7 @@ import Modelo.BitacoraDAO;
 import Controlador.clsSeguridad;
 import Controlador.clsUsuario;
 import Controlador.clsUsuarioConectado;
-import Vista.ComisionesVentas.frmComisionesVentas;
+import Vista.ComisionVenta.frmComisionesVentas;
 
 import Vista.vistaCuentasCorrientes.MdiGeneralCC;
 
