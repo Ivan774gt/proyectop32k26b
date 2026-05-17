@@ -14,7 +14,7 @@ import java.util.*;
  * * Descripción:
  * DAO encargado de gestionar las operaciones CRUD de la tabla transportistas.
  * Permite insertar, actualizar, eliminar, listar y buscar registros en la base de datos.
- * Ahora incluye registro automático en la Bitácora General del sistema.
+ * Ahora incluye registro automático en la Bitácora General del sistema y reparaciones adicionales.
  */
 public class TransportistasDAO {
 
