@@ -43,7 +43,7 @@ public class frmMantenimientoProductos extends javax.swing.JInternalFrame  {
 
         // Instrucciones para adaptarlo a otro formulario Cambiar el "2000" por el código de tu aplicación:
         //  Codigos de ejmplo utilizados de momento 2000 = Transportes | 2001 = Kardex | 2002 = Stock | 2003 = Pedidos
-        int codigoAplicacion = 2003; 
+        int codigoAplicacion = 2010; 
 
         btnRegistrar1.setEnabled(permisosDAO.puedeInsertar(usuId, codigoAplicacion));
         btnBuscar1.setEnabled(permisosDAO.puedeBuscar(usuId, codigoAplicacion));
@@ -663,9 +663,8 @@ Vista.Logistica.frmReportes ventana = new Vista.Logistica.frmReportes();
     ventanaAyuda.setLocationRelativeTo(null);
                                            
     //Ferdynand Monroy mayo 2026: agregue la ayuda junto al archivo .chm
-        
         try {
-        String ruta = "C:\\Users\\ferit\\Desktop\\proyectop32k26b\\proyectop32k26b\\src\\main\\java\\Ayudas\\Logistica\\Logistica.chm";
+        String ruta = "C:\\Users\\ferit\\Desktop\\proyFinalP32K26b\\proyectop32k26b\\proyectop32k26b\\src\\main\\java\\Ayudas\\Logistica\\Logistica.chm";
 
         File archivo = new File(ruta);
 
@@ -679,7 +678,7 @@ Vista.Logistica.frmReportes ventana = new Vista.Logistica.frmReportes();
 
     } catch (Exception e) {
         e.printStackTrace();
-    }
+        }
 
     }//GEN-LAST:event_btnAyudaActionPerformed
 
@@ -738,10 +737,6 @@ Vista.Logistica.frmReportes ventana = new Vista.Logistica.frmReportes();
             JOptionPane.showMessageDialog(null, "Error: Verifica que los números no tengan letras o espacios vacíos.");
         
     }
-
-
-    JOptionPane.showMessageDialog(null, "Pedido agregado a la lista visual.");
-    limpiarCampos();
 
 
     }//GEN-LAST:event_btnRegistrar1ActionPerformed
