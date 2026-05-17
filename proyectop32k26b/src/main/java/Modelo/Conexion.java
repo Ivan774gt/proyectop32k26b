@@ -10,7 +10,7 @@ import java.sql.*;
  * @author ferito
  */
 public class Conexion { //aquí se encuentra la conexion a la BD llamada proyecto
-    private static final String JDBC_URL = "jdbc:mysql://10.222.254.31/sig";
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/sig";
     private static final String JDBC_USER = "usuprueba";
     private static final String JDBC_PASS = "123456";
 
@@ -32,4 +32,8 @@ public class Conexion { //aquí se encuentra la conexion a la BD llamada proyect
         try { conn.close(); } 
         catch (SQLException ex){ ex.printStackTrace(System.out); }
     } 
+
+    public static Connection getConexion() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

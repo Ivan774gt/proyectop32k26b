@@ -25,6 +25,10 @@ import Vista.ComercialComprasyVentas.frmVentas;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import Vista.ComercialComprasyVentas.frmVendedores;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JFrame;
 
 
@@ -87,6 +91,8 @@ public class MdiComercio extends javax.swing.JFrame {
         proveedor = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         proveedoresMantenimiento = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        vendedores = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -176,17 +182,29 @@ public class MdiComercio extends javax.swing.JFrame {
 
         mnuGeneral.add(jMenu1);
 
+        jMenu3.setText("Vendedores");
+
+        vendedores.setText("Vendedores");
+        vendedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vendedoresActionPerformed(evt);
+            }
+        });
+        jMenu3.add(vendedores);
+
+        mnuGeneral.add(jMenu3);
+
         setJMenuBar(mnuGeneral);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGap(0, 277, Short.MAX_VALUE)
         );
 
         pack();
@@ -260,12 +278,22 @@ public class MdiComercio extends javax.swing.JFrame {
     }//GEN-LAST:event_ventasmenuActionPerformed
 
     private void menudelasventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        frmVentas ventana = new frmVentas();
-        jDesktopPane1.add(ventana);
-        Dimension desktopSize = jDesktopPane1.getSize();
-        Dimension FrameSize = ventana.getSize();
-        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-        ventana.setVisible(true);
+                                                    
+    if (jDesktopPane1.getParent() == null) {
+        this.getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
+        this.validate();
+    }
+
+    frmVentas ventana = new frmVentas();
+    jDesktopPane1.add(ventana);
+    
+    Dimension desktopSize = jDesktopPane1.getSize();
+    Dimension frameSize = ventana.getSize();
+    ventana.setLocation((desktopSize.width - frameSize.width) / 2, (desktopSize.height - frameSize.height) / 2);
+    
+    ventana.setVisible(true);
+    ventana.toFront();
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void proveedoresMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proveedoresMantenimientoActionPerformed
@@ -274,6 +302,28 @@ public class MdiComercio extends javax.swing.JFrame {
         
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_proveedoresMantenimientoActionPerformed
+
+    private void vendedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendedoresActionPerformed
+                                           
+    // Asegurar que el contenedor tenga un tamaño real si el layout falló
+    if (jDesktopPane1.getParent() == null) {
+        this.getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
+        this.validate();
+    }
+
+    frmVendedores ventana = new frmVendedores();
+    jDesktopPane1.add(ventana);
+    
+    // Centrar la ventana dentro del contenedor
+    Dimension desktopSize = jDesktopPane1.getSize();
+    Dimension frameSize = ventana.getSize();
+    ventana.setLocation((desktopSize.width - frameSize.width) / 2, (desktopSize.height - frameSize.height) / 2);
+    
+    ventana.setVisible(true);
+    ventana.toFront(); // Fuerza a que se pinte por encima de cualquier otro elemento
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vendedoresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,6 +364,7 @@ public class MdiComercio extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuItem menudelasventas;
     private javax.swing.JMenu mnuArchivo;
     private javax.swing.JMenu mnuAyudas;
@@ -322,6 +373,7 @@ public class MdiComercio extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem mnuSalirSistema;
     private javax.swing.JMenuItem proveedor;
     private javax.swing.JMenuItem proveedoresMantenimiento;
+    private javax.swing.JMenuItem vendedores;
     private javax.swing.JMenu ventasmenu;
     // End of variables declaration//GEN-END:variables
 }
