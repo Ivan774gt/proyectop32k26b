@@ -16,6 +16,7 @@ public class clsComisionVentas {
     private double meta;
     private double ventas_adicionales;
     private double comision;
+    private String cppcodigo;
     //atributos vendedores
     private int venid;
     private String vennombre; 
@@ -30,15 +31,17 @@ public class clsComisionVentas {
     //atributos linea
     private String linnombre;
     private double lincomision;
+    //atributos cuentas por pagar
 
     //constructores
-    public clsComisionVentas(int id_comision, int id_empleado, double monto_ventas, double meta, double ventas_adicionales, double comision, int venid, String vennombre, String ventelefono, String vencorreo, int proid, String prodnombre, double prodprecioventa, String marnombre, String linnombre, double lincomision) {
+    public clsComisionVentas(int id_comision, int id_empleado, double monto_ventas, double meta, double ventas_adicionales, double comision, int venid, String vennombre, String ventelefono, String vencorreo, int proid, String prodnombre, double prodprecioventa, String marnombre, String linnombre, double lincomision, String cppcodigo) {
         this.id_comision = id_comision;
         this.id_empleado = id_empleado;
         this.monto_ventas = monto_ventas;
         this.meta = meta;
         this.ventas_adicionales = ventas_adicionales;
         this.comision = comision;
+        this.cppcodigo = cppcodigo;
         this.venid = venid;
         this.vennombre = vennombre;
         this.ventelefono = ventelefono;
@@ -98,6 +101,14 @@ public class clsComisionVentas {
 
     public void setComision(double comision) {
         this.comision = comision;
+    }
+    
+    public String getCppcodigo() {
+        return cppcodigo;
+    }
+
+    public void setCppcodigo(String cppcodigo) {
+        this.cppcodigo = cppcodigo;
     }
 
     //getter y setter vendedores
@@ -183,6 +194,7 @@ public class clsComisionVentas {
     public void setLincomision(double lincomision) {
         this.lincomision = lincomision;
     }
+    
 
     //constructor vacio
     public clsComisionVentas() {
@@ -191,7 +203,6 @@ public class clsComisionVentas {
     //tostring
     @Override
     public String toString() {
-        return "clsComisionVentas{" + "id_comision=" + id_comision + ", id_empleado=" + id_empleado + ", monto_ventas=" + monto_ventas + ", meta=" + meta + ", ventas_adicionales=" + ventas_adicionales + ", comision=" + comision + ", venid=" + venid + ", vennombre=" + vennombre + ", ventelefono=" + ventelefono + ", vencorreo=" + vencorreo + ", proid=" + proid + ", prodnombre=" + prodnombre + ", prodprecioventa=" + prodprecioventa + ", marnombre=" + marnombre + ", linnombre=" + linnombre + ", lincomision=" + lincomision + '}';
+        return "clsComisionVentas{" + "id_comision=" + id_comision + ", id_empleado=" + id_empleado + ", monto_ventas=" + monto_ventas + ", meta=" + meta + ", ventas_adicionales=" + ventas_adicionales + ", comision=" + comision + ", venid=" + venid + ", vennombre=" + vennombre + ", ventelefono=" + ventelefono + ", vencorreo=" + vencorreo + ", proid=" + proid + ", prodnombre=" + prodnombre + ", prodprecioventa=" + prodprecioventa + ", marnombre=" + marnombre + ", linnombre=" + linnombre + ", lincomision=" + lincomision + ", cppcodigo=" + cppcodigo + '}';
     }
-    
 }

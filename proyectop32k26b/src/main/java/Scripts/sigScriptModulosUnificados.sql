@@ -303,6 +303,53 @@ CREATE TABLE IF NOT EXISTS conceptosexcepcion (
     ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+CREATE TABLE IF NOT EXISTS empleados (
+    Empcodigo INT AUTO_INCREMENT PRIMARY KEY,
+    Empnombre VARCHAR(100) NOT NULL,
+    Empdpi VARCHAR(20) NOT NULL UNIQUE,
+    Puecodigo INT NOT NULL,
+    Empfecha_ingreso DATE NOT NULL,
+    Empestado TINYINT(1) NOT NULL DEFAULT 1,
+
+    CONSTRAINT fk_empleados_puestos
+        FOREIGN KEY (Puecodigo)
+        REFERENCES puestos(Puecodigo)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+
+
+CREATE TABLE IF NOT EXISTS puestos (
+    Puecodigo INT AUTO_INCREMENT PRIMARY KEY,
+    Puenombre VARCHAR(50) NOT NULL,
+    Puesalario_base DECIMAL(10,2) NOT NULL,
+    Depcodigo INT NOT NULL,
+
+    CONSTRAINT fk_puestos_departamentos
+        FOREIGN KEY (Depcodigo)
+        REFERENCES departamentos(Depcodigo)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+
+
+CREATE TABLE IF NOT EXISTS departamentos (
+    Depcodigo INT AUTO_INCREMENT PRIMARY KEY,
+    Depnombre VARCHAR(50) NOT NULL,
+    Depestado TINYINT(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 -- ============================================================
 -- BLOQUE 6: LOGÍSTICA (depende de proveedores, clientes,
 --           empleados, productos, bodegas)
