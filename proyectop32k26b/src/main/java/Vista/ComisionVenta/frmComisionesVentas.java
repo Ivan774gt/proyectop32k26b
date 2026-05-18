@@ -7,6 +7,7 @@ package Vista.ComisionVenta;
 import Controlador.clsUsuarioConectado;
 import Modelo.PermisosDAO;
 import Vista.ComisionVenta.frmCalculoComisiones;
+import Vista.frmLogin;
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
