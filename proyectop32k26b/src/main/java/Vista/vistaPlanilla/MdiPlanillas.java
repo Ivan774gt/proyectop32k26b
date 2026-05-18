@@ -51,15 +51,17 @@ public class MdiPlanillas extends javax.swing.JFrame {
         manDepartamento = new javax.swing.JMenuItem();
         frmMantenimientoPerfiles5 = new javax.swing.JMenuItem();
         frmMantenimientoPerfiles6 = new javax.swing.JMenuItem();
-        frmMantenimientoPerfiles7 = new javax.swing.JMenuItem();
+        conceptoplanilla = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         frmMantenimientoPerfiles8 = new javax.swing.JMenuItem();
         frmMantenimientoPerfiles10 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         frmMantenimientoPerfiles11 = new javax.swing.JMenuItem();
         frmMantenimientoPerfiles12 = new javax.swing.JMenuItem();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jMenu5 = new javax.swing.JMenu();
         frmMantenimientoPerfiles14 = new javax.swing.JMenuItem();
         frmMantenimientoPerfiles15 = new javax.swing.JMenuItem();
@@ -120,13 +122,13 @@ public class MdiPlanillas extends javax.swing.JFrame {
         });
         jMenu2.add(frmMantenimientoPerfiles6);
 
-        frmMantenimientoPerfiles7.setText("Conceptos Planillas");
-        frmMantenimientoPerfiles7.addActionListener(new java.awt.event.ActionListener() {
+        conceptoplanilla.setText("Conceptos Planillas");
+        conceptoplanilla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                frmMantenimientoPerfiles7ActionPerformed(evt);
+                conceptoplanillaActionPerformed(evt);
             }
         });
-        jMenu2.add(frmMantenimientoPerfiles7);
+        jMenu2.add(conceptoplanilla);
 
         jMenuItem1.setText("Deducciones");
         jMenu2.add(jMenuItem1);
@@ -137,6 +139,11 @@ public class MdiPlanillas extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Procesos");
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
 
         frmMantenimientoPerfiles8.setText("Generar Planilla");
         frmMantenimientoPerfiles8.addActionListener(new java.awt.event.ActionListener() {
@@ -153,6 +160,14 @@ public class MdiPlanillas extends javax.swing.JFrame {
             }
         });
         jMenu3.add(frmMantenimientoPerfiles10);
+
+        jMenuItem3.setText("Planilla Encabezado");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem3);
 
         jMenuBar1.add(jMenu3);
 
@@ -173,6 +188,10 @@ public class MdiPlanillas extends javax.swing.JFrame {
             }
         });
         jMenu4.add(frmMantenimientoPerfiles12);
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("Consultar BITACORA");
+        jMenu4.add(jCheckBoxMenuItem1);
 
         jMenuBar1.add(jMenu4);
 
@@ -306,15 +325,21 @@ public class MdiPlanillas extends javax.swing.JFrame {
 
     private void frmMantenimientoPerfiles6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmMantenimientoPerfiles6ActionPerformed
         // TODO add your handling code here:
+         frmMantenimientoEmpleado vista = new frmMantenimientoEmpleado();
+        vista.setVisible(true);
     }//GEN-LAST:event_frmMantenimientoPerfiles6ActionPerformed
 
     private void frmMantenimientoPerfiles5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmMantenimientoPerfiles5ActionPerformed
         // TODO add your handling code here:
+        frmPuesto vista = new frmPuesto ();
+        vista.setVisible(true);
     }//GEN-LAST:event_frmMantenimientoPerfiles5ActionPerformed
 
-    private void frmMantenimientoPerfiles7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmMantenimientoPerfiles7ActionPerformed
+    private void conceptoplanillaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conceptoplanillaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_frmMantenimientoPerfiles7ActionPerformed
+        frmMantenimientoConceptoPlanilla vista = new frmMantenimientoConceptoPlanilla();
+        vista.setVisible(true);
+    }//GEN-LAST:event_conceptoplanillaActionPerformed
 
     private void frmMantenimientoPerfiles15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frmMantenimientoPerfiles15ActionPerformed
         // TODO add your handling code here:
@@ -361,6 +386,17 @@ public class MdiPlanillas extends javax.swing.JFrame {
     
     }//GEN-LAST:event_salirPlanillasActionPerformed
 
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        frmPlanillaEncabezado vista = new frmPlanillaEncabezado();
+        vista.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -399,6 +435,7 @@ public class MdiPlanillas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu archivo;
+    private javax.swing.JMenuItem conceptoplanilla;
     private javax.swing.JMenuItem frmMantenimientoPerfiles10;
     private javax.swing.JMenuItem frmMantenimientoPerfiles11;
     private javax.swing.JMenuItem frmMantenimientoPerfiles12;
@@ -409,9 +446,9 @@ public class MdiPlanillas extends javax.swing.JFrame {
     private javax.swing.JMenuItem frmMantenimientoPerfiles4;
     private javax.swing.JMenuItem frmMantenimientoPerfiles5;
     private javax.swing.JMenuItem frmMantenimientoPerfiles6;
-    private javax.swing.JMenuItem frmMantenimientoPerfiles7;
     private javax.swing.JMenuItem frmMantenimientoPerfiles8;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -420,6 +457,7 @@ public class MdiPlanillas extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem manDepartamento;
     private javax.swing.JMenuItem salirPlanillas;
     // End of variables declaration//GEN-END:variables
